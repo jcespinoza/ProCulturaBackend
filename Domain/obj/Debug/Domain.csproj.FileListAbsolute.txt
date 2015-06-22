@@ -1,0 +1,15 @@
+C:\Users\Camilo Aguilar\Desktop\Clase-8-10-2014\MiPrimerMVC\Domain\bin\Debug\Domain.dll
+C:\Users\Camilo Aguilar\Desktop\Clase-8-10-2014\MiPrimerMVC\Domain\bin\Debug\Domain.pdb
+C:\Users\Camilo Aguilar\Desktop\Clase-8-10-2014\MiPrimerMVC\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Camilo Aguilar\Desktop\Clase-8-10-2014\MiPrimerMVC\Domain\obj\Debug\Domain.dll
+C:\Users\Camilo Aguilar\Desktop\Clase-8-10-2014\MiPrimerMVC\Domain\obj\Debug\Domain.pdb
+C:\Users\Slyther\Desktop\miprimermvc-master\Domain\bin\Debug\Domain.dll
+C:\Users\Slyther\Desktop\miprimermvc-master\Domain\bin\Debug\Domain.pdb
+C:\Users\Slyther\Desktop\miprimermvc-master\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Slyther\Desktop\miprimermvc-master\Domain\obj\Debug\Domain.dll
+C:\Users\Slyther\Desktop\miprimermvc-master\Domain\obj\Debug\Domain.pdb
+C:\Users\Slyther\Documents\Visual Studio 2013\Projects\ProCulturaBackEnd\Domain\bin\Debug\Domain.dll
+C:\Users\Slyther\Documents\Visual Studio 2013\Projects\ProCulturaBackEnd\Domain\bin\Debug\Domain.pdb
+C:\Users\Slyther\Documents\Visual Studio 2013\Projects\ProCulturaBackEnd\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Slyther\Documents\Visual Studio 2013\Projects\ProCulturaBackEnd\Domain\obj\Debug\Domain.dll
+C:\Users\Slyther\Documents\Visual Studio 2013\Projects\ProCulturaBackEnd\Domain\obj\Debug\Domain.pdb
