@@ -7,6 +7,7 @@ using System.Web.Http;
 using Domain.Entities;
 using ProCulturaBackEnd.Models;
 using Domain.Services;
+using ProCulturaBackEnd.App_Start;
 
 
 namespace ProCulturaBackEnd.Controllers
@@ -21,27 +22,28 @@ namespace ProCulturaBackEnd.Controllers
             _readOnlyRepository = readOnlyRepository;
             _writeOnlyRepository = writeOnlyRepository;
         }
-        // GET api/values/5
-        public UserModel Get(int id)
-        {
-            return new UserModel()
-            {
-                id = 1,
-                Email = "lkajdalkj",
-                Name = "hello",
-                Password = "dskjshfjdh"
-            };
-        }
+
 
         // POST api/values
-        public UserModel Post([FromBody]UserModel model)
+        public AuthModel Post([FromBody]UserModel model)
         {
             var user = _readOnlyRepository.FirstOrDefault<User>(x => x.Email == model.Email);
-            if (user.CheckPassword(model.Password))
+            if (!user.CheckPassword(model.Password))
+                return new AuthModel()
+                {
+                    Mensaje = "Login Failed",
+                    Status = 403
+                };
+
+            var authModel = new AuthModel
             {
-                
-            }
-            return model;
+                email = user.Email,
+                access_token = AuthRequestFactory.BuildEncryptedRequest(user.Email),
+                Mensaje = "Login Succesfully",
+                Status = 200
+            };
+
+            return authModel;
         }
     }
 }

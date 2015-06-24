@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using Domain.Entities;
+using ProCulturaBackEnd.Models;
 
 namespace ProCulturaBackEnd
 {
@@ -18,6 +21,11 @@ namespace ProCulturaBackEnd
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        public static void ConfigureAutoMapper()
+        {
+            Mapper.CreateMap<UserModel, User>().ReverseMap();
         }
     }
 }
