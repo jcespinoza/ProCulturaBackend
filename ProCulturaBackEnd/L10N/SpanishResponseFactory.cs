@@ -1,0 +1,27 @@
+﻿using System;
+
+namespace ProCulturaBackEnd.L10N
+{
+    public class SpanishResponseFactory : ILocalizedResponseFactory
+    {
+        public string LoginSuccessMessage()
+        {
+            return "Autenticacion Exitosa!";
+        }
+
+        public string PasswordMismatchMessage()
+        {
+            return "La contraseña no coincide.";
+        }
+
+        public string EmailInUseMessage()
+        {
+            return "Este correo se encuentra en uso.";
+        }
+
+        public string RegistrationSuccessMessage()
+        {
+            return "Registracion exitosa!";
+        }
+    }
+}
