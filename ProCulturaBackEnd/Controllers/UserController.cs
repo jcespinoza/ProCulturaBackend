@@ -4,8 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ProCulturaBackEnd.Contexts;
+using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.L10N;
 using ProCulturaBackEnd.Models;
+using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd.Controllers
 {
@@ -14,7 +17,7 @@ namespace ProCulturaBackEnd.Controllers
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
         // PUT api/Register2/5
-        public IHttpActionResult PutUser(int id, UserModel user)
+        public IHttpActionResult PutUser(int id, UserEntity user)
         {
             if (!ModelState.IsValid)
             {
@@ -48,11 +51,16 @@ namespace ProCulturaBackEnd.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [ResponseType(typeof(UserModel))]
+        [ResponseType(typeof(UserEntity))]
         public IHttpActionResult GetUser(int id, string token)
         {
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Email == GeneralEncriptionService.Decrypt(token));
-            if (obtaineduser != null)
+            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
+            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == id);
+            var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.email);
+            if (obtaineduser == null || requestingUser == null) return NotFound();
+            if (obtaineduser == requestingUser)
+                return Ok(obtaineduser);
+            if(requestingUser.Role >= obtaineduser.Role)
                 return Ok(obtaineduser);
             return NotFound();
         }
@@ -61,29 +69,30 @@ namespace ProCulturaBackEnd.Controllers
         public ResponseModel PostUser(RegisterModel user)
         {
           if(_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
-              return new ResponseModel()
+              return new ResponseModel
               {
                   Mensaje = LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage(),
                   Status = 500
               };
 
             if(!user.Password.Equals(user.ConfirmPassword))
-                return new ResponseModel()
+                return new ResponseModel
                 {
                     Mensaje = LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage(),
                     Status = 500
                 };
-            var newUser = new UserModel()
+            var newUser = new UserEntity
             {
                 Email = user.Email,
                 Name = user.FirstName + " " + user.LastName,
-                Password = user.Password
+                Password = user.Password,
+                Role = Role.User
             };
             PasswordEncryptionService.Encrypt(newUser);
             _db.UserModels.Add(newUser);
             _db.SaveChanges();
 
-            return new ResponseModel()
+            return new ResponseModel
             {
                 Mensaje = LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage(),
                 Status = 200

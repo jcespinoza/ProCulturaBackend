@@ -1,13 +1,12 @@
-using ProCulturaBackEnd.Models;
+using ProCulturaBackEnd.Contexts;
+using ProCulturaBackEnd.Entities;
+using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ProCulturaBackEnd.Models.ProCulturaBackEndContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ProCulturaBackEndContext>
     {
         public Configuration()
         {
@@ -16,17 +15,17 @@ namespace ProCulturaBackEnd.Migrations
 
         protected override void Seed(ProCulturaBackEndContext context)
         {
-            var UserToSeed = new UserModel()
+            var userToSeed = new UserEntity()
             {
                 Email = "jgpaz5@gmail.com",
                 Name = "Gabriel",
                 Id = 1,
-                Password = GeneralEncriptionService.Encrypt("password")
+                Password = "password",
+                Role = 0
             };
-
-            context.UserModels.Add(UserToSeed);
+            PasswordEncryptionService.Encrypt(userToSeed);
+            context.UserModels.Add(userToSeed);
             context.SaveChanges();
         }
-        
     }
 }

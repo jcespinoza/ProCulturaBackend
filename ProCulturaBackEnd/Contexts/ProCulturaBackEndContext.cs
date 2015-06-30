@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using ProCulturaBackEnd.Entities;
+using ProCulturaBackEnd.Models;
 
-namespace ProCulturaBackEnd.Models
+namespace ProCulturaBackEnd.Contexts
 {
     public class ProCulturaBackEndContext : DbContext
     {
@@ -19,7 +17,7 @@ namespace ProCulturaBackEnd.Models
         {
         }
 
-        public DbSet<UserModel> UserModels { get; set; }
+        public DbSet<UserEntity> UserModels { get; set; }
     
     }
 }

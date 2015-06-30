@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ProCulturaBackEnd.Contexts;
 using ProCulturaBackEnd.L10N;
 using ProCulturaBackEnd.Models;
+using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd.Controllers
 {
@@ -21,7 +23,7 @@ namespace ProCulturaBackEnd.Controllers
                 return NotFound();
             var authModel = new AuthModel
             {
-                AccessToken = GeneralEncriptionService.Encrypt(user.Email),
+                AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
                 Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage(),
                 Status = 200
             };

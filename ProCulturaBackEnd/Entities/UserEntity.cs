@@ -1,10 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ProCulturaBackEnd.Models;
 
-namespace ProCulturaBackEnd.Models
+namespace ProCulturaBackEnd.Entities
 {
+    public enum Role
+    {
+        Administrator = 5,
+        User = 1
+    }
+
     [Table("userdetails")]
-    public class UserModel : ResponseModel
+    public class UserEntity : ResponseModel
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
@@ -17,6 +24,6 @@ namespace ProCulturaBackEnd.Models
         [ScaffoldColumn(false)]
         public string Salt { get; set; }
         [ScaffoldColumn(false)]
-        public int Role { get; set; }
+        public Role Role { get; set; }
     }
 }

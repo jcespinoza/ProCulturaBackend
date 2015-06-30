@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using ProCulturaBackEnd.Models;
+using ProCulturaBackEnd.Entities;
 
-namespace ProCulturaBackEnd
+namespace ProCulturaBackEnd.Services
 {
     public static class PasswordEncryptionService
     {
-        public static bool CheckPassword(UserModel user, string password)
+        public static bool CheckPassword(UserEntity user, string password)
         {
             var hashtool = SHA512.Create();
             var pass1 = hashtool.ComputeHash(Encoding.UTF8.GetBytes(password));
@@ -17,7 +17,7 @@ namespace ProCulturaBackEnd
             return user.Password.Equals(passFinal);
         }
 
-        public static void Encrypt(UserModel account)
+        public static void Encrypt(UserEntity account)
         {
             var hashtool = SHA512.Create();
             var pass1 = hashtool.ComputeHash(Encoding.UTF8.GetBytes(account.Password));
