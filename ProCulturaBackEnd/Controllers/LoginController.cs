@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ProCulturaBackEnd.Contexts;
@@ -18,14 +19,13 @@ namespace ProCulturaBackEnd.Controllers
         {
             var user = _db.UserModels.FirstOrDefault(x => x.Email == usermodel.Email);
             if (user == null)
-            return NotFound();
+                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFound());
             if (!PasswordEncryptionService.CheckPassword(user, usermodel.Password))
-                return NotFound();
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InvalidPassword());
             var authModel = new AuthModel
             {
                 AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
-                Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage(),
-                Status = 200
+                Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage()
             };
             return Ok(authModel);
         }

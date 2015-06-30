@@ -8,7 +8,7 @@ namespace ProCulturaBackEnd.Services{
         {
             var request = new UserTokenModel
             {
-                email = email
+                Email = email
             };
 
             var jsonRequest = new JavaScriptSerializer().Serialize(request);

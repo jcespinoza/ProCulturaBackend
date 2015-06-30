@@ -15,6 +15,7 @@ namespace ProCulturaBackEnd.Models
         public string Name { get; set; }
         [Required]
         public string Email { get; set; }
+        [ScaffoldColumn(false)]
         public Role Role { get; set; }
     }
 }

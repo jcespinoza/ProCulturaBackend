@@ -7,6 +7,6 @@ namespace ProCulturaBackEnd.Models
 {
     public class UserTokenModel : ResponseModel
     {
-        public string email { get; set; }
+        public string Email { get; set; }
     }
 }

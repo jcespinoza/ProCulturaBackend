@@ -1,3 +1,4 @@
+using System.Linq;
 using ProCulturaBackEnd.Contexts;
 using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.Services;
@@ -15,16 +16,21 @@ namespace ProCulturaBackEnd.Migrations
 
         protected override void Seed(ProCulturaBackEndContext context)
         {
-            var userToSeed = new UserEntity()
+            var userToSeed = new UserEntity
             {
-                Email = "jgpaz5@gmail.com",
-                Name = "Gabriel",
+                Email = "admin@proculturabackend.com",
+                Name = "Admin",
                 Id = 1,
-                Password = "password",
-                Role = 0
+                Password = "adminpassword",
+                Role = Role.Administrator
             };
             PasswordEncryptionService.Encrypt(userToSeed);
-            context.UserModels.Add(userToSeed);
+            var entity = context.UserModels.FirstOrDefault(x => x.Id == 1);
+
+            if (entity != null)
+                context.Entry(entity).CurrentValues.SetValues(userToSeed);
+            else
+                context.UserModels.Add(userToSeed);
             context.SaveChanges();
         }
     }

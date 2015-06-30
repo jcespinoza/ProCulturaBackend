@@ -8,7 +8,5 @@ namespace ProCulturaBackEnd.Models
     public class ResponseModel 
     {
         public string Mensaje { get; set; }
-
-        public int Status { get; set; }
     }
 }
