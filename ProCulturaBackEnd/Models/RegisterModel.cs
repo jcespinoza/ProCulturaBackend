@@ -10,10 +10,7 @@ namespace ProCulturaBackEnd.Models
     public class RegisterModel : ResponseModel
     {
         [Required(ErrorMessage = "Name is required")]
-        public string FirstName { get; set; }
-
-        [Required(ErrorMessage = "Name is required")]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress)]  

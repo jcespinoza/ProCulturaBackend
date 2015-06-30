@@ -9,6 +9,7 @@ using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.L10N;
 using ProCulturaBackEnd.Models;
 using ProCulturaBackEnd.Services;
+using AutoMapper;
 
 namespace ProCulturaBackEnd.Controllers
 {
@@ -16,26 +17,35 @@ namespace ProCulturaBackEnd.Controllers
     {
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
-        // PUT api/Register2/5
-        public IHttpActionResult PutUser(int id, UserEntity user)
+        // PUT api/user/5
+        public IHttpActionResult PutUser(int id, UserModel recievedUser)
         {
+           Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
+
+            var user = Mapper.Map<UserEntity>(recievedUser);
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             if (id != user.Id) //check for clearance
             {
                 return BadRequest();
             }
+
             _db.Entry(user).State = EntityState.Modified;
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Email == user.Email);
-            if (obtaineduser != null)
+
+
+            //var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Email == user.Email);
+            /*if (obtaineduser != null)
             {
                 if (!PasswordEncryptionService.CheckPassword(obtaineduser, user.Password) || obtaineduser.Password != user.Password)
                 {
                     PasswordEncryptionService.Encrypt(user);
                 }
-            }
+            } */
+
             try
             {
                 _db.SaveChanges();
@@ -51,55 +61,54 @@ namespace ProCulturaBackEnd.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [ResponseType(typeof(UserEntity))]
+        [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(int id, string token)
         {
             var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == id);
+
+            Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
+
+            var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
+
+            var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
+
             var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.email);
+
             if (obtaineduser == null || requestingUser == null) return NotFound();
-            if (obtaineduser == requestingUser)
+            if (obtaineduserEntity == requestingUser)
                 return Ok(obtaineduser);
+
             if(requestingUser.Role >= obtaineduser.Role)
                 return Ok(obtaineduser);
+
             return NotFound();
         }
 
-        // POST api/Register2
-        public ResponseModel PostUser(RegisterModel user)
+        // POST api/user
+      
+        public IHttpActionResult PostUser(RegisterModel user)
         {
           if(_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
-              return new ResponseModel
-              {
-                  Mensaje = LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage(),
-                  Status = 500
-              };
+              return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage()); 
 
             if(!user.Password.Equals(user.ConfirmPassword))
-                return new ResponseModel
-                {
-                    Mensaje = LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage(),
-                    Status = 500
-                };
-            var newUser = new UserEntity
-            {
-                Email = user.Email,
-                Name = user.FirstName + " " + user.LastName,
-                Password = user.Password,
-                Role = Role.User
-            };
+                return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage());
+
+            Mapper.CreateMap<RegisterModel, UserEntity>().ReverseMap();
+
+            var newUser = Mapper.Map<UserEntity>(user);
+
             PasswordEncryptionService.Encrypt(newUser);
+
             _db.UserModels.Add(newUser);
             _db.SaveChanges();
 
-            return new ResponseModel
-            {
-                Mensaje = LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage(),
-                Status = 200
-            };
+            return Ok(LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage());
+
         }
 
-        // DELETE api/Register2/5
+
+        // DELETE api/user/5
         public IHttpActionResult DeleteUser(int id)
         {
             var user = _db.UserModels.Find(id);
