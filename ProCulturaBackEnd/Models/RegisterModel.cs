@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using ProCulturaBackEnd.L10N;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProCulturaBackEnd.Models
 {

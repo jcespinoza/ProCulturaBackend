@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using ProCulturaBackEnd.L10N;
+using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd
 {

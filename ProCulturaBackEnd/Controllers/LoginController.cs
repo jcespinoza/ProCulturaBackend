@@ -4,7 +4,6 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using ProCulturaBackEnd.Contexts;
-using ProCulturaBackEnd.L10N;
 using ProCulturaBackEnd.Models;
 using ProCulturaBackEnd.Services;
 
@@ -26,6 +25,7 @@ namespace ProCulturaBackEnd.Controllers
                 return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InvalidPasswordMessage());
             var authModel = new AuthModel
             {
+                Id = user.Id,
                 AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
                 Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage()
             };

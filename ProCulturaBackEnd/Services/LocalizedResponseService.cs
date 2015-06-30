@@ -1,4 +1,6 @@
-﻿namespace ProCulturaBackEnd.L10N
+﻿using ProCulturaBackEnd.L10N;
+
+namespace ProCulturaBackEnd.Services
 {
     public static class LocalizedResponseService
     {

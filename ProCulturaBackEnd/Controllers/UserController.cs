@@ -5,7 +5,6 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using ProCulturaBackEnd.Contexts;
 using ProCulturaBackEnd.Entities;
-using ProCulturaBackEnd.L10N;
 using ProCulturaBackEnd.Models;
 using ProCulturaBackEnd.Services;
 using AutoMapper;
@@ -47,6 +46,7 @@ namespace ProCulturaBackEnd.Controllers
             _db.SaveChanges();
             var authModel = new AuthModel
             {
+                Id = user.Id,
                 AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
                 Mensaje = LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage()
             };
@@ -70,7 +70,6 @@ namespace ProCulturaBackEnd.Controllers
         }
 
         // POST api/user
-      
         public IHttpActionResult PostUser(RegisterModel user)
         {
           if(_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
@@ -109,11 +108,6 @@ namespace ProCulturaBackEnd.Controllers
                 _db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool UserExists(int id)
-        {
-            return _db.UserModels.Count(e => e.Id == id) > 0;
         }
     }
 }

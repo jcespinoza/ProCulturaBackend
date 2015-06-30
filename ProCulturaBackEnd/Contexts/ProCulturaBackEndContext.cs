@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using ProCulturaBackEnd.Entities;
-using ProCulturaBackEnd.Models;
 
 namespace ProCulturaBackEnd.Contexts
 {
