@@ -25,22 +25,22 @@ namespace ProCulturaBackEnd.L10N
             return "Registrierung erfolgreich!";
         }
 
-        public string AuthRequestNotRecognized()
+        public string AuthRequestNotRecognizedMessage()
         {
             throw new NotImplementedException();
         }
 
-        public string InsufficientPrivileges()
+        public string InsufficientPrivilegesMessage()
         {
             throw new NotImplementedException();
         }
 
-        public string UserDeleted()
+        public string UserDeletedMessage()
         {
             throw new NotImplementedException();
         }
 
-        public string UserNotFound()
+        public string UserNotFoundMessage()
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace ProCulturaBackEnd.L10N
             throw new NotImplementedException();
         }
 
-        public string InvalidPassword()
+        public string InvalidPasswordMessage()
         {
             throw new NotImplementedException();
         }

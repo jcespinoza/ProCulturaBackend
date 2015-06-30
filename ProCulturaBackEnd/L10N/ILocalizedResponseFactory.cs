@@ -12,11 +12,11 @@ namespace ProCulturaBackEnd.L10N
         string PasswordMismatchMessage();
         string EmailInUseMessage();
         string RegistrationSuccessMessage();
-        string AuthRequestNotRecognized();
-        string InsufficientPrivileges();
-        string UserDeleted();
-        string UserNotFound();
+        string AuthRequestNotRecognizedMessage();
+        string InsufficientPrivilegesMessage();
+        string UserDeletedMessage();
+        string UserNotFoundMessage();
         string UpdateUserSuccessMessage();
-        string InvalidPassword();
+        string InvalidPasswordMessage();
     }
 }

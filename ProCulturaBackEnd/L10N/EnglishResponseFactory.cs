@@ -24,34 +24,34 @@ namespace ProCulturaBackEnd.L10N
             return "Registration Successful!";
         }
 
-        public string AuthRequestNotRecognized()
+        public string AuthRequestNotRecognizedMessage()
         {
-            throw new NotImplementedException();
+            return "Couldn't validate permissions. Please log in again.";
         }
 
-        public string InsufficientPrivileges()
+        public string InsufficientPrivilegesMessage()
         {
-            throw new NotImplementedException();
+            return "You do not have sufficient privileges to perform this action.";
         }
 
-        public string UserDeleted()
+        public string UserDeletedMessage()
         {
-            throw new NotImplementedException();
+            return "User successfully deleted!";
         }
 
-        public string UserNotFound()
+        public string UserNotFoundMessage()
         {
-            throw new NotImplementedException();
+            return "User not found!";
         }
 
         public string UpdateUserSuccessMessage()
         {
-            throw new NotImplementedException();
+            return "User successfully updated!";
         }
 
-        public string InvalidPassword()
+        public string InvalidPasswordMessage()
         {
-            throw new NotImplementedException();
+            return "Invalid Password.";
         }
     }
 }

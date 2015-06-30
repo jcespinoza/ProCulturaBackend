@@ -19,9 +19,9 @@ namespace ProCulturaBackEnd.Controllers
         {
             var user = _db.UserModels.FirstOrDefault(x => x.Email == usermodel.Email);
             if (user == null)
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFound());
+                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
             if (!PasswordEncryptionService.CheckPassword(user, usermodel.Password))
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InvalidPassword());
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InvalidPasswordMessage());
             var authModel = new AuthModel
             {
                 AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),

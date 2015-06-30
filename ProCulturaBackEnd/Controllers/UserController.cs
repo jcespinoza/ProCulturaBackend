@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -18,6 +16,7 @@ namespace ProCulturaBackEnd.Controllers
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
         // PUT api/user/5
+        [ResponseType(typeof(AuthModel))]
         public IHttpActionResult PutUser(string token, UserModel recievedUser) 
         {
             Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
@@ -27,9 +26,9 @@ namespace ProCulturaBackEnd.Controllers
             var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
             if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognized());
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
             if (requestSendingUser.Id != user.Id && requestSendingUser.Role <= user.Role) //check for clearance
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivileges());
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
             var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == user.Id);
             if (obtaineduser != null)
             {
@@ -42,9 +41,14 @@ namespace ProCulturaBackEnd.Controllers
                 _db.Entry(obtaineduser).CurrentValues.SetValues(user);
             }
             else
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFound());
+                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
             _db.SaveChanges();
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage());
+            var authModel = new AuthModel
+            {
+                AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
+                Mensaje = LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage()
+            };
+            return Ok(authModel);
         }
 
         [ResponseType(typeof(UserModel))]
@@ -60,7 +64,7 @@ namespace ProCulturaBackEnd.Controllers
                 return Ok(obtaineduser);
             if(requestingUser.Role >= obtaineduser.Role)
                 return Ok(obtaineduser);
-            return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFound());
+            return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
         }
 
         // POST api/user
@@ -79,22 +83,21 @@ namespace ProCulturaBackEnd.Controllers
             return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage());
         }
 
-
         // DELETE api/user/5
         public IHttpActionResult DeleteUser(string token, int id)
         {
             var user = _db.UserModels.Find(id);
             if (user == null)
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFound());
+                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
             var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
             if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognized());
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
             if (requestSendingUser.Id != user.Id && requestSendingUser.Role <= user.Role) //check for clearance
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivileges());
+                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
             _db.UserModels.Remove(user);
             _db.SaveChanges();
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.UserDeleted());
+            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.UserDeletedMessage());
         }
 
         protected override void Dispose(bool disposing)
