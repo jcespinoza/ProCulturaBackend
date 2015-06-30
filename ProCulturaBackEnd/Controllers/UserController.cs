@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using ProCulturaBackEnd.Contexts;
 using ProCulturaBackEnd.Entities;
@@ -11,6 +12,7 @@ using AutoMapper;
 
 namespace ProCulturaBackEnd.Controllers
 {
+    [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
