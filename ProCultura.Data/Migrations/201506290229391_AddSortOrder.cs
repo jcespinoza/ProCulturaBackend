@@ -1,12 +1,12 @@
-namespace ProCultura.Web.Api.Migrations
+namespace ProCultura.Data.Migrations
 {
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddSortOrder : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
+            this.CreateTable(
                 "dbo.userdetails",
                 c => new
                     {
@@ -25,7 +25,7 @@ namespace ProCultura.Web.Api.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.userdetails");
+            this.DropTable("dbo.userdetails");
         }
     }
 }

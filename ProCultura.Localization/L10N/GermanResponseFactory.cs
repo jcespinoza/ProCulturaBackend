@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace ProCultura.Web.Api.L10N
+﻿namespace ProCultura.Localization.L10N
 {
+    using System;
+
     public class GermanResponseFactory : ILocalizedResponseFactory
     {
 

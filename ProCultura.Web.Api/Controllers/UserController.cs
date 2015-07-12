@@ -9,6 +9,7 @@ using AutoMapper;
 namespace ProCultura.Web.Api.Controllers
 {
     using ProCultura.Domain.Entities;
+    using ProCultura.Localization;
     using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Models;
     using ProCultura.Web.Api.Services;

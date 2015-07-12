@@ -1,4 +1,4 @@
-﻿namespace ProCultura.Web.Api.L10N
+﻿namespace ProCultura.Localization.L10N
 {
     public class EnglishResponseFactory : ILocalizedResponseFactory
     {

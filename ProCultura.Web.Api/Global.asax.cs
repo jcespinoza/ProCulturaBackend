@@ -5,8 +5,8 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
-    using ProCultura.Web.Api.Services;
-
+    using ProCultura.Localization;
+    
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

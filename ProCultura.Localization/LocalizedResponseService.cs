@@ -1,6 +1,6 @@
-﻿namespace ProCultura.Web.Api.Services
+﻿namespace ProCultura.Localization
 {
-    using ProCultura.Web.Api.L10N;
+    using ProCultura.Localization.L10N;
 
     public static class LocalizedResponseService
     {

@@ -6,6 +6,7 @@ using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
+    using ProCultura.Localization;
     using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Models;
     using ProCultura.Web.Api.Services;
