@@ -5,8 +5,8 @@ namespace ProCultura.Data.Migrations
 
     using ProCultura.Data.Contexts;
     using ProCultura.Domain.Entities;
-    using ProCultura.Security.Services;
-
+    using ProCultura.Domain.Services;
+    
     internal sealed class Configuration : DbMigrationsConfiguration<ProCulturaBackEndContext>
     {
         public Configuration()

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace ProCultura.Web.Api.Services
+﻿namespace ProCultura.Domain.Services
 {
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+
     using ProCultura.Domain.Entities;
 
     public static class PasswordEncryptionService

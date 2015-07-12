@@ -4,7 +4,7 @@ using System.Linq;
 namespace ProCultura.Web.Api.Contexts
 {
     using ProCultura.Domain.Entities;
-    using ProCultura.Web.Api.Services;
+    using ProCultura.Domain.Services;
 
     public class ProCulturaContextInitializer  : DropCreateDatabaseIfModelChanges<ProCulturaBackEndContext>
     {

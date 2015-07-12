@@ -5,6 +5,7 @@ namespace ProCultura.Web.Api.Migrations
     using System.Data.Entity.Migrations;
 
     using ProCultura.Domain.Entities;
+    using ProCultura.Domain.Services;
     using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Services;
 

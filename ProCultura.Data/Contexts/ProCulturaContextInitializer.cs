@@ -4,6 +4,7 @@
     using System.Linq;
 
     using ProCultura.Domain.Entities;
+    using ProCultura.Domain.Services;
     using ProCultura.Security.Services;
 
     public class ProCulturaContextInitializer  : DropCreateDatabaseIfModelChanges<ProCulturaBackEndContext>
