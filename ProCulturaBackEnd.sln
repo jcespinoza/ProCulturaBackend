@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Web.Api", "ProCulturaBackEnd\ProCultura.Web.Api.csproj", "{19D57329-A20E-4D70-B5C9-2A581166F649}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Web.Api", "ProCultura.Web.Api\ProCultura.Web.Api.csproj", "{19D57329-A20E-4D70-B5C9-2A581166F649}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Domain", "ProCultura.Domain\ProCultura.Domain.csproj", "{0AF303BB-9666-49CA-81D6-BEC96F94060E}"
 EndProject
