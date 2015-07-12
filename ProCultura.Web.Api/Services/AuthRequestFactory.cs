@@ -2,6 +2,7 @@
 
 namespace ProCultura.Web.Api.Services{
     using ProCultura.Web.Api.Models;
+    using ProCultura.Security.Services;
 
     public class AuthRequestFactory
     {
