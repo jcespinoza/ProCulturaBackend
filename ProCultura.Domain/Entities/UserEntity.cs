@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProCulturaBackEnd.Entities
+namespace ProCultura.Domain.Entities
 {
     public enum Role
     {

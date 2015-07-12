@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using ProCulturaBackEnd.Entities;
 
 namespace ProCulturaBackEnd.Services
 {
+    using ProCultura.Domain.Entities;
+
     public static class PasswordEncryptionService
     {
         public static bool CheckPassword(UserEntity user, string password)

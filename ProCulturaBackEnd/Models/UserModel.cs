@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ProCulturaBackEnd.Entities;
 
 namespace ProCulturaBackEnd.Models
 {
+    using ProCultura.Domain.Entities;
+
     public class UserModel
     {
         [ScaffoldColumn(false)]

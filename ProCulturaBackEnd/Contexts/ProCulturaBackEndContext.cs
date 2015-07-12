@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
-using ProCulturaBackEnd.Entities;
 
 namespace ProCulturaBackEnd.Contexts
 {
+    using ProCultura.Domain.Entities;
+
     public class ProCulturaBackEndContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.

@@ -1,11 +1,12 @@
 using System.Linq;
 using ProCulturaBackEnd.Contexts;
-using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd.Migrations
 {
     using System.Data.Entity.Migrations;
+
+    using ProCultura.Domain.Entities;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ProCulturaBackEndContext>
     {

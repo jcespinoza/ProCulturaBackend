@@ -4,13 +4,14 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using ProCulturaBackEnd.Contexts;
-using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.Models;
 using ProCulturaBackEnd.Services;
 using AutoMapper;
 
 namespace ProCulturaBackEnd.Controllers
 {
+    using ProCultura.Domain.Entities;
+
     [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class UserController : ApiController
     {

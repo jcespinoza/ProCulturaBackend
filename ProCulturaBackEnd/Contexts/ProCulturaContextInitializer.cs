@@ -1,10 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using ProCulturaBackEnd.Entities;
 using ProCulturaBackEnd.Services;
 
 namespace ProCulturaBackEnd.Contexts
 {
+    using ProCultura.Domain.Entities;
+
     public class ProCulturaContextInitializer  : DropCreateDatabaseIfModelChanges<ProCulturaBackEndContext>
     {
         protected override void Seed(ProCulturaBackEndContext context)

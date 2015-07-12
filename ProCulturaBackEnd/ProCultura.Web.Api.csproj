@@ -145,7 +145,6 @@
     <Compile Include="Contexts\ProCulturaBackEndContext.cs" />
     <Compile Include="Contexts\ProCulturaContextInitializer.cs" />
     <Compile Include="Controllers\HttpActionResult.cs" />
-    <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -252,15 +251,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AutoHelperLib">
-      <Guid>{8404DD0E-7A27-4399-B1D9-6492B7DD7F7F}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
+      <Project>{0AF303BB-9666-49CA-81D6-BEC96F94060E}</Project>
+      <Name>ProCultura.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
