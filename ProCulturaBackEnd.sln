@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCulturaBackEnd", "ProCulturaBackEnd\ProCulturaBackEnd.csproj", "{19D57329-A20E-4D70-B5C9-2A581166F649}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Web.Api", "ProCultura.Web.Api\ProCultura.Web.Api.csproj", "{19D57329-A20E-4D70-B5C9-2A581166F649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Domain", "ProCultura.Domain\ProCultura.Domain.csproj", "{0AF303BB-9666-49CA-81D6-BEC96F94060E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Data", "ProCultura.Data\ProCultura.Data.csproj", "{920454D5-D611-414E-A74C-E3281D5A3F25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Security", "ProCultura.Security\ProCultura.Security.csproj", "{6AB30794-3B80-484C-8AAB-3257EBDAB114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Localization", "ProCultura.Localization\ProCultura.Localization.csproj", "{2BA73281-4707-412C-97E4-F2859E3C7852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{19D57329-A20E-4D70-B5C9-2A581166F649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19D57329-A20E-4D70-B5C9-2A581166F649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19D57329-A20E-4D70-B5C9-2A581166F649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{920454D5-D611-414E-A74C-E3281D5A3F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{920454D5-D611-414E-A74C-E3281D5A3F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
