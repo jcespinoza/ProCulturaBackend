@@ -65,11 +65,15 @@ namespace ProCultura.Web.Api.Controllers
             var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
             var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
             var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
+
             if (obtaineduser == null || requestingUser == null) return NotFound();
+
             if (obtaineduserEntity == requestingUser)
                 return Ok(obtaineduser);
+
             if(requestingUser.Role >= obtaineduser.Role)
                 return Ok(obtaineduser);
+
             return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
         }
 
@@ -80,8 +84,10 @@ namespace ProCultura.Web.Api.Controllers
               return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage()); 
             if(!user.Password.Equals(user.ConfirmPassword))
                 return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage());
+            
             Mapper.CreateMap<RegisterModel, UserEntity>().ReverseMap();
             var newUser = Mapper.Map<UserEntity>(user);
+
             PasswordEncryptionService.Encrypt(newUser);
             _db.UserModels.Add(newUser);
             _db.SaveChanges();
