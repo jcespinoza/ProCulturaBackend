@@ -8,17 +8,25 @@ using AutoMapper;
 
 namespace ProCultura.Web.Api.Controllers
 {
+    using ProCultura.CrossCutting.Encryption;
     using ProCultura.Domain.Entities;
     using ProCultura.Domain.Services;
     using ProCultura.Localization;
     using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Models;
-    using ProCultura.Web.Api.Services;
-
+    
     [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
+
+        private readonly IAuthRequestFactory authRequestFactory;
+
+        public UserController(IAuthRequestFactory _authRequestFactory)
+        {
+            //TODO: inject this dependency later
+            authRequestFactory = new AuthRequestFactory(null);
+        }
 
         // PUT api/user/5
         [ResponseType(typeof(AuthModel))]
@@ -28,7 +36,7 @@ namespace ProCultura.Web.Api.Controllers
             var user = Mapper.Map<UserEntity>(recievedUser);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
+            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
             if (requestSendingUser == null)
                 return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
@@ -37,10 +45,6 @@ namespace ProCultura.Web.Api.Controllers
             var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == user.Id);
             if (obtaineduser != null)
             {
-                /*if (!PasswordEncryptionService.CheckPassword(obtaineduser, user.Password) && obtaineduser.Password != user.Password)
-                {
-                    PasswordEncryptionService.Encrypt(user);
-                }*/
                 user.Password = obtaineduser.Password;
                 user.Salt = obtaineduser.Salt;
                 _db.Entry(obtaineduser).CurrentValues.SetValues(user);
@@ -51,7 +55,7 @@ namespace ProCultura.Web.Api.Controllers
             var authModel = new AuthModel
             {
                 Id = user.Id,
-                AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
+                AccessToken = authRequestFactory.BuildEncryptedRequest(user.Email),
                 Mensaje = LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage()
             };
             return Ok(authModel);
@@ -60,7 +64,7 @@ namespace ProCultura.Web.Api.Controllers
         [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(string token, int id)
         {
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
+            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
             var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
             var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
@@ -100,7 +104,7 @@ namespace ProCultura.Web.Api.Controllers
             var user = _db.UserModels.Find(id);
             if (user == null)
                 return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
+            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
             if (requestSendingUser == null)
                 return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());

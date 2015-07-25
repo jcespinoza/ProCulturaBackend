@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProCultura.Security")]
+[assembly: AssemblyTitle("ProCultura.CrossCutting")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ProCultura.Security")]
+[assembly: AssemblyProduct("ProCultura.CrossCutting")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8a5eb9d6-debc-4bd9-ad0c-6ae2c182ef6d")]
+[assembly: Guid("60a14c0a-c744-49f1-91d1-3c4e0b2f5418")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -7,7 +7,6 @@ namespace ProCultura.Web.Api.Migrations
     using ProCultura.Domain.Entities;
     using ProCultura.Domain.Services;
     using ProCultura.Web.Api.Contexts;
-    using ProCultura.Web.Api.Services;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ProCulturaBackEndContext>
     {

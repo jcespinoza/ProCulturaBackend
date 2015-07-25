@@ -6,23 +6,31 @@ using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
+    using ProCultura.CrossCutting.Encryption;
     using ProCultura.Domain.Entities;
     using ProCultura.Domain.Services;
     using ProCultura.Localization;
     using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Models;
-    using ProCultura.Web.Api.Services;
 
     [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
+        private readonly IAuthRequestFactory authRequestFactory;
+
+        public LoginController(IAuthRequestFactory _authRequestFactory)
+        {
+            //TODO: inject this dependency later
+            authRequestFactory = new AuthRequestFactory(null);
+        }
+
         // POST api/Login2
         [ResponseType(typeof(AuthModel))]
         public IHttpActionResult PostUserModel(LoginModel usermodel)
         {
-            var user = this.GetUserByEmail(usermodel);
+            var user = GetUserByEmail(usermodel);
             if (user == null)
                 return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
 
@@ -32,12 +40,13 @@ namespace ProCultura.Web.Api.Controllers
             return Ok(BuildSuccessAuthModel(user));
         }
 
-        private static AuthModel BuildSuccessAuthModel(UserEntity user)
+        private AuthModel BuildSuccessAuthModel(UserEntity user)
         {
+            var tokenModel = new UserTokenModel() { Email = user.Email };
             var authModel = new AuthModel
                                 {
                                     Id = user.Id,
-                                    AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
+                                    AccessToken = authRequestFactory.BuildEncryptedRequest(tokenModel),
                                     Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage()
                                 };
             return authModel;

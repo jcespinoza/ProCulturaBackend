@@ -5,7 +5,7 @@
 
     using ProCultura.Domain.Entities;
     using ProCultura.Domain.Services;
-    using ProCultura.Security.Services;
+    using ProCultura.CrossCutting.Encryption;
 
     public class ProCulturaContextInitializer  : DropCreateDatabaseIfModelChanges<ProCulturaBackEndContext>
     {

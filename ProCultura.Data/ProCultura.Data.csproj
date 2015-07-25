@@ -67,13 +67,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
+      <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
+      <Name>ProCultura.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
       <Project>{0af303bb-9666-49ca-81d6-bec96f94060e}</Project>
       <Name>ProCultura.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProCultura.Security\ProCultura.Security.csproj">
-      <Project>{6AB30794-3B80-484C-8AAB-3257EBDAB114}</Project>
-      <Name>ProCultura.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
