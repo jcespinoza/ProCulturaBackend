@@ -22,6 +22,8 @@ namespace ProCultura.Web.Api.Controllers
 
         private readonly IAuthRequestFactory authRequestFactory;
 
+        public UserController() : this(null) { }
+
         public UserController(IAuthRequestFactory _authRequestFactory)
         {
             //TODO: inject this dependency later
