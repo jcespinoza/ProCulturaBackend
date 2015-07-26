@@ -49,7 +49,7 @@
     <Compile Include="Encryption\GeneralEncryptionService.cs" />
     <Compile Include="Encryption\IAuthRequestFactory.cs" />
     <Compile Include="Encryption\IEncryptionService.cs" />
-    <Compile Include="Localization\LocalizationKeys.Designer.cs">
+    <Compile Include="L10N\LocalizationKeys.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizationKeys.resx</DependentUpon>
@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Localization\LocalizationKeys.resx">
+    <EmbeddedResource Include="L10N\LocalizationKeys.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationKeys.Designer.cs</LastGenOutput>
     </EmbeddedResource>

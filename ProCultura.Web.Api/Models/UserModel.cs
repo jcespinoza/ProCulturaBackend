@@ -1,18 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ProCultura.Web.Api.Models
+﻿namespace ProCultura.Web.Api.Models
 {
-    using ProCultura.Domain.Entities;
+    using System.Collections.Generic;
 
     public class UserModel
     {
-        [ScaffoldColumn(false)]
+        
         public int Id { get; set; }
-        [Required]
+        
         public string Name { get; set; }
-        [Required]
+        
         public string Email { get; set; }
-        [ScaffoldColumn(false)]
-        public Role Role { get; set; }
+        
+        public ICollection<RoleModel> Role { get; set; }
+    }
+
+    public class RoleModel
+    {
+        public string RoleId { get; set; }
     }
 }

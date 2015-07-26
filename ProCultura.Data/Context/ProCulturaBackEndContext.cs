@@ -1,7 +1,9 @@
-﻿namespace ProCultura.Data.Contexts
+﻿namespace ProCultura.Data.Context
 {
-    using ProCultura.Domain.Entities;
     using System.Data.Entity;
+
+    using ProCultura.Domain.Entities.Account;
+    using ProCultura.Domain.Entities.Security;
 
     public class ProCulturaBackEndContext : DbContext
     {
@@ -12,11 +14,15 @@
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public ProCulturaBackEndContext() : base("name=ProCulturaBackEndContext")
+        public ProCulturaBackEndContext() : base("name=ProCulturaBackendDB")
         {
+            Database.SetInitializer(new ProCulturaContextInitializer());
         }
 
-        public DbSet<UserEntity> UserModels { get; set; }
-    
+
+
+        public IDbSet<UserEntity> UserModels { get; set; }
+        public IDbSet<UserRole> UserRoles { get; set; }
+        public IDbSet<Role> Roles { get; set; }
     }
 }

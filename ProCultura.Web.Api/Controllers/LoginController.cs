@@ -7,16 +7,16 @@ using System.Web.Http.Description;
 namespace ProCultura.Web.Api.Controllers
 {
     using ProCultura.CrossCutting.Encryption;
-    using ProCultura.Domain.Entities;
+    using ProCultura.Data.Context;
+    using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
     using ProCultura.Localization;
-    using ProCultura.Web.Api.Contexts;
     using ProCultura.Web.Api.Models;
 
     [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
-        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
+        private readonly ProCulturaBackEndContext db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory authRequestFactory;
 
@@ -56,7 +56,7 @@ namespace ProCultura.Web.Api.Controllers
 
         private UserEntity GetUserByEmail(LoginModel usermodel)
         {
-            var user = this._db.UserModels.FirstOrDefault(x => x.Email == usermodel.Email);
+            var user = this.db.UserModels.FirstOrDefault(x => x.Email == usermodel.Email);
             return user;
         }
 
@@ -64,7 +64,7 @@ namespace ProCultura.Web.Api.Controllers
         {
             if (disposing)
             {
-                _db.Dispose();
+                this.db.Dispose();
             }
             base.Dispose(disposing);
         }

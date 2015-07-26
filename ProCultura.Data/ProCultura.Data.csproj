@@ -42,29 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contexts\ProCulturaBackEndContext.cs" />
-    <Compile Include="Contexts\ProCulturaContextInitializer.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.Designer.cs">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.cs" />
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.Designer.cs">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Context\ProCulturaBackEndContext.cs" />
+    <Compile Include="Context\ProCulturaContextInitializer.cs" />
+    <Compile Include="Mappings\Security\RoleEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\Security\UserRoleEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\User\UserDetailEntityTypeConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506290229391_AddSortOrder.resx">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506300440275_AddSortOrder1.resx">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
@@ -76,6 +62,7 @@
       <Name>ProCultura.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

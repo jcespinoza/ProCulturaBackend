@@ -139,8 +139,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contexts\ProCulturaBackEndContext.cs" />
-    <Compile Include="Contexts\ProCulturaContextInitializer.cs" />
     <Compile Include="Controllers\HttpActionResult.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
@@ -160,15 +158,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.Designer.cs">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.cs" />
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.Designer.cs">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,17 +220,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506290229391_AddSortOrder.resx">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506300440275_AddSortOrder1.resx">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
       <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
       <Name>ProCultura.CrossCutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProCultura.Data\ProCultura.Data.csproj">
+      <Project>{920454D5-D611-414E-A74C-E3281D5A3F25}</Project>
+      <Name>ProCultura.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
       <Project>{0AF303BB-9666-49CA-81D6-BEC96F94060E}</Project>

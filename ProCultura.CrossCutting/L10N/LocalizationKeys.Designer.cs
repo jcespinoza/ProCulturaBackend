@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProCultura.CrossCutting.Localization {
+namespace ProCultura.CrossCutting.L10N {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ProCultura.CrossCutting.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProCultura.CrossCutting.Localization.LocalizationKeys", typeof(LocalizationKeys).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProCultura.CrossCutting.L10N.LocalizationKeys", typeof(LocalizationKeys).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
