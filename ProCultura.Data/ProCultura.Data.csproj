@@ -51,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Scripts\DictionaryEntriesSeedScript.sql" />
+    <Content Include="Scripts\LanguageSeedScript.sql" />
+    <Content Include="Scripts\LocalizationTablesCreateScript.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">

@@ -117,38 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="message_AuthRequestNotRecognized" xml:space="preserve">
-    <value>message_AuthRequestNotRecognized</value>
-    <comment>For when the auth request is not in the right format</comment>
+  <data name="DatabaseConnectionName" xml:space="preserve">
+    <value>ProCulturaBackEndContext</value>
+    <comment>Name of the connection string in the config file</comment>
   </data>
-  <data name="message_EmailInUse" xml:space="preserve">
-    <value>message_EmailInUse</value>
-    <comment>For when a user tries to signup with an existing email</comment>
+  <data name="EnglishCode" xml:space="preserve">
+    <value>en</value>
+    <comment>English Language code</comment>
   </data>
-  <data name="message_InsufficientPrivileges" xml:space="preserve">
-    <value>message_InsufficientPrivileges</value>
-    <comment>For when the user has not enough privileges</comment>
-  </data>
-  <data name="message_InvalidPassword" xml:space="preserve">
-    <value>message_InvalidPassword</value>
-  </data>
-  <data name="message_LoginSuccess" xml:space="preserve">
-    <value>message_LoginSuccess</value>
-    <comment>Message for the user logs in</comment>
-  </data>
-  <data name="message_PasswordMismatch" xml:space="preserve">
-    <value>message_PasswordMismatch</value>
-  </data>
-  <data name="message_RegistrationSuccess" xml:space="preserve">
-    <value>message_RegistrationSuccess</value>
-  </data>
-  <data name="message_UpdateUserSuccess" xml:space="preserve">
-    <value>message_UpdateUserSuccess</value>
-  </data>
-  <data name="message_UserDeleted" xml:space="preserve">
-    <value>message_UserDeleted</value>
-  </data>
-  <data name="message_UserNotFound" xml:space="preserve">
-    <value>message_UserNotFound</value>
+  <data name="SpanishCode" xml:space="preserve">
+    <value>es</value>
+    <comment>Spanish Language code</comment>
   </data>
 </root>

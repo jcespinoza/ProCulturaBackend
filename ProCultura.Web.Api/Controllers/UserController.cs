@@ -1,18 +1,19 @@
 ﻿namespace ProCultura.Web.Api.Controllers
 {
+    using System.Web.Http.Description;
+
     using ProCultura.CrossCutting.Encryption;
+    using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
-    using ProCultura.Localization;
+    using ProCultura.CrossCutting.L10N;
     using ProCultura.Web.Api.Models;
 
     using System.Linq;
     using System.Net;
     using System.Web.Http;
     using System.Web.Http.Cors;
-    using System.Web.Http.Description;
-
     using AutoMapper;
     
     [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
@@ -21,13 +22,15 @@
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory authRequestFactory;
+        private readonly ILocalizationService l10nService;
 
-        public UserController() : this(null) { }
+        public UserController() : this(null, null) { }
 
-        public UserController(IAuthRequestFactory _authRequestFactory)
+        public UserController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
             //TODO: inject this dependency later
             authRequestFactory = new AuthRequestFactory(null);
+            l10nService = new DatabaseLocalizationService();
         }
 
         // PUT api/user/5
@@ -44,10 +47,18 @@
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
 
             if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
+                return new HttpActionResult(
+                    HttpStatusCode.Forbidden,
+                    l10nService.GetLocalizedString(
+                        LocalizationKeys.message_AuthRequestNotRecognized,
+                        AppStrings.EnglishCode));
 
             if (requestSendingUser.Id != user.Id && !requestSendingUser.IsAdmin())
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
+                return new HttpActionResult(
+                    HttpStatusCode.Forbidden,
+                    l10nService.GetLocalizedString(
+                        LocalizationKeys.message_InsufficientPrivileges,
+                        AppStrings.EnglishCode));
 
             var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == user.Id);
             if (obtaineduser != null)
@@ -61,15 +72,18 @@
             {
                 return new HttpActionResult(
                     HttpStatusCode.NotFound,
-                    LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
+                    l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
             }
 
             var authModel = new AuthModel
-            {
-                Id = user.Id,
-                AccessToken = authRequestFactory.BuildEncryptedRequest(user.Email),
-                Mensaje = LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage()
-            };
+                                {
+                                    Id = user.Id,
+                                    AccessToken = authRequestFactory.BuildEncryptedRequest(user.Email),
+                                    Mensaje =
+                                        l10nService.GetLocalizedString(
+                                            LocalizationKeys.message_UpdateUserSuccess,
+                                            AppStrings.EnglishCode)
+                                };
             return Ok(authModel);
         }
 
@@ -90,17 +104,23 @@
             if(requestingUser.HasHigherAuthorityThan(obtaineduserEntity))
                 return Ok(obtaineduser);
 
-            return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
+            return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
         }
 
         // POST api/user
         public IHttpActionResult PostUser(RegisterModel user)
         {
-            if(_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
-                return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage()); 
+            if (_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
+                return BuildActionResult(
+                    HttpStatusCode.InternalServerError,
+                    LocalizationKeys.message_EmailInUse,
+                    AppStrings.EnglishCode);
 
-            if(!user.Password.Equals(user.ConfirmPassword))
-                return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage());
+            if (!user.Password.Equals(user.ConfirmPassword))
+                return BuildActionResult(
+                    HttpStatusCode.InternalServerError,
+                    LocalizationKeys.message_PasswordMismatch,
+                    AppStrings.EnglishCode);
             
             Mapper.CreateMap<RegisterModel, UserEntity>().ReverseMap();
             var newUser = Mapper.Map<UserEntity>(user);
@@ -109,7 +129,7 @@
             _db.UserModels.Add(newUser);
             _db.SaveChanges();
 
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage());
+            return BuildActionResult(HttpStatusCode.OK, LocalizationKeys.message_RegistrationSuccess, AppStrings.EnglishCode);
         }
 
         // DELETE api/user/5
@@ -117,19 +137,24 @@
         {
             var user = _db.UserModels.Find(id);
             if (user == null)
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
+                return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
             var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
 
             if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
+                return BuildActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_AuthRequestNotRecognized, AppStrings.EnglishCode);
 
             if (requestSendingUser.Id != user.Id && requestSendingUser.IsAdmin())
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
+                return BuildActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
 
             _db.UserModels.Remove(user);
             _db.SaveChanges();
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.UserDeletedMessage());
+            return BuildActionResult(HttpStatusCode.OK, LocalizationKeys.message_UserDeleted, AppStrings.EnglishCode);
+        }
+
+        private HttpActionResult BuildActionResult(HttpStatusCode code, string message, string language)
+        {
+            return new HttpActionResult(code, l10nService.GetLocalizedString(message, language));
         }
 
         protected override void Dispose(bool disposing)

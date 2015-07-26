@@ -2,7 +2,8 @@
 
 namespace ProCultura.Web.Api.Models
 {
-    public class RegisterModel : ResponseModel
+
+    public class RegisterModel : RequestModel
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }

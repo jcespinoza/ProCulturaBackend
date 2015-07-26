@@ -164,6 +164,8 @@
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RequestInformation.cs" />
+    <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserTokenModel.cs" />
@@ -231,10 +233,6 @@
     <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
       <Project>{0AF303BB-9666-49CA-81D6-BEC96F94060E}</Project>
       <Name>ProCultura.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProCultura.Localization\ProCultura.Localization.csproj">
-      <Project>{2BA73281-4707-412C-97E4-F2859E3C7852}</Project>
-      <Name>ProCultura.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

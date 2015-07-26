@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Domain", "ProCul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Data", "ProCultura.Data\ProCultura.Data.csproj", "{920454D5-D611-414E-A74C-E3281D5A3F25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Localization", "ProCultura.Localization\ProCultura.Localization.csproj", "{2BA73281-4707-412C-97E4-F2859E3C7852}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.CrossCutting", "ProCultura.CrossCutting\ProCultura.CrossCutting.csproj", "{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Release|Any CPU.ActiveCfg = Release|Any CPU

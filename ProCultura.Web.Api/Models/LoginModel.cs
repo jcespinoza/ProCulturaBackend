@@ -2,7 +2,8 @@
 
 namespace ProCultura.Web.Api.Models
 {
-    public class LoginModel
+
+    public class LoginModel: RequestModel
     {
         [Required(ErrorMessage = "El correo es requerido")]
         [DataType(DataType.EmailAddress)]  

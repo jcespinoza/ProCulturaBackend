@@ -22,7 +22,7 @@ namespace ProCultura.CrossCutting.L10N {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LocalizationKeys {
+    public class LocalizationKeys {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ProCultura.CrossCutting.L10N {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProCultura.CrossCutting.L10N.LocalizationKeys", typeof(LocalizationKeys).Assembly);
@@ -51,7 +51,7 @@ namespace ProCultura.CrossCutting.L10N {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,29 +61,92 @@ namespace ProCultura.CrossCutting.L10N {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to message_invalidPassword.
+        ///   Looks up a localized string similar to message_AuthRequestNotRecognized.
         /// </summary>
-        internal static string message_invalidPassword {
+        public static string message_AuthRequestNotRecognized {
             get {
-                return ResourceManager.GetString("message_invalidPassword", resourceCulture);
+                return ResourceManager.GetString("message_AuthRequestNotRecognized", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to message_succes.
+        ///   Looks up a localized string similar to message_EmailInUse.
         /// </summary>
-        internal static string message_success {
+        public static string message_EmailInUse {
             get {
-                return ResourceManager.GetString("message_success", resourceCulture);
+                return ResourceManager.GetString("message_EmailInUse", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to message_userDosNotExist.
+        ///   Looks up a localized string similar to message_InsufficientPrivileges.
         /// </summary>
-        internal static string message_userDosNotExist {
+        public static string message_InsufficientPrivileges {
             get {
-                return ResourceManager.GetString("message_userDosNotExist", resourceCulture);
+                return ResourceManager.GetString("message_InsufficientPrivileges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_InvalidPassword.
+        /// </summary>
+        public static string message_InvalidPassword {
+            get {
+                return ResourceManager.GetString("message_InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_LoginSuccess.
+        /// </summary>
+        public static string message_LoginSuccess {
+            get {
+                return ResourceManager.GetString("message_LoginSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_PasswordMismatch.
+        /// </summary>
+        public static string message_PasswordMismatch {
+            get {
+                return ResourceManager.GetString("message_PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_RegistrationSuccess.
+        /// </summary>
+        public static string message_RegistrationSuccess {
+            get {
+                return ResourceManager.GetString("message_RegistrationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_UpdateUserSuccess.
+        /// </summary>
+        public static string message_UpdateUserSuccess {
+            get {
+                return ResourceManager.GetString("message_UpdateUserSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_UserDeleted.
+        /// </summary>
+        public static string message_UserDeleted {
+            get {
+                return ResourceManager.GetString("message_UserDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_UserNotFound.
+        /// </summary>
+        public static string message_UserNotFound {
+            get {
+                return ResourceManager.GetString("message_UserNotFound", resourceCulture);
             }
         }
     }
