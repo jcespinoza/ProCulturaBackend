@@ -5,7 +5,6 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
-    using ProCultura.Localization;
     
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -16,7 +15,6 @@ namespace ProCultura.Web.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            LocalizedResponseService.SetLocalization(LocalizedResponseService.L10N.Spanish);//change to spanish for deployment
         }
     }
 }
