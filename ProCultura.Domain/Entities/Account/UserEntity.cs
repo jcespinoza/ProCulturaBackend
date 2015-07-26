@@ -19,5 +19,14 @@
         {
             return UserRoles != null && UserRoles.FirstOrDefault(ur => ur.RoleId == "Administrator") != null;
         }
+
+        public bool HasHigherAuthorityThan(UserEntity otherUser)
+        {
+            if (UserRoles.Any() && otherUser.UserRoles.Any())
+                return UserRoles.Max(ur => ur.Role.AuthorityLevel)
+                       >= otherUser.UserRoles.Max(ur => ur.Role.AuthorityLevel);
+
+            return UserRoles.Any() && !otherUser.UserRoles.Any();
+        }
     }
 }

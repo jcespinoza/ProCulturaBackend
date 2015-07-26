@@ -55,10 +55,15 @@
                 user.Password = obtaineduser.Password;
                 user.Salt = obtaineduser.Salt;
                 _db.Entry(obtaineduser).CurrentValues.SetValues(user);
+                _db.SaveChanges();
             }
             else
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-            _db.SaveChanges();
+            {
+                return new HttpActionResult(
+                    HttpStatusCode.NotFound,
+                    LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
+            }
+
             var authModel = new AuthModel
             {
                 Id = user.Id,
@@ -82,7 +87,7 @@
             if (obtaineduserEntity == requestingUser)
                 return Ok(obtaineduser);
 
-            if (requestingUser.UserRoles.Max(ur => ur.Role.AuthorityLevel) >= obtaineduserEntity.UserRoles.Max(ur => ur.Role.AuthorityLevel))
+            if(requestingUser.HasHigherAuthorityThan(obtaineduserEntity))
                 return Ok(obtaineduser);
 
             return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());

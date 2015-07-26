@@ -1,18 +1,18 @@
 ﻿namespace ProCultura.Data.Context
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
+    using ProCultura.Data.Mappings.Security;
+    using ProCultura.Data.Mappings.User;
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Entities.Security;
 
     public class ProCulturaBackEndContext : DbContext
     {
-        // You can add custom code to this file. Changes will not be overwritten.
-        // 
-        // If you want Entity Framework to drop and regenerate your database
-        // automatically whenever you change your model schema, please use data migrations.
-        // For more information refer to the documentation:
-        // http://msdn.microsoft.com/en-us/data/jj591621.aspx
+        public IDbSet<UserEntity> UserModels { get; set; }
+        public IDbSet<UserRole> UserRoles { get; set; }
+        public IDbSet<Role> Roles { get; set; }
 
         public ProCulturaBackEndContext()
             : base("name=ProCulturaBackEndContext")
@@ -20,10 +20,12 @@
             Database.SetInitializer(new ProCulturaContextInitializer());
         }
 
-
-
-        public IDbSet<UserEntity> UserModels { get; set; }
-        public IDbSet<UserRole> UserRoles { get; set; }
-        public IDbSet<Role> Roles { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Configurations.Add(new UserDetailEntityTypeConfiguration());
+            modelBuilder.Configurations.Add(new UserRoleEntityTypeConfiguration());
+            modelBuilder.Configurations.Add(new RoleEntityTypeConfiguration());
+        }
     }
 }
