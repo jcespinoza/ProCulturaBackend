@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Data", "ProCultu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.CrossCutting", "ProCultura.CrossCutting\ProCultura.CrossCutting.csproj", "{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Distributed Services", "1. Distributed Services", "{79ED78D8-7CCB-47A1-A73F-5AF24211072E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Domain", "4. Domain", "{447930CC-2B6D-472F-A699-C0CEBBBF6E6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Infrastructure", "7. Infrastructure", "{35A4592A-7B5E-43F4-B41A-89D67680BE89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19D57329-A20E-4D70-B5C9-2A581166F649} = {79ED78D8-7CCB-47A1-A73F-5AF24211072E}
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E} = {447930CC-2B6D-472F-A699-C0CEBBBF6E6A}
+		{920454D5-D611-414E-A74C-E3281D5A3F25} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
 	EndGlobalSection
 EndGlobal

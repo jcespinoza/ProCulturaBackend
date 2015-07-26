@@ -25,7 +25,7 @@ namespace ProCultura.Web.Api.Controllers
 
         public LoginController() : this(null, null){}
 
-        public LoginController(IAuthRequestFactory _authRequestFactory, ILocalizationService l10nService)
+        public LoginController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
             //TODO: inject this dependencies later
             authRequestFactory = new AuthRequestFactory(null);
