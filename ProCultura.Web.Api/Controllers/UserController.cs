@@ -107,6 +107,23 @@
             return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
         }
 
+        [ResponseType(typeof(UserModel))]
+        public IHttpActionResult GetUser(string token)
+        {
+            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var foundUser = _db.UserModels.FirstOrDefault(u => u.Email == tokenModel.Email);
+
+            if (foundUser != null)
+            {
+                Mapper.CreateMap<UserEntity, UserModel>();
+                var userModel = Mapper.Map<UserModel>(foundUser);
+
+                return Ok(userModel);
+            }
+
+            return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+        }
+
         // POST api/user
         public IHttpActionResult PostUser(RegisterModel user)
         {
