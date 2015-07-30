@@ -16,7 +16,6 @@
     using System.Web.Http.Cors;
     using AutoMapper;
     
-    [EnableCors(origins: "http://localhost:8090, http://procultura.herokuapp.com" , headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
