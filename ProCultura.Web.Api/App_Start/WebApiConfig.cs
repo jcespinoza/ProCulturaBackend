@@ -2,6 +2,8 @@
 
 namespace ProCultura.Web.Api
 {
+    using System.Web.Http.Cors;
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -9,7 +11,8 @@ namespace ProCultura.Web.Api
             // Web API configuration and services
 
             // Web API routes
-            config.EnableCors();
+            var cors = new EnableCorsAttribute("http://localhost:8090, http://procultura.herokuapp.com", "*", "*");
+            config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
