@@ -14,7 +14,7 @@ namespace ProCultura.Web.Api.Controllers
     using ProCultura.Domain.Services;
     using ProCultura.Web.Api.Models;
 
-    [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:8090, http://procultura.herokuapp.com", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
         private readonly ProCulturaBackEndContext db = new ProCulturaBackEndContext();
