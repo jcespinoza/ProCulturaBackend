@@ -1,5 +1,3 @@
-USE ProCulturaBackendDB
-
 BEGIN TRAN
 
 INSERT

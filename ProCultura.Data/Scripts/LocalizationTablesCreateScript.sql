@@ -1,8 +1,3 @@
-IF DB_ID('ProCulturaBackendDB') IS NULL
-	CREATE DATABASE [ProCulturaBackendDB]
-
-EXEC (N'USE ProCulturaBackendDB')
-
 ----Create Schema
 IF NOT EXISTS (
 	SELECT

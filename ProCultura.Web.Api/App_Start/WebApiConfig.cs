@@ -11,7 +11,7 @@ namespace ProCultura.Web.Api
             // Web API configuration and services
 
             // Web API routes
-            var cors = new EnableCorsAttribute("localhost:8090, procultura.herokuapp.com", "*", "*");
+            var cors = new EnableCorsAttribute("http://localhost:8090, http://procultura.herokuapp.com", "*", "*");
             config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
 
