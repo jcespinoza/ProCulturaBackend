@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
+    using System;
+
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
     using ProCultura.CrossCutting.Settings;
@@ -16,19 +17,20 @@ namespace ProCultura.Web.Api.Controllers
 
     public class LoginController : ApiController
     {
+        //TODO: receive this as a dependency
         private readonly ProCulturaBackEndContext db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory authRequestFactory;
 
-        private readonly ILocalizationService l10nService;
-
-        public LoginController() : this(null, null){}
+        private readonly ILocalizationService l10NService;
 
         public LoginController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
-            //TODO: inject this dependencies later
-            authRequestFactory = new AuthRequestFactory(null);
-            l10nService = new DatabaseLocalizationService();
+            if (_authRequestFactory == null) throw new ArgumentNullException("_authRequestFactory");
+            if (_l10nService == null) throw new ArgumentNullException("_l10nService");
+            
+            authRequestFactory = _authRequestFactory;
+            l10NService = _l10nService;
         }
 
         // POST api/Login2
@@ -39,12 +41,12 @@ namespace ProCultura.Web.Api.Controllers
             if (user == null)
                 return new HttpActionResult(
                     HttpStatusCode.NotFound,
-                    l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
+                    this.l10NService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
 
             if (!PasswordEncryptionService.CheckPassword(user, usermodel.Password))
                 return new HttpActionResult(
                     HttpStatusCode.Forbidden,
-                    l10nService.GetLocalizedString(LocalizationKeys.message_InvalidPassword, AppStrings.EnglishCode));
+                    this.l10NService.GetLocalizedString(LocalizationKeys.message_InvalidPassword, AppStrings.EnglishCode));
 
             return Ok(BuildSuccessAuthModel(user));
         }
@@ -57,7 +59,7 @@ namespace ProCultura.Web.Api.Controllers
                                     Id = user.Id,
                                     AccessToken = authRequestFactory.BuildEncryptedRequest(tokenModel),
                                     Mensaje =
-                                        l10nService.GetLocalizedString(
+                                        this.l10NService.GetLocalizedString(
                                             LocalizationKeys.message_LoginSuccess,
                                             AppStrings.EnglishCode)
                                 };

@@ -5,11 +5,14 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
-    
+
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
+            var config = GlobalConfiguration.Configuration;
+            ContainerRegistration.Configure(config);
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
