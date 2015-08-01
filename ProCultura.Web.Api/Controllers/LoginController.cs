@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
@@ -16,6 +15,7 @@ namespace ProCultura.Web.Api.Controllers
 
     public class LoginController : ApiController
     {
+        //TODO: receive this as a dependency
         private readonly ProCulturaBackEndContext db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory authRequestFactory;
@@ -26,9 +26,8 @@ namespace ProCultura.Web.Api.Controllers
 
         public LoginController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
-            //TODO: inject this dependencies later
-            authRequestFactory = new AuthRequestFactory(null);
-            l10nService = new DatabaseLocalizationService();
+            authRequestFactory = _authRequestFactory;
+            l10nService = _l10nService;
         }
 
         // POST api/Login2

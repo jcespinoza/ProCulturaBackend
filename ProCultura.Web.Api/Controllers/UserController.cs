@@ -13,11 +13,12 @@
     using System.Linq;
     using System.Net;
     using System.Web.Http;
-    using System.Web.Http.Cors;
+
     using AutoMapper;
     
     public class UserController : ApiController
     {
+        //TODO: receive this as a dependency
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory authRequestFactory;
@@ -27,9 +28,8 @@
 
         public UserController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
-            //TODO: inject this dependency later
-            authRequestFactory = new AuthRequestFactory(null);
-            l10nService = new DatabaseLocalizationService();
+            authRequestFactory = _authRequestFactory;
+            l10nService = _l10nService;
         }
 
         // PUT api/user/5

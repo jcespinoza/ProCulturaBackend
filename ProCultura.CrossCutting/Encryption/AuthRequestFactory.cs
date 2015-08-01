@@ -7,8 +7,7 @@
 
         public AuthRequestFactory(IEncryptionService _encryptionService)
         {
-            //TODO: inject this dependency later
-            encryptionService = new GeneralEncryptionService();
+            encryptionService = _encryptionService;
         }
 
         public string BuildEncryptedRequest<T>(T request)
