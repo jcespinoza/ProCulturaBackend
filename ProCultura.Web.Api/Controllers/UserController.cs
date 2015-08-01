@@ -24,8 +24,6 @@
         private readonly IAuthRequestFactory authRequestFactory;
         private readonly ILocalizationService l10nService;
 
-        public UserController() : this(null, null) { }
-
         public UserController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
         {
             authRequestFactory = _authRequestFactory;
@@ -34,7 +32,7 @@
 
         // PUT api/user/5
         [ResponseType(typeof(AuthModel))]
-        public IHttpActionResult PutUser(string token, UserModel receivedUser) 
+        public IHttpActionResult PutUser(string token, UserModel receivedUser)
         {
             Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
             var user = Mapper.Map<UserEntity>(receivedUser);

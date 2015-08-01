@@ -15,7 +15,7 @@
     public class ContainerRegistration
     {
         /// <summary>
-        /// Main method for registration of dependencies. I also sets AutoFac to be the dependency resolver.
+        /// Main method for registration of dependencies. It also sets AutoFac to be the dependency resolver.
         /// </summary>
         /// <param name="config">The current HttpConfiguration for this assembly</param>
         public static void Configure(HttpConfiguration config)
