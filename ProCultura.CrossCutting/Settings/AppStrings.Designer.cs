@@ -70,11 +70,29 @@ namespace ProCultura.CrossCutting.Settings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to de.
+        /// </summary>
+        public static string DeutschCode {
+            get {
+                return ResourceManager.GetString("DeutschCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en.
         /// </summary>
         public static string EnglishCode {
             get {
                 return ResourceManager.GetString("EnglishCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fr.
+        /// </summary>
+        public static string FrenchCode {
+            get {
+                return ResourceManager.GetString("FrenchCode", resourceCulture);
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿namespace ProCultura.Web.Api.Controllers
 {
+    using System.Web.Compilation;
     using System.Web.Http.Description;
 
     using ProCultura.CrossCutting.Encryption;
@@ -31,11 +32,10 @@
         }
 
         // PUT api/user/5
-        [ResponseType(typeof(AuthModel))]
-        public IHttpActionResult PutUser(string token, UserModel receivedUser)
+        [ResponseType(typeof(ResponseModel))]
+        public IHttpActionResult PutUser(string token, UserModel request)
         {
-            Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
-            var user = Mapper.Map<UserEntity>(receivedUser);
+            var userEntity = Mapper.Map<UserEntity>(request);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -50,19 +50,19 @@
                         LocalizationKeys.message_AuthRequestNotRecognized,
                         AppStrings.EnglishCode));
 
-            if (requestSendingUser.Id != user.Id && !requestSendingUser.IsAdmin())
+            if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
                 return new HttpActionResult(
                     HttpStatusCode.Forbidden,
                     l10nService.GetLocalizedString(
                         LocalizationKeys.message_InsufficientPrivileges,
                         AppStrings.EnglishCode));
 
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == user.Id);
+            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == userEntity.Id);
             if (obtaineduser != null)
             {
-                user.Password = obtaineduser.Password;
-                user.Salt = obtaineduser.Salt;
-                _db.Entry(obtaineduser).CurrentValues.SetValues(user);
+                userEntity.Password = obtaineduser.Password;
+                userEntity.Salt = obtaineduser.Salt;
+                _db.Entry(obtaineduser).CurrentValues.SetValues(userEntity);
                 _db.SaveChanges();
             }
             else
@@ -72,23 +72,21 @@
                     l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
             }
 
-            var authModel = new AuthModel
+            var response = new ResponseModel
                                 {
-                                    Id = user.Id,
-                                    AccessToken = authRequestFactory.BuildEncryptedRequest(user.Email),
-                                    Mensaje =
+                                    Message =
                                         l10nService.GetLocalizedString(
                                             LocalizationKeys.message_UpdateUserSuccess,
                                             AppStrings.EnglishCode)
                                 };
-            return Ok(authModel);
+            return Ok(response);
         }
 
         [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(string token, int id)
         {
             var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
+            
             var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
             var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
             var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
@@ -101,7 +99,7 @@
             if(requestingUser.HasHigherAuthorityThan(obtaineduserEntity))
                 return Ok(obtaineduser);
 
-            return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+            return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
         }
 
         [ResponseType(typeof(UserModel))]
@@ -112,61 +110,80 @@
 
             if (foundUser != null)
             {
-                Mapper.CreateMap<UserEntity, UserModel>();
                 var userModel = Mapper.Map<UserModel>(foundUser);
 
                 return Ok(userModel);
             }
 
-            return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+            return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
         }
 
-        // POST api/user
-        public IHttpActionResult PostUser(RegisterModel user)
+        [ResponseType(typeof(UserModel))]
+        public IHttpActionResult PostUser(RegisterModel request)
         {
-            if (_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
-                return BuildActionResult(
+            if (request.Email == null)
+            {
+                return this.BuildErrorActionResult(
+                    HttpStatusCode.Forbidden,
+                    LocalizationKeys.message_EmailIsRequired,
+                    GetLanguage(request));
+            }
+            
+            if (_db.UserModels.FirstOrDefault(x => x.Email == request.Email) != null)
+                return this.BuildErrorActionResult(
                     HttpStatusCode.InternalServerError,
                     LocalizationKeys.message_EmailInUse,
                     AppStrings.EnglishCode);
-
-            if (!user.Password.Equals(user.ConfirmPassword))
-                return BuildActionResult(
-                    HttpStatusCode.InternalServerError,
-                    LocalizationKeys.message_PasswordMismatch,
-                    AppStrings.EnglishCode);
             
-            Mapper.CreateMap<RegisterModel, UserEntity>().ReverseMap();
-            var newUser = Mapper.Map<UserEntity>(user);
+            var newUser = Mapper.Map<UserEntity>(request);
 
             PasswordEncryptionService.Encrypt(newUser);
             _db.UserModels.Add(newUser);
             _db.SaveChanges();
 
-            return BuildActionResult(HttpStatusCode.OK, LocalizationKeys.message_RegistrationSuccess, AppStrings.EnglishCode);
+            return Ok(this.BuildGenericResponse( LocalizationKeys.message_RegistrationSuccess, GetLanguage(request)) );
         }
 
-        // DELETE api/user/5
-        public IHttpActionResult DeleteUser(string token, int id)
+        private string GetLanguage(RequestModel request)
         {
-            var user = _db.UserModels.Find(id);
+            if (request.RequestInformation != null)
+            {
+                return AppStrings.ResourceManager.GetString(request.RequestInformation.LanguageId); ;
+            }
+
+            return AppStrings.EnglishCode;
+        }
+
+        [ResponseType(typeof(ResponseModel))]
+        public IHttpActionResult DeleteUser(string token, DeleteUserModel request)
+        {
+            var user = _db.UserModels.FirstOrDefault(u => u.Email == request.Email);
             if (user == null)
-                return BuildActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+                return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
             var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
 
             if (requestSendingUser == null)
-                return BuildActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_AuthRequestNotRecognized, AppStrings.EnglishCode);
+                return this.BuildErrorActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_AuthRequestNotRecognized, AppStrings.EnglishCode);
 
             if (requestSendingUser.Id != user.Id && requestSendingUser.IsAdmin())
-                return BuildActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
+                return this.BuildErrorActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
 
             _db.UserModels.Remove(user);
             _db.SaveChanges();
-            return BuildActionResult(HttpStatusCode.OK, LocalizationKeys.message_UserDeleted, AppStrings.EnglishCode);
+
+            return Ok(BuildGenericResponse( LocalizationKeys.message_UserDeleted, GetLanguage(request) ));
         }
 
-        private HttpActionResult BuildActionResult(HttpStatusCode code, string message, string language)
+        private ResponseModel BuildGenericResponse(string messageKey, string languageCode) 
+        {
+            return new ResponseModel()
+                       {
+                           Message = l10nService.GetLocalizedString(messageKey, languageCode)
+                       };
+        }
+
+        private HttpActionResult BuildErrorActionResult(HttpStatusCode code, string message, string language)
         {
             return new HttpActionResult(code, l10nService.GetLocalizedString(message, language));
         }

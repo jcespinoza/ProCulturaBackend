@@ -33,7 +33,6 @@ namespace ProCultura.Web.Api.Controllers
             l10NService = _l10nService;
         }
 
-        // POST api/Login2
         [ResponseType(typeof(AuthModel))]
         public IHttpActionResult PostUserModel(LoginModel usermodel)
         {
@@ -58,7 +57,7 @@ namespace ProCultura.Web.Api.Controllers
                                 {
                                     Id = user.Id,
                                     AccessToken = authRequestFactory.BuildEncryptedRequest(tokenModel),
-                                    Mensaje =
+                                    Message =
                                         this.l10NService.GetLocalizedString(
                                             LocalizationKeys.message_LoginSuccess,
                                             AppStrings.EnglishCode)

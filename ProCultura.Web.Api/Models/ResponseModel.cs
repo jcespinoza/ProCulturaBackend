@@ -2,6 +2,6 @@
 {
     public class ResponseModel 
     {
-        public string Mensaje { get; set; }
+        public string Message { get; set; }
     }
 }

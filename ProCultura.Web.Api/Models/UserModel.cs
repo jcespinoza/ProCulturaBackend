@@ -2,9 +2,8 @@
 {
     using System.Collections.Generic;
 
-    public class UserModel
+    public class UserModel: ResponseModel
     {
-        
         public int Id { get; set; }
         
         public string Name { get; set; }
