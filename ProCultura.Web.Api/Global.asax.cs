@@ -5,6 +5,7 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
+    using ProCulturaBackEnd.App_Start;
 
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -12,6 +13,7 @@ namespace ProCultura.Web.Api
         {
             var config = GlobalConfiguration.Configuration;
             ContainerRegistration.Configure(config);
+            MappingConfig.RegisterMappings();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -121,9 +121,17 @@
     <value>ProCulturaBackEndContext</value>
     <comment>Name of the connection string in the config file</comment>
   </data>
+  <data name="DeutschCode" xml:space="preserve">
+    <value>de</value>
+    <comment>Deutsch Language Code</comment>
+  </data>
   <data name="EnglishCode" xml:space="preserve">
     <value>en</value>
     <comment>English Language code</comment>
+  </data>
+  <data name="FrenchCode" xml:space="preserve">
+    <value>fr</value>
+    <comment>French Language code</comment>
   </data>
   <data name="SpanishCode" xml:space="preserve">
     <value>es</value>

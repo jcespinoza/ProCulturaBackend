@@ -15,10 +15,5 @@ namespace ProCultura.Web.Api.Models
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [Required(ErrorMessage = "Confirm Password is required")]
-        [Compare("Password", ErrorMessage = "Password and Confirm Password should be the same")]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
     }
 }
