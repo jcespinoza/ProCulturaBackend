@@ -1,4 +1,4 @@
-﻿namespace ProCultura.Web.Api.Models
+﻿namespace Procultura.Application.DTO.User
 {
     using Procultura.Application.DTO;
 

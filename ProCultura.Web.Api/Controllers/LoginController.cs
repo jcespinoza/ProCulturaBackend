@@ -7,13 +7,14 @@ namespace ProCultura.Web.Api.Controllers
 {
     using System;
 
+    using Procultura.Application.DTO.User;
+
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
     using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
-    using ProCultura.Web.Api.Models;
 
     public class LoginController : ApiController
     {

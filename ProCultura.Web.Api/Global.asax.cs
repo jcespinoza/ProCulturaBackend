@@ -5,7 +5,7 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
-    using ProCulturaBackEnd.App_Start;
+    using ProCultura.Web.Api.App_Start;
 
     public class WebApiApplication : System.Web.HttpApplication
     {

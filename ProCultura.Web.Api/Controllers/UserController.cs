@@ -3,6 +3,7 @@
     using System.Web.Http.Description;
 
     using Procultura.Application.DTO;
+    using Procultura.Application.DTO.User;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.Settings;
@@ -10,7 +11,6 @@
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
     using ProCultura.CrossCutting.L10N;
-    using ProCultura.Web.Api.Models;
 
     using System.Linq;
     using System.Net;

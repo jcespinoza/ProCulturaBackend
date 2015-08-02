@@ -1,9 +1,10 @@
-﻿namespace ProCulturaBackEnd.App_Start
+﻿namespace ProCultura.Web.Api.App_Start
 {
     using AutoMapper;
 
+    using Procultura.Application.DTO.User;
+
     using ProCultura.Domain.Entities.Account;
-    using ProCultura.Web.Api.Models;
 
     public class MappingConfig
     {

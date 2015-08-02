@@ -42,12 +42,16 @@
     <Compile Include="DTO\RequestInformation.cs" />
     <Compile Include="DTO\RequestBase.cs" />
     <Compile Include="DTO\ResponseBase.cs" />
+    <Compile Include="DTO\User\AuthModel.cs" />
+    <Compile Include="DTO\User\DeleteUserModel.cs" />
+    <Compile Include="DTO\User\LoginModel.cs" />
+    <Compile Include="DTO\User\RegisterModel.cs" />
+    <Compile Include="DTO\User\UserModel.cs" />
+    <Compile Include="DTO\User\UserTokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IUserAppService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
