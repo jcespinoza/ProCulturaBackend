@@ -32,7 +32,7 @@
         }
 
         // PUT api/user/5
-        [ResponseType(typeof(ResponseModel))]
+        [ResponseType(typeof(ResponseBase))]
         public IHttpActionResult PutUser(string token, UserModel request)
         {
             var userEntity = Mapper.Map<UserEntity>(request);
@@ -72,7 +72,7 @@
                     l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
             }
 
-            var response = new ResponseModel
+            var response = new ResponseBase
                                 {
                                     Message =
                                         l10nService.GetLocalizedString(
@@ -144,7 +144,7 @@
             return Ok(this.BuildGenericResponse( LocalizationKeys.message_RegistrationSuccess, GetLanguage(request)) );
         }
 
-        private string GetLanguage(RequestModel request)
+        private string GetLanguage(RequestBase request)
         {
             if (request.RequestInformation != null)
             {
@@ -154,7 +154,7 @@
             return AppStrings.EnglishCode;
         }
 
-        [ResponseType(typeof(ResponseModel))]
+        [ResponseType(typeof(ResponseBase))]
         public IHttpActionResult DeleteUser(string token, DeleteUserModel request)
         {
             var user = _db.UserModels.FirstOrDefault(u => u.Email == request.Email);
@@ -175,9 +175,9 @@
             return Ok(BuildGenericResponse( LocalizationKeys.message_UserDeleted, GetLanguage(request) ));
         }
 
-        private ResponseModel BuildGenericResponse(string messageKey, string languageCode) 
+        private ResponseBase BuildGenericResponse(string messageKey, string languageCode) 
         {
-            return new ResponseModel()
+            return new ResponseBase()
                        {
                            Message = l10nService.GetLocalizedString(messageKey, languageCode)
                        };

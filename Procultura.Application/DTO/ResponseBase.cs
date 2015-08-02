@@ -1,6 +1,6 @@
 ﻿namespace ProCultura.Web.Api.Models
 {
-    public class ResponseModel 
+    public class ResponseBase
     {
         public string Message { get; set; }
     }

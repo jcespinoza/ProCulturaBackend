@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Domain", "4. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Infrastructure", "7. Infrastructure", "{35A4592A-7B5E-43F4-B41A-89D67680BE89}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Application", "3. Application", "{5F0EEB24-3BA2-410D-B2A8-99C5C30BDA42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procultura.Application", "Procultura.Application\Procultura.Application.csproj", "{CADDC959-76BB-43B6-AD05-41D1D739C0F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +56,6 @@ Global
 		{0AF303BB-9666-49CA-81D6-BEC96F94060E} = {447930CC-2B6D-472F-A699-C0CEBBBF6E6A}
 		{920454D5-D611-414E-A74C-E3281D5A3F25} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
 		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3} = {5F0EEB24-3BA2-410D-B2A8-99C5C30BDA42}
 	EndGlobalSection
 EndGlobal

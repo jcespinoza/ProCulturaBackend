@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class UserModel: ResponseModel
+    public class UserModel: ResponseBase
     {
         public int Id { get; set; }
         

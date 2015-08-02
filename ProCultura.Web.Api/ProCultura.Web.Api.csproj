@@ -177,9 +177,6 @@
     <Compile Include="Models\DeleteUserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\RequestInformation.cs" />
-    <Compile Include="Models\RequestModel.cs" />
-    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserTokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,6 +232,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Procultura.Application\Procultura.Application.csproj">
+      <Project>{caddc959-76bb-43b6-ad05-41d1d739c0f3}</Project>
+      <Name>Procultura.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
       <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
       <Name>ProCultura.CrossCutting</Name>
