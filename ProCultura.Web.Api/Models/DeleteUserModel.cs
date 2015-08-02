@@ -1,6 +1,6 @@
 ﻿namespace ProCultura.Web.Api.Models
 {
-    using ProCultura.Web.Api.Models;
+    using Procultura.Application.DTO;
 
     public class DeleteUserModel: RequestBase
     {

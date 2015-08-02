@@ -2,6 +2,7 @@
 
 namespace ProCultura.Web.Api.Models
 {
+    using Procultura.Application.DTO;
 
     public class RegisterModel : RequestBase
     {

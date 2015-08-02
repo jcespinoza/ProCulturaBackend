@@ -1,7 +1,8 @@
 ﻿namespace ProCultura.Web.Api.Controllers
 {
-    using System.Web.Compilation;
     using System.Web.Http.Description;
+
+    using Procultura.Application.DTO;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.Settings;

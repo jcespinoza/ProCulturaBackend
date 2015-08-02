@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Procultura.Application.DTO;
+
     public class UserModel: ResponseBase
     {
         public int Id { get; set; }
