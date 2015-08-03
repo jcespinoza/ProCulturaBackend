@@ -10,5 +10,7 @@
         ResponseBase DeleteUser(DeleteUserModel request);
 
         UserModel GetUser(string token);
+
+        UserModel GetUser(string token, int id);
     }
 }

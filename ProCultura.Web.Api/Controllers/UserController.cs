@@ -91,21 +91,21 @@
         [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(string token, int id)
         {
-            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            
-            var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
-            var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
-            var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
+            var userModel = _userAppService.GetUser(token, id);
 
-            if (obtaineduserEntity == null || requestingUser == null) return NotFound();
+            if (userModel.Exception is UserNotFoundException)
+            {
+                return this.BuildErrorActionResult(HttpStatusCode.NotFound,
+                    userModel.Message, AppStrings.EnglishCode);
+            }
 
-            if (obtaineduserEntity == requestingUser)
-                return Ok(obtaineduser);
+            if (userModel.Exception is NotEnoughPrivilegesException)
+            {
+                return this.BuildErrorActionResult(HttpStatusCode.Forbidden,
+                    LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
+            }
 
-            if(requestingUser.HasHigherAuthorityThan(obtaineduserEntity))
-                return Ok(obtaineduser);
-
-            return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+            return Ok(userModel);
         }
 
         [ResponseType(typeof(UserModel))]

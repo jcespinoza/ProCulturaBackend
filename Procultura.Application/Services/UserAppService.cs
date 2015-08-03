@@ -65,6 +65,28 @@
             return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
         }
 
+        public UserModel GetUser(string token, int id)
+        {
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+
+            var obtainedUserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
+            var userModel = obtainedUserEntity.ProjectAs<UserModel>();
+
+            var requestingUser = this.GetUserByEmail(tokenModel.Email);
+
+            if (obtainedUserEntity == null && requestingUser == null)
+            {
+                return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+            }
+
+            if (obtainedUserEntity == requestingUser || requestingUser.HasHigherAuthorityThan(obtainedUserEntity))
+            {
+                return userModel;
+            }
+
+            return new UserModel().MarkedWithException<UserModel, NotEnoughPrivilegesException>();
+        }
+
         private UserEntity GetUserByEmail(string email)
         {
             var user = _db.UserModels.FirstOrDefault(x => x.Email == email);
