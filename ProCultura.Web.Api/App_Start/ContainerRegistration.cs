@@ -6,6 +6,8 @@
     using Autofac;
     using Autofac.Integration.WebApi;
 
+    using Procultura.Application.Services;
+
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
 
@@ -63,6 +65,7 @@
             builder.RegisterType<DatabaseLocalizationService>().As<ILocalizationService>();
             builder.RegisterType<AuthRequestFactory>().As<IAuthRequestFactory>();
             builder.RegisterType<GeneralEncryptionService>().As<IEncryptionService>();
+            builder.RegisterType<UserAppService>().As<IUserAppService>();
         }
 
         /// <summary>

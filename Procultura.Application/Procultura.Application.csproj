@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,10 +57,32 @@
     <Compile Include="DTO\User\RegisterModel.cs" />
     <Compile Include="DTO\User\UserModel.cs" />
     <Compile Include="DTO\User\UserTokenModel.cs" />
+    <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Exceptions\ResourceNotFoundException.cs" />
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Extensions\ProCulturaExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IUserAppService.cs" />
+    <Compile Include="Services\UserAppService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
+      <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
+      <Name>ProCultura.CrossCutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProCultura.Data\ProCultura.Data.csproj">
+      <Project>{920454d5-d611-414e-a74c-e3281d5a3f25}</Project>
+      <Name>ProCultura.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
+      <Project>{0af303bb-9666-49ca-81d6-bec96f94060e}</Project>
+      <Name>ProCultura.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

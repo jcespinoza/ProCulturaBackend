@@ -133,6 +133,15 @@ namespace ProCultura.CrossCutting.L10N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to message_ResourceNotFound.
+        /// </summary>
+        public static string message_ResourceNotFound {
+            get {
+                return ResourceManager.GetString("message_ResourceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to message_UpdateUserSuccess.
         /// </summary>
         public static string message_UpdateUserSuccess {
