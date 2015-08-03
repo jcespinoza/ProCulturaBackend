@@ -4,6 +4,8 @@
 
     using Procultura.Application.DTO;
     using Procultura.Application.DTO.User;
+    using Procultura.Application.Exceptions;
+    using Procultura.Application.Services;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.Settings;
@@ -23,13 +25,16 @@
         //TODO: receive this as a dependency
         private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
-        private readonly IAuthRequestFactory authRequestFactory;
-        private readonly ILocalizationService l10nService;
+        private readonly IAuthRequestFactory _authRequestFactory;
+        private readonly ILocalizationService _l10nService;
 
-        public UserController(IAuthRequestFactory _authRequestFactory, ILocalizationService _l10nService)
+        private readonly IUserAppService _userAppService;
+
+        public UserController(IAuthRequestFactory authRequestFactory, ILocalizationService l10nService, IUserAppService userAppService)
         {
-            authRequestFactory = _authRequestFactory;
-            l10nService = _l10nService;
+            _authRequestFactory = authRequestFactory;
+            _l10nService = l10nService;
+            _userAppService = userAppService;
         }
 
         // PUT api/user/5
@@ -41,20 +46,20 @@
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
 
             if (requestSendingUser == null)
                 return new HttpActionResult(
                     HttpStatusCode.Forbidden,
-                    l10nService.GetLocalizedString(
+                    _l10nService.GetLocalizedString(
                         LocalizationKeys.message_AuthRequestNotRecognized,
                         AppStrings.EnglishCode));
 
             if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
                 return new HttpActionResult(
                     HttpStatusCode.Forbidden,
-                    l10nService.GetLocalizedString(
+                    _l10nService.GetLocalizedString(
                         LocalizationKeys.message_InsufficientPrivileges,
                         AppStrings.EnglishCode));
 
@@ -70,13 +75,13 @@
             {
                 return new HttpActionResult(
                     HttpStatusCode.NotFound,
-                    l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
+                    _l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
             }
 
             var response = new ResponseBase
                                 {
                                     Message =
-                                        l10nService.GetLocalizedString(
+                                        _l10nService.GetLocalizedString(
                                             LocalizationKeys.message_UpdateUserSuccess,
                                             AppStrings.EnglishCode)
                                 };
@@ -86,7 +91,7 @@
         [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(string token, int id)
         {
-            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             
             var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
             var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
@@ -106,17 +111,14 @@
         [ResponseType(typeof(UserModel))]
         public IHttpActionResult GetUser(string token)
         {
-            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var foundUser = _db.UserModels.FirstOrDefault(u => u.Email == tokenModel.Email);
+            var userModel = _userAppService.GetUser(token);
 
-            if (foundUser != null)
+            if (userModel.Exception is UserNotFoundException)
             {
-                var userModel = Mapper.Map<UserModel>(foundUser);
-
-                return Ok(userModel);
+                return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
             }
 
-            return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
+            return Ok(userModel);
         }
 
         [ResponseType(typeof(UserModel))]
@@ -161,7 +163,7 @@
             var user = _db.UserModels.FirstOrDefault(u => u.Email == request.Email);
             if (user == null)
                 return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
-            var tokenModel = authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
 
             if (requestSendingUser == null)
@@ -180,13 +182,13 @@
         {
             return new ResponseBase()
                        {
-                           Message = l10nService.GetLocalizedString(messageKey, languageCode)
+                           Message = _l10nService.GetLocalizedString(messageKey, languageCode)
                        };
         }
 
         private HttpActionResult BuildErrorActionResult(HttpStatusCode code, string message, string language)
         {
-            return new HttpActionResult(code, l10nService.GetLocalizedString(message, language));
+            return new HttpActionResult(code, _l10nService.GetLocalizedString(message, language));
         }
 
         protected override void Dispose(bool disposing)

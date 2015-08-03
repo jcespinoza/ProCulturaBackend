@@ -1,11 +1,13 @@
 ﻿namespace Procultura.Application.Extensions
 {
     using System;
-    using System.Reflection;
+
+    using AutoMapper;
 
     using Procultura.Application.DTO;
 
     using ProCultura.CrossCutting.Settings;
+    using ProCultura.Domain.Entities;
 
     public static class ProCulturaExtensions
     {
@@ -33,6 +35,13 @@
             }
 
             return request.RequestInformation.LanguageId;
+        }
+
+        public static TDestination ProjectedAs<TDestination>(this object source) where TDestination : class
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            return Mapper.Map<TDestination>(source);
         }
     }
 }

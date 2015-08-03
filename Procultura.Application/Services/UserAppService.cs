@@ -10,7 +10,6 @@
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
-    using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
@@ -18,7 +17,7 @@
     public class UserAppService: IUserAppService
     {
         //TODO: receive this as a dependency
-        private readonly ProCulturaBackEndContext db = new ProCulturaBackEndContext();
+        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
 
         private readonly IAuthRequestFactory _authRequestFactory;
 
@@ -53,9 +52,22 @@
             throw new System.NotImplementedException();
         }
 
+        public UserModel GetUser(string token)
+        {
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var foundUser = this.GetUserByEmail(tokenModel.Email);
+
+            if (foundUser != null)
+            {
+                return foundUser.ProjectedAs<UserModel>();
+            }
+
+            return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+        }
+
         private UserEntity GetUserByEmail(string email)
         {
-            var user = this.db.UserModels.FirstOrDefault(x => x.Email == email);
+            var user = _db.UserModels.FirstOrDefault(x => x.Email == email);
             return user;
         }
 

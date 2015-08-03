@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Role
+    public class Role : IEntity
     {
         public string RoleId { get; set; }
 
