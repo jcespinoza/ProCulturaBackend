@@ -7,31 +7,20 @@
     using Procultura.Application.Exceptions;
     using Procultura.Application.Services;
 
-    using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.Settings;
-    using ProCultura.Data.Context;
-    using ProCultura.Domain.Entities.Account;
     using ProCultura.CrossCutting.L10N;
 
-    using System.Linq;
     using System.Net;
     using System.Web.Http;
 
-    using AutoMapper;
-    
     public class UserController : ApiController
     {
-        //TODO: receive this as a dependency
-        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
-
-        private readonly IAuthRequestFactory _authRequestFactory;
         private readonly ILocalizationService _l10nService;
 
         private readonly IUserAppService _userAppService;
 
-        public UserController(IAuthRequestFactory authRequestFactory, ILocalizationService l10nService, IUserAppService userAppService)
+        public UserController(ILocalizationService l10nService, IUserAppService userAppService)
         {
-            _authRequestFactory = authRequestFactory;
             _l10nService = l10nService;
             _userAppService = userAppService;
         }
@@ -152,7 +141,7 @@
         {
             if (disposing)
             {
-                _db.Dispose();
+                
             }
             base.Dispose(disposing);
         }
