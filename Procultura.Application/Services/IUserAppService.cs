@@ -12,5 +12,7 @@
         UserModel GetUser(string token);
 
         UserModel GetUser(string token, int id);
+
+        ResponseBase CreateUser(RegisterModel request);
     }
 }

@@ -87,6 +87,27 @@
             return new UserModel().MarkedWithException<UserModel, NotEnoughPrivilegesException>();
         }
 
+        public ResponseBase CreateUser(RegisterModel request)
+        {
+            if (string.IsNullOrEmpty(request.Email))
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, EmptyEmailException>();
+            }
+
+            if (_db.UserModels.FirstOrDefault(x => x.Email == request.Email) != null)
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, EmailInUseException>();
+            }
+
+            var newUser = request.ProjectAs<UserEntity>();
+
+            PasswordEncryptionService.Encrypt(newUser);
+            _db.UserModels.Add(newUser);
+            _db.SaveChanges();
+
+            return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess, request.GetRequestLanguage());
+        }
+
         private UserEntity GetUserByEmail(string email)
         {
             var user = _db.UserModels.FirstOrDefault(x => x.Email == email);
@@ -106,6 +127,14 @@
                         request.GetRequestLanguage())
             };
             return authModel;
+        }
+
+        private ResponseBase BuildGenericResponse(string messageKey, string languageId)
+        {
+            return new ResponseBase()
+            {
+                Message = _l10nService.GetLocalizedString(messageKey, languageId)
+            };
         }
     }
 }

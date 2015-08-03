@@ -121,30 +121,27 @@
             return Ok(userModel);
         }
 
-        [ResponseType(typeof(UserModel))]
+        [ResponseType(typeof(ResponseBase))]
         public IHttpActionResult PostUser(RegisterModel request)
         {
-            if (request.Email == null)
+            var response = _userAppService.CreateUser(request);
+            if (response.Exception is EmptyEmailException)
             {
                 return this.BuildErrorActionResult(
                     HttpStatusCode.Forbidden,
                     LocalizationKeys.message_EmailIsRequired,
                     GetLanguage(request));
             }
-            
-            if (_db.UserModels.FirstOrDefault(x => x.Email == request.Email) != null)
+
+            if (response.Exception is EmailInUseException)
+            {
                 return this.BuildErrorActionResult(
                     HttpStatusCode.InternalServerError,
                     LocalizationKeys.message_EmailInUse,
                     AppStrings.EnglishCode);
-            
-            var newUser = Mapper.Map<UserEntity>(request);
+            }
 
-            PasswordEncryptionService.Encrypt(newUser);
-            _db.UserModels.Add(newUser);
-            _db.SaveChanges();
-
-            return Ok(this.BuildGenericResponse( LocalizationKeys.message_RegistrationSuccess, GetLanguage(request)) );
+            return Ok(response);
         }
 
         private string GetLanguage(RequestBase request)

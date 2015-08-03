@@ -65,6 +65,8 @@
     <Compile Include="DTO\User\RegisterModel.cs" />
     <Compile Include="DTO\User\UserModel.cs" />
     <Compile Include="DTO\User\UserTokenModel.cs" />
+    <Compile Include="Exceptions\EmailInUseException.cs" />
+    <Compile Include="Exceptions\EmptyEmailException.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\NotEnoughPrivilegesException.cs" />
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />
