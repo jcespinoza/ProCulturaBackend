@@ -11,7 +11,6 @@
     using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
-    using ProCultura.Domain.Services;
     using ProCultura.CrossCutting.L10N;
 
     using System.Linq;
@@ -157,30 +156,17 @@
         [ResponseType(typeof(ResponseBase))]
         public IHttpActionResult DeleteUser(string token, DeleteUserModel request)
         {
-            var user = _db.UserModels.FirstOrDefault(u => u.Email == request.Email);
-            if (user == null)
-                return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
-            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
+            var response = _userAppService.DeleteUser(token, request);
 
-            if (requestSendingUser == null)
-                return this.BuildErrorActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_AuthRequestNotRecognized, AppStrings.EnglishCode);
+            if (response.Exception is UserNotFoundException)
+                return this.BuildErrorActionResult(HttpStatusCode.NotFound,
+                    LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
 
-            if (requestSendingUser.Id != user.Id && requestSendingUser.IsAdmin())
-                return this.BuildErrorActionResult(HttpStatusCode.Forbidden, LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
+            if (response.Exception is NotEnoughPrivilegesException)
+                return this.BuildErrorActionResult(HttpStatusCode.Forbidden,
+                    LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
 
-            _db.UserModels.Remove(user);
-            _db.SaveChanges();
-
-            return Ok(BuildGenericResponse( LocalizationKeys.message_UserDeleted, GetLanguage(request) ));
-        }
-
-        private ResponseBase BuildGenericResponse(string messageKey, string languageCode) 
-        {
-            return new ResponseBase()
-                       {
-                           Message = _l10nService.GetLocalizedString(messageKey, languageCode)
-                       };
+            return Ok(response);
         }
 
         private HttpActionResult BuildErrorActionResult(HttpStatusCode code, string message, string language)

@@ -47,9 +47,31 @@
             return BuildSuccessAuthModel(user, request);
         }
 
-        public ResponseBase DeleteUser(DeleteUserModel request)
+        public ResponseBase DeleteUser(string token, DeleteUserModel request)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(request.Email))
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, EmptyEmailException>();
+            }
+
+            var user = GetUserByEmail(request.Email);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var requestSendingUser = GetUserByEmail(tokenModel.Email);
+
+            if (user == null || requestSendingUser == null)
+            {
+                return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+            }
+
+            if (requestSendingUser.Id != user.Id && requestSendingUser.IsAdmin())
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, NotEnoughPrivilegesException>();
+            }
+
+            _db.UserModels.Remove(user);
+            _db.SaveChanges();
+
+            return BuildGenericResponse(LocalizationKeys.message_UserDeleted, request.GetRequestLanguage());
         }
 
         public UserModel GetUser(string token)
@@ -94,7 +116,7 @@
                 return new ResponseBase().MarkedWithException<ResponseBase, EmptyEmailException>();
             }
 
-            if (_db.UserModels.FirstOrDefault(x => x.Email == request.Email) != null)
+            if (GetUserByEmail(request.Email) != null)
             {
                 return new ResponseBase().MarkedWithException<ResponseBase, EmailInUseException>();
             }

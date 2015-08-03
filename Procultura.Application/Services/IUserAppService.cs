@@ -7,7 +7,7 @@
     {
         AuthModel GetAuth(LoginModel request);
 
-        ResponseBase DeleteUser(DeleteUserModel request);
+        ResponseBase DeleteUser(string token, DeleteUserModel request);
 
         UserModel GetUser(string token);
 
