@@ -59,7 +59,7 @@
 
             if (foundUser != null)
             {
-                return foundUser.ProjectedAs<UserModel>();
+                return foundUser.ProjectAs<UserModel>();
             }
 
             return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();

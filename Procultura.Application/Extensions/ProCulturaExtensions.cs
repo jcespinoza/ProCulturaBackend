@@ -1,6 +1,7 @@
 ﻿namespace Procultura.Application.Extensions
 {
     using System;
+    using System.Collections.Generic;
 
     using AutoMapper;
 
@@ -37,11 +38,19 @@
             return request.RequestInformation.LanguageId;
         }
 
-        public static TDestination ProjectedAs<TDestination>(this object source) where TDestination : class
+        public static TDestination ProjectAs<TDestination>(this object source) where TDestination : class
         {
             if (source == null)
                 throw new ArgumentNullException("source");
             return Mapper.Map<TDestination>(source);
+        }
+
+        public static IEnumerable<TDestination> ProjectAs<TDestination>(this IEnumerable<object> source)
+            where TDestination : class
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            return Mapper.Map<IEnumerable<TDestination>>(source);
         }
     }
 }
