@@ -10,6 +10,7 @@
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
+    using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
     using ProCultura.Domain.Services;
@@ -128,6 +129,34 @@
             _db.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess, request.GetRequestLanguage());
+        }
+
+        public ResponseBase UpdateUser(string token, UserModel request)
+        {
+            var userEntity = request.ProjectAs<UserEntity>();
+            
+            //TODO: add method to check whether the entity is valid and call that method here
+
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var requestSendingUser = this.GetUserByEmail(tokenModel.Email);
+            var userToModify = _db.UserModels.FirstOrDefault(x => x.Id == userEntity.Id);
+
+            if (requestSendingUser == null || userToModify == null)
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, UserNotFoundException>();
+            }
+
+            if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
+            {
+                return new ResponseBase().MarkedWithException<ResponseBase, NotEnoughPrivilegesException>();
+            }
+
+            userEntity.Password = userToModify.Password;
+            userEntity.Salt = userToModify.Salt;
+            _db.Entry(userToModify).CurrentValues.SetValues(userEntity);
+            _db.SaveChanges();
+
+            return this.BuildGenericResponse(LocalizationKeys.message_UpdateUserSuccess, AppStrings.EnglishCode);
         }
 
         private UserEntity GetUserByEmail(string email)

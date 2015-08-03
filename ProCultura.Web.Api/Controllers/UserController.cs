@@ -40,50 +40,24 @@
         [ResponseType(typeof(ResponseBase))]
         public IHttpActionResult PutUser(string token, UserModel request)
         {
-            var userEntity = Mapper.Map<UserEntity>(request);
+            var response = _userAppService.UpdateUser(token, request);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
-
-            if (requestSendingUser == null)
-                return new HttpActionResult(
-                    HttpStatusCode.Forbidden,
-                    _l10nService.GetLocalizedString(
-                        LocalizationKeys.message_AuthRequestNotRecognized,
-                        AppStrings.EnglishCode));
-
-            if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
-                return new HttpActionResult(
-                    HttpStatusCode.Forbidden,
-                    _l10nService.GetLocalizedString(
-                        LocalizationKeys.message_InsufficientPrivileges,
-                        AppStrings.EnglishCode));
-
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == userEntity.Id);
-            if (obtaineduser != null)
-            {
-                userEntity.Password = obtaineduser.Password;
-                userEntity.Salt = obtaineduser.Salt;
-                _db.Entry(obtaineduser).CurrentValues.SetValues(userEntity);
-                _db.SaveChanges();
-            }
-            else
+            if (response.Exception is UserNotFoundException)
             {
                 return new HttpActionResult(
                     HttpStatusCode.NotFound,
                     _l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
             }
 
-            var response = new ResponseBase
-                                {
-                                    Message =
-                                        _l10nService.GetLocalizedString(
-                                            LocalizationKeys.message_UpdateUserSuccess,
-                                            AppStrings.EnglishCode)
-                                };
+            if (response.Exception is NotEnoughPrivilegesException)
+            {
+                return new HttpActionResult(
+                    HttpStatusCode.Forbidden,
+                    _l10nService.GetLocalizedString(
+                        LocalizationKeys.message_InsufficientPrivileges,
+                        AppStrings.EnglishCode));
+            }
+
             return Ok(response);
         }
 
