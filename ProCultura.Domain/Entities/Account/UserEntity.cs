@@ -5,7 +5,7 @@
 
     using ProCultura.Domain.Entities.Security;
 
-    public class UserEntity
+    public class UserEntity : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

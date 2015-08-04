@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProCulturaBackEnd</RootNamespace>
-    <AssemblyName>ProCulturaBackEnd</AssemblyName>
+    <RootNamespace>ProCultura.Web.Api</RootNamespace>
+    <AssemblyName>ProCultura.Web.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -170,18 +170,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Models\AuthModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeleteUserModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\RequestInformation.cs" />
-    <Compile Include="Models\RequestModel.cs" />
-    <Compile Include="Models\ResponseModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\UserTokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +226,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Procultura.Application\Procultura.Application.csproj">
+      <Project>{caddc959-76bb-43b6-ad05-41d1d739c0f3}</Project>
+      <Name>Procultura.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
       <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
       <Name>ProCultura.CrossCutting</Name>

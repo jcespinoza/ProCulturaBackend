@@ -135,6 +135,7 @@
   </data>
   <data name="message_InvalidPassword" xml:space="preserve">
     <value>message_InvalidPassword</value>
+    <comment>To be used when the password does no produce a valid user</comment>
   </data>
   <data name="message_LoginSuccess" xml:space="preserve">
     <value>message_LoginSuccess</value>
@@ -142,17 +143,26 @@
   </data>
   <data name="message_PasswordMismatch" xml:space="preserve">
     <value>message_PasswordMismatch</value>
+    <comment>For use when the password don't match</comment>
   </data>
   <data name="message_RegistrationSuccess" xml:space="preserve">
     <value>message_RegistrationSuccess</value>
+    <comment>Notification after signing up</comment>
+  </data>
+  <data name="message_ResourceNotFound" xml:space="preserve">
+    <value>message_ResourceNotFound</value>
+    <comment>Generic message for resources not found</comment>
   </data>
   <data name="message_UpdateUserSuccess" xml:space="preserve">
     <value>message_UpdateUserSuccess</value>
+    <comment>To use when a user update succeeds</comment>
   </data>
   <data name="message_UserDeleted" xml:space="preserve">
     <value>message_UserDeleted</value>
+    <comment>For when auser has been deleted</comment>
   </data>
   <data name="message_UserNotFound" xml:space="preserve">
     <value>message_UserNotFound</value>
+    <comment>For when the use is not found with the given criteria</comment>
   </data>
 </root>

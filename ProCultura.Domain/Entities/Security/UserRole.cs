@@ -2,7 +2,7 @@
 {
     using ProCultura.Domain.Entities.Account;
 
-    public class UserRole
+    public class UserRole : IEntity
     {
         public int UserId { get; set; }
 

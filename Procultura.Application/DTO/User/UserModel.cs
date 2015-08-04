@@ -1,8 +1,10 @@
-﻿namespace ProCultura.Web.Api.Models
+﻿namespace Procultura.Application.DTO.User
 {
     using System.Collections.Generic;
 
-    public class UserModel: ResponseModel
+    using Procultura.Application.DTO;
+
+    public class UserModel: ResponseBase
     {
         public int Id { get; set; }
         
