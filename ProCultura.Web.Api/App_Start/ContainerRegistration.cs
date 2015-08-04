@@ -1,5 +1,6 @@
 ﻿namespace ProCultura.Web.Api
 {
+    using System.Data.Entity;
     using System.Reflection;
     using System.Web.Http;
 
@@ -10,6 +11,11 @@
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
+    using ProCultura.Data.Context;
+    using ProCultura.Data.Repositories;
+    using ProCultura.Data.UnitOfWork;
+    using ProCultura.Domain.Repositories;
+    using ProCultura.Domain.UnitOfWork;
 
     /// <summary>
     /// Register implementations for project dependencies
@@ -74,7 +80,10 @@
         /// <param name="builder"></param>
         private static void ConfigureDataDependencies(ContainerBuilder builder)
         {
-
+            var context = new ProCulturaBackEndContext();
+            builder.RegisterInstance(context).As<DbContext>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
         }
     }
 }
