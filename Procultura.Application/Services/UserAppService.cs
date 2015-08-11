@@ -13,24 +13,24 @@
     using ProCultura.CrossCutting.Settings;
     using ProCultura.Data.Context;
     using ProCultura.Domain.Entities.Account;
+    using ProCultura.Domain.Repositories;
     using ProCultura.Domain.Services;
 
     public class UserAppService: IUserAppService
     {
-        //TODO: receive this as a dependency
-        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
-
         private readonly IAuthRequestFactory _authRequestFactory;
-
+        private readonly IRepository<UserEntity> _userRepository;
         private readonly ILocalizationService _l10nService;
 
-        public UserAppService(IAuthRequestFactory authRequestFactory, ILocalizationService l10NService)
+        public UserAppService(IAuthRequestFactory authRequestFactory, ILocalizationService l10NService, IRepository<UserEntity> userRepository)
         {
             if (authRequestFactory == null) throw new ArgumentNullException("authRequestFactory");
             if (l10NService == null) throw new ArgumentNullException("l10NService");
+            if (userRepository == null) throw new ArgumentNullException("userRepository");
 
             _authRequestFactory = authRequestFactory;
             _l10nService = l10NService;
+            _userRepository = userRepository;
         }
 
         public AuthModel GetAuth(LoginModel request)
@@ -69,8 +69,8 @@
                 return new ResponseBase().MarkedWithException<ResponseBase, NotEnoughPrivilegesException>();
             }
 
-            _db.UserModels.Remove(user);
-            _db.SaveChanges();
+            _userRepository.Delete(user);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_UserDeleted, request.GetRequestLanguage());
         }
@@ -92,7 +92,7 @@
         {
             var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
 
-            var obtainedUserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
+            var obtainedUserEntity = _userRepository.Single(x => x.Id == id);
             var userModel = obtainedUserEntity.ProjectAs<UserModel>();
 
             var requestingUser = this.GetUserByEmail(tokenModel.Email);
@@ -125,8 +125,8 @@
             var newUser = request.ProjectAs<UserEntity>();
 
             PasswordEncryptionService.Encrypt(newUser);
-            _db.UserModels.Add(newUser);
-            _db.SaveChanges();
+            _userRepository.Insert(newUser);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess, request.GetRequestLanguage());
         }
@@ -139,7 +139,7 @@
 
             var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = this.GetUserByEmail(tokenModel.Email);
-            var userToModify = _db.UserModels.FirstOrDefault(x => x.Id == userEntity.Id);
+            var userToModify = _userRepository.Single(x => x.Id == userEntity.Id);
 
             if (requestSendingUser == null || userToModify == null)
             {
@@ -153,15 +153,16 @@
 
             userEntity.Password = userToModify.Password;
             userEntity.Salt = userToModify.Salt;
-            _db.Entry(userToModify).CurrentValues.SetValues(userEntity);
-            _db.SaveChanges();
+
+            _userRepository.Update(userToModify);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return this.BuildGenericResponse(LocalizationKeys.message_UpdateUserSuccess, AppStrings.EnglishCode);
         }
 
         private UserEntity GetUserByEmail(string email)
         {
-            var user = _db.UserModels.FirstOrDefault(x => x.Email == email);
+            var user = _userRepository.Single(x => x.Email == email);
             return user;
         }
 

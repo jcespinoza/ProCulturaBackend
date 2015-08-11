@@ -12,3 +12,9 @@ API for ProCultura Project
     - LanguageSeedScript.sql
     - DictionaryEntriesSeedScript.sql
 
+## Running the project from the command line
+The following code snippet might be useful to run the project without opening Visual Studio.
+
+```bat
+"C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\11.0\WebDev.WebServer40.EXE" /path:"C:\Path\To\Repository\ProCulturaBackend\ProCultura.Web.Api" /port:11705
+```
