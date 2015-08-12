@@ -11,7 +11,7 @@
     using ProCultura.CrossCutting.L10N;
     using ProCultura.CrossCutting.Settings;
 
-    public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute
+    public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute, IExceptionFilter
     {
         private static IDictionary<Type, HttpStatusCode> _exceptionDictionary;
 
