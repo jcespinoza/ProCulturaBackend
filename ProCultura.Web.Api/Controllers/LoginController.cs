@@ -33,16 +33,6 @@ namespace ProCultura.Web.Api.Controllers
         {
             var authModel = _userAppService.GetAuth(request);
 
-            if (authModel.Exception is UserNotFoundException)
-                return new HttpActionResult(
-                    HttpStatusCode.NotFound,
-                    this.l10NService.GetLocalizedString(authModel.Message, AppStrings.EnglishCode));
-
-            if (authModel.Exception is InvalidPasswordException)
-                return new HttpActionResult(
-                    HttpStatusCode.Forbidden,
-                    this.l10NService.GetLocalizedString(authModel.Message, AppStrings.EnglishCode));
-
             return Ok(authModel);
         }
 

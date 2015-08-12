@@ -38,11 +38,11 @@
             var user = GetUserByEmail(request.Email);
             if (user == null)
             {
-                return new AuthModel().MarkedWithException<AuthModel,UserNotFoundException>();
+                throw new UserNotFoundException();
             }
             if (!PasswordEncryptionService.CheckPassword(user, request.Password))
             {
-                return new AuthModel().MarkedWithException<AuthModel, InvalidPasswordException>();
+                throw new InvalidPasswordException();
             }
 
             return BuildSuccessAuthModel(user, request);
