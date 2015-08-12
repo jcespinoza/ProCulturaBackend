@@ -4,24 +4,18 @@
 
     using Procultura.Application.DTO;
     using Procultura.Application.DTO.User;
-    using Procultura.Application.Exceptions;
     using Procultura.Application.Services;
 
     using ProCultura.CrossCutting.Settings;
-    using ProCultura.CrossCutting.L10N;
 
-    using System.Net;
     using System.Web.Http;
 
     public class UserController : ApiController
     {
-        private readonly ILocalizationService _l10nService;
-
         private readonly IUserAppService _userAppService;
 
-        public UserController(ILocalizationService l10nService, IUserAppService userAppService)
+        public UserController(IUserAppService userAppService)
         {
-            _l10nService = l10nService;
             _userAppService = userAppService;
         }
 
@@ -31,22 +25,6 @@
         {
             var response = _userAppService.UpdateUser(token, request);
 
-            if (response.Exception is UserNotFoundException)
-            {
-                return new HttpActionResult(
-                    HttpStatusCode.NotFound,
-                    _l10nService.GetLocalizedString(LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode));
-            }
-
-            if (response.Exception is NotEnoughPrivilegesException)
-            {
-                return new HttpActionResult(
-                    HttpStatusCode.Forbidden,
-                    _l10nService.GetLocalizedString(
-                        LocalizationKeys.message_InsufficientPrivileges,
-                        AppStrings.EnglishCode));
-            }
-
             return Ok(response);
         }
 
@@ -54,18 +32,6 @@
         public IHttpActionResult GetUser(string token, int id)
         {
             var userModel = _userAppService.GetUser(token, id);
-
-            if (userModel.Exception is UserNotFoundException)
-            {
-                return this.BuildErrorActionResult(HttpStatusCode.NotFound,
-                    userModel.Message, AppStrings.EnglishCode);
-            }
-
-            if (userModel.Exception is NotEnoughPrivilegesException)
-            {
-                return this.BuildErrorActionResult(HttpStatusCode.Forbidden,
-                    LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
-            }
 
             return Ok(userModel);
         }
@@ -75,11 +41,6 @@
         {
             var userModel = _userAppService.GetUser(token);
 
-            if (userModel.Exception is UserNotFoundException)
-            {
-                return this.BuildErrorActionResult(HttpStatusCode.NotFound, LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
-            }
-
             return Ok(userModel);
         }
 
@@ -87,21 +48,6 @@
         public IHttpActionResult PostUser(RegisterModel request)
         {
             var response = _userAppService.CreateUser(request);
-            if (response.Exception is EmptyEmailException)
-            {
-                return this.BuildErrorActionResult(
-                    HttpStatusCode.Forbidden,
-                    LocalizationKeys.message_EmailIsRequired,
-                    GetLanguage(request));
-            }
-
-            if (response.Exception is EmailInUseException)
-            {
-                return this.BuildErrorActionResult(
-                    HttpStatusCode.InternalServerError,
-                    LocalizationKeys.message_EmailInUse,
-                    AppStrings.EnglishCode);
-            }
 
             return Ok(response);
         }
@@ -121,20 +67,7 @@
         {
             var response = _userAppService.DeleteUser(token, request);
 
-            if (response.Exception is UserNotFoundException)
-                return this.BuildErrorActionResult(HttpStatusCode.NotFound,
-                    LocalizationKeys.message_UserNotFound, AppStrings.EnglishCode);
-
-            if (response.Exception is NotEnoughPrivilegesException)
-                return this.BuildErrorActionResult(HttpStatusCode.Forbidden,
-                    LocalizationKeys.message_InsufficientPrivileges, AppStrings.EnglishCode);
-
             return Ok(response);
-        }
-
-        private HttpActionResult BuildErrorActionResult(HttpStatusCode code, string message, string language)
-        {
-            return new HttpActionResult(code, _l10nService.GetLocalizedString(message, language));
         }
 
         protected override void Dispose(bool disposing)

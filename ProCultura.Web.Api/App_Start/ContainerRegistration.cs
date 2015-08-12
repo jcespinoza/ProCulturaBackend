@@ -26,10 +26,8 @@
         /// Main method for registration of dependencies. It also sets AutoFac to be the dependency resolver.
         /// </summary>
         /// <param name="config">The current HttpConfiguration for this assembly</param>
-        public static void Configure(HttpConfiguration config)
+        public static void Configure(HttpConfiguration config, ContainerBuilder builder)
         {
-            var builder = new ContainerBuilder();
-
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -37,9 +35,6 @@
             builder.RegisterWebApiFilterProvider(config);
 
             RegisterCustomTypes(builder);
-
-            var container = builder.Build();
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
         /// <summary>

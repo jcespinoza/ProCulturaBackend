@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
@@ -7,11 +6,9 @@ namespace ProCultura.Web.Api.Controllers
     using System;
 
     using Procultura.Application.DTO.User;
-    using Procultura.Application.Exceptions;
     using Procultura.Application.Services;
 
     using ProCultura.CrossCutting.L10N;
-    using ProCultura.CrossCutting.Settings;
 
     public class LoginController : ApiController
     {
@@ -32,16 +29,6 @@ namespace ProCultura.Web.Api.Controllers
         public IHttpActionResult PostUserModel(LoginModel request)
         {
             var authModel = _userAppService.GetAuth(request);
-
-            if (authModel.Exception is UserNotFoundException)
-                return new HttpActionResult(
-                    HttpStatusCode.NotFound,
-                    this.l10NService.GetLocalizedString(authModel.Message, AppStrings.EnglishCode));
-
-            if (authModel.Exception is InvalidPasswordException)
-                return new HttpActionResult(
-                    HttpStatusCode.Forbidden,
-                    this.l10NService.GetLocalizedString(authModel.Message, AppStrings.EnglishCode));
 
             return Ok(authModel);
         }
