@@ -52,7 +52,7 @@
         {
             if (string.IsNullOrEmpty(request.Email))
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, EmptyEmailException>();
+                throw new EmptyEmailException();
             }
 
             var user = GetUserByEmail(request.Email);
@@ -61,12 +61,12 @@
 
             if (user == null || requestSendingUser == null)
             {
-                return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+                throw new UserNotFoundException();
             }
 
             if (requestSendingUser.Id != user.Id && requestSendingUser.IsAdmin())
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, NotEnoughPrivilegesException>();
+                throw new  NotEnoughPrivilegesException();
             }
 
             _userRepository.Delete(user);
@@ -85,7 +85,7 @@
                 return foundUser.ProjectAs<UserModel>();
             }
 
-            return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+            throw new UserNotFoundException();
         }
 
         public UserModel GetUser(string token, int id)
@@ -99,7 +99,7 @@
 
             if (obtainedUserEntity == null && requestingUser == null)
             {
-                return new UserModel().MarkedWithException<UserModel, UserNotFoundException>();
+                throw new UserNotFoundException();
             }
 
             if (obtainedUserEntity == requestingUser || requestingUser.HasHigherAuthorityThan(obtainedUserEntity))
@@ -107,19 +107,19 @@
                 return userModel;
             }
 
-            return new UserModel().MarkedWithException<UserModel, NotEnoughPrivilegesException>();
+            throw new NotEnoughPrivilegesException();
         }
 
         public ResponseBase CreateUser(RegisterModel request)
         {
             if (string.IsNullOrEmpty(request.Email))
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, EmptyEmailException>();
+                throw new EmptyEmailException();
             }
 
             if (GetUserByEmail(request.Email) != null)
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, EmailInUseException>();
+                throw new EmailInUseException();
             }
 
             var newUser = request.ProjectAs<UserEntity>();
@@ -143,12 +143,12 @@
 
             if (requestSendingUser == null || userToModify == null)
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, UserNotFoundException>();
+                throw new UserNotFoundException();
             }
 
             if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
             {
-                return new ResponseBase().MarkedWithException<ResponseBase, NotEnoughPrivilegesException>();
+                throw new NotEnoughPrivilegesException();
             }
 
             userEntity.Password = userToModify.Password;

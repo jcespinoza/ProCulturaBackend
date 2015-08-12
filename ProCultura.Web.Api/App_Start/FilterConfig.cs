@@ -4,8 +4,6 @@ namespace ProCultura.Web.Api
 {
     using System.Web.Http.Filters;
 
-    using Autofac;
-
     using ProCultura.CrossCutting.L10N;
     using ProCultura.Web.Api.Filters;
 
