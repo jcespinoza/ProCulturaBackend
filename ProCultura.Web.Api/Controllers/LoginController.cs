@@ -3,25 +3,15 @@ using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
-    using System;
-
     using Procultura.Application.DTO.User;
     using Procultura.Application.Services;
-
-    using ProCultura.CrossCutting.L10N;
 
     public class LoginController : ApiController
     {
         private readonly IUserAppService _userAppService;
 
-        private readonly ILocalizationService l10NService;
-
-        public LoginController(ILocalizationService _l10nService, IUserAppService userAppService)
+        public LoginController(IUserAppService userAppService)
         {
-            if (_l10nService == null) throw new ArgumentNullException("_l10nService");
-            if (userAppService == null) throw new ArgumentNullException("userAppService");
-
-            l10NService = _l10nService;
             this._userAppService = userAppService;
         }
 
@@ -31,15 +21,6 @@ namespace ProCultura.Web.Api.Controllers
             var authModel = _userAppService.GetAuth(request);
 
             return Ok(authModel);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                
-            }
-            base.Dispose(disposing);
         }
     }
 }
