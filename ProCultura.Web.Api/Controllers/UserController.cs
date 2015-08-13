@@ -19,37 +19,33 @@
             _userAppService = userAppService;
         }
 
-        // PUT api/user/5
-        [ResponseType(typeof(ResponseBase))]
-        public IHttpActionResult PutUser(string token, UserModel request)
+    
+        public ResponseBase PutUser(string token, UserModel request)
         {
             var response = _userAppService.UpdateUser(token, request);
 
-            return Ok(response);
+            return response;
         }
 
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult GetUser(string token, int id)
+        public UserModel GetUser(string token, int id)
         {
             var userModel = _userAppService.GetUser(token, id);
 
-            return Ok(userModel);
+            return userModel;
         }
 
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult GetUser(string token)
+        public UserModel GetUser(string token)
         {
             var userModel = _userAppService.GetUser(token);
 
-            return Ok(userModel);
+            return userModel;
         }
 
-        [ResponseType(typeof(ResponseBase))]
-        public IHttpActionResult PostUser(RegisterModel request)
+        public ResponseBase PostUser(RegisterModel request)
         {
             var response = _userAppService.CreateUser(request);
 
-            return Ok(response);
+            return response;
         }
 
         private string GetLanguage(RequestBase request)
@@ -62,12 +58,11 @@
             return AppStrings.EnglishCode;
         }
 
-        [ResponseType(typeof(ResponseBase))]
-        public IHttpActionResult DeleteUser(string token, DeleteUserModel request)
+        public ResponseBase DeleteUser(string token, DeleteUserModel request)
         {
             var response = _userAppService.DeleteUser(token, request);
 
-            return Ok(response);
+            return response;
         }
     }
 }
