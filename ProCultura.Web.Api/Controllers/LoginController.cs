@@ -15,12 +15,11 @@ namespace ProCultura.Web.Api.Controllers
             this._userAppService = userAppService;
         }
 
-        [ResponseType(typeof(AuthModel))]
-        public IHttpActionResult PostUserModel(LoginModel request)
+     
+        public AuthModel PostUserModel(LoginModel request)
         {
             var authModel = _userAppService.GetAuth(request);
-
-            return Ok(authModel);
+            return authModel;
         }
     }
 }
