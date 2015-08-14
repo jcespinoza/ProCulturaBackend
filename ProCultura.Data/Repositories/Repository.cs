@@ -76,7 +76,7 @@
         /// <inheritdoc/>
         public TEntity Single(Expression<Func<TEntity, bool>> predicate)
         {
-            return GetAll().Single(predicate);
+            return GetAll().FirstOrDefault(predicate);
         }
 
         /// <inheritdoc/>
