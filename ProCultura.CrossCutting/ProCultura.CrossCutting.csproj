@@ -34,7 +34,16 @@
       <HintPath>..\packages\Encryptamajig.1.0.0.0\lib\net40\Encryptamajig.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -50,6 +59,10 @@
     <Compile Include="Encryption\GeneralEncryptionService.cs" />
     <Compile Include="Encryption\IAuthRequestFactory.cs" />
     <Compile Include="Encryption\IEncryptionService.cs" />
+    <Compile Include="L10N\EF\EntityFrameworkLocalizationService.cs" />
+    <Compile Include="L10N\EF\LocalizationContext.cs" />
+    <Compile Include="L10N\EF\LocalizedEntry.cs" />
+    <Compile Include="L10N\EF\LocalizedEntryEntityTypeConfiguration.cs" />
     <Compile Include="L10N\ILocalizationService.cs" />
     <Compile Include="L10N\LocalizationKeys.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -65,6 +78,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
