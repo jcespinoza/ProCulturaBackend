@@ -11,6 +11,7 @@
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
+    using ProCultura.CrossCutting.L10N.EF;
     using ProCultura.Data.Context;
     using ProCultura.Data.Repositories;
     using ProCultura.Data.UnitOfWork;
@@ -63,7 +64,10 @@
         /// <param name="builder"></param>
         private static void ConfigureCrossCuttingDependencies(ContainerBuilder builder)
         {
-            builder.RegisterType<DatabaseLocalizationService>().As<ILocalizationService>();
+            var localizationContext = new LocalizationContext();
+            builder.RegisterInstance(localizationContext).AsSelf();
+
+            builder.RegisterType<EntityFrameworkLocalizationService>().As<ILocalizationService>();
             builder.RegisterType<AuthRequestFactory>().As<IAuthRequestFactory>();
             builder.RegisterType<GeneralEncryptionService>().As<IEncryptionService>();
             builder.RegisterType<UserAppService>().As<IUserAppService>();
