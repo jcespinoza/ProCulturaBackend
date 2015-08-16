@@ -5,18 +5,33 @@ using System.Web.Routing;
 
 namespace ProCultura.Web.Api
 {
-    using ProCultura.Web.Api.Services;
+    using Autofac;
+    using Autofac.Integration.WebApi;
+
+    using ProCultura.Web.Api.App_Start;
 
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
+            var config = GlobalConfiguration.Configuration;
+            var builder = new ContainerBuilder();
+
+            ContainerRegistration.Configure(config, builder);
+
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            MappingConfig.RegisterMappings();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            FilterConfig.RegisterHttpFilters(GlobalConfiguration.Configuration.Filters, container);
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            LocalizedResponseService.SetLocalization(LocalizedResponseService.L10N.Spanish);//change to spanish for deployment
         }
     }
 }

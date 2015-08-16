@@ -1,115 +1,68 @@
-﻿using System.Linq;
-using System.Net;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using System.Web.Http.Description;
-
-using AutoMapper;
-
-namespace ProCultura.Web.Api.Controllers
+﻿namespace ProCultura.Web.Api.Controllers
 {
-    using ProCultura.Domain.Entities;
-    using ProCultura.Web.Api.Contexts;
-    using ProCultura.Web.Api.Models;
-    using ProCultura.Web.Api.Services;
+    using System.Web.Http.Description;
 
-    [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
+    using Procultura.Application.DTO;
+    using Procultura.Application.DTO.User;
+    using Procultura.Application.Services;
+
+    using ProCultura.CrossCutting.Settings;
+
+    using System.Web.Http;
+
     public class UserController : ApiController
     {
-        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
+        private readonly IUserAppService _userAppService;
 
-        // PUT api/user/5
-        [ResponseType(typeof(AuthModel))]
-        public IHttpActionResult PutUser(string token, UserModel recievedUser) 
+        public UserController(IUserAppService userAppService)
         {
-            Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
-            var user = Mapper.Map<UserEntity>(recievedUser);
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
-            var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
-            if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
-            if (requestSendingUser.Id != user.Id && requestSendingUser.Role <= user.Role) //check for clearance
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
-            var obtaineduser = _db.UserModels.FirstOrDefault(x => x.Id == user.Id);
-            if (obtaineduser != null)
+            _userAppService = userAppService;
+        }
+
+    
+        public ResponseBase PutUser(string token, UserModel request)
+        {
+            var response = _userAppService.UpdateUser(token, request);
+
+            return response;
+        }
+
+        public UserModel GetUser(string token, int id)
+        {
+            var userModel = _userAppService.GetUser(token, id);
+
+            return userModel;
+        }
+
+        public UserModel GetUser(string token)
+        {
+            var userModel = _userAppService.GetUser(token);
+
+            return userModel;
+        }
+
+        public ResponseBase PostUser(RegisterModel request)
+        {
+            var response = _userAppService.CreateUser(request);
+
+            return response;
+        }
+
+        private string GetLanguage(RequestBase request)
+        {
+            if (request.RequestInformation != null)
             {
-                /*if (!PasswordEncryptionService.CheckPassword(obtaineduser, user.Password) && obtaineduser.Password != user.Password)
-                {
-                    PasswordEncryptionService.Encrypt(user);
-                }*/
-                user.Password = obtaineduser.Password;
-                user.Salt = obtaineduser.Salt;
-                _db.Entry(obtaineduser).CurrentValues.SetValues(user);
+                return AppStrings.ResourceManager.GetString(request.RequestInformation.LanguageId); ;
             }
-            else
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-            _db.SaveChanges();
-            var authModel = new AuthModel
-            {
-                Id = user.Id,
-                AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
-                Mensaje = LocalizedResponseService.LocalizedResponseFactory.UpdateUserSuccessMessage()
-            };
-            return Ok(authModel);
+
+            return AppStrings.EnglishCode;
         }
 
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult GetUser(string token, int id)
+        public ResponseBase DeleteUser(string token, DeleteUserModel request)
         {
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
-            Mapper.CreateMap<UserEntity, UserModel>().ReverseMap();
-            var obtaineduserEntity = _db.UserModels.FirstOrDefault(x => x.Id == id);
-            var obtaineduser = Mapper.Map<UserModel>(obtaineduserEntity);
-            var requestingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
-            if (obtaineduser == null || requestingUser == null) return NotFound();
-            if (obtaineduserEntity == requestingUser)
-                return Ok(obtaineduser);
-            if(requestingUser.Role >= obtaineduser.Role)
-                return Ok(obtaineduser);
-            return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-        }
+            var response = _userAppService.DeleteUser(token, request);
 
-        // POST api/user
-        public IHttpActionResult PostUser(RegisterModel user)
-        {
-          if(_db.UserModels.FirstOrDefault(x => x.Email == user.Email) != null)
-              return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.EmailInUseMessage()); 
-            if(!user.Password.Equals(user.ConfirmPassword))
-                return new HttpActionResult(HttpStatusCode.InternalServerError, LocalizedResponseService.LocalizedResponseFactory.PasswordMismatchMessage());
-            Mapper.CreateMap<RegisterModel, UserEntity>().ReverseMap();
-            var newUser = Mapper.Map<UserEntity>(user);
-            PasswordEncryptionService.Encrypt(newUser);
-            _db.UserModels.Add(newUser);
-            _db.SaveChanges();
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.RegistrationSuccessMessage());
-        }
-
-        // DELETE api/user/5
-        public IHttpActionResult DeleteUser(string token, int id)
-        {
-            var user = _db.UserModels.Find(id);
-            if (user == null)
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-            var tokenModel = AuthRequestFactory.BuildDecryptedRequest(token);
-            var requestSendingUser = _db.UserModels.FirstOrDefault(x => x.Email == tokenModel.Email);
-            if (requestSendingUser == null)
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.AuthRequestNotRecognizedMessage());
-            if (requestSendingUser.Id != user.Id && requestSendingUser.Role <= user.Role) //check for clearance
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InsufficientPrivilegesMessage());
-            _db.UserModels.Remove(user);
-            _db.SaveChanges();
-            return new HttpActionResult(HttpStatusCode.OK, LocalizedResponseService.LocalizedResponseFactory.UserDeletedMessage());
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
+            return response;
         }
     }
 }

@@ -42,40 +42,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contexts\ProCulturaBackEndContext.cs" />
-    <Compile Include="Contexts\ProCulturaContextInitializer.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.cs" />
-    <Compile Include="Migrations\201506290229391_AddSortOrder.Designer.cs">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.cs" />
-    <Compile Include="Migrations\201506300440275_AddSortOrder1.Designer.cs">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Context\ProCulturaBackEndContext.cs" />
+    <Compile Include="Context\ProCulturaContextInitializer.cs" />
+    <Compile Include="Mappings\Security\RoleEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\Security\UserRoleEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\User\UserDetailEntityTypeConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Scripts\DictionaryEntriesSeedScript.sql" />
+    <Content Include="Scripts\LanguageSeedScript.sql" />
+    <Content Include="Scripts\LocalizationTablesCreateScript.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506290229391_AddSortOrder.resx">
-      <DependentUpon>201506290229391_AddSortOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506300440275_AddSortOrder1.resx">
-      <DependentUpon>201506300440275_AddSortOrder1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
+      <Project>{5e7859d6-e687-44ac-b0f9-1a0ea818b06f}</Project>
+      <Name>ProCultura.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProCultura.Domain\ProCultura.Domain.csproj">
       <Project>{0af303bb-9666-49ca-81d6-bec96f94060e}</Project>
       <Name>ProCultura.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProCultura.Security\ProCultura.Security.csproj">
-      <Project>{6AB30794-3B80-484C-8AAB-3257EBDAB114}</Project>
-      <Name>ProCultura.Security</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

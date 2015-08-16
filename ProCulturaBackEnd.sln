@@ -9,9 +9,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Domain", "ProCul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Data", "ProCultura.Data\ProCultura.Data.csproj", "{920454D5-D611-414E-A74C-E3281D5A3F25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Security", "ProCultura.Security\ProCultura.Security.csproj", "{6AB30794-3B80-484C-8AAB-3257EBDAB114}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.CrossCutting", "ProCultura.CrossCutting\ProCultura.CrossCutting.csproj", "{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Localization", "ProCultura.Localization\ProCultura.Localization.csproj", "{2BA73281-4707-412C-97E4-F2859E3C7852}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Distributed Services", "1. Distributed Services", "{79ED78D8-7CCB-47A1-A73F-5AF24211072E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Domain", "4. Domain", "{447930CC-2B6D-472F-A699-C0CEBBBF6E6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Infrastructure", "7. Infrastructure", "{35A4592A-7B5E-43F4-B41A-89D67680BE89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Application", "3. Application", "{5F0EEB24-3BA2-410D-B2A8-99C5C30BDA42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procultura.Application", "Procultura.Application\Procultura.Application.csproj", "{CADDC959-76BB-43B6-AD05-41D1D739C0F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,16 +39,23 @@ Global
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920454D5-D611-414E-A74C-E3281D5A3F25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AB30794-3B80-484C-8AAB-3257EBDAB114}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BA73281-4707-412C-97E4-F2859E3C7852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19D57329-A20E-4D70-B5C9-2A581166F649} = {79ED78D8-7CCB-47A1-A73F-5AF24211072E}
+		{0AF303BB-9666-49CA-81D6-BEC96F94060E} = {447930CC-2B6D-472F-A699-C0CEBBBF6E6A}
+		{920454D5-D611-414E-A74C-E3281D5A3F25} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F} = {35A4592A-7B5E-43F4-B41A-89D67680BE89}
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3} = {5F0EEB24-3BA2-410D-B2A8-99C5C30BDA42}
 	EndGlobalSection
 EndGlobal

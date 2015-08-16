@@ -1,45 +1,25 @@
-﻿using System.Linq;
-using System.Net;
-using System.Web.Http;
-using System.Web.Http.Cors;
+﻿using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
-    using ProCultura.Web.Api.Contexts;
-    using ProCultura.Web.Api.Models;
-    using ProCultura.Web.Api.Services;
+    using Procultura.Application.DTO.User;
+    using Procultura.Application.Services;
 
-    [EnableCors(origins: "http://localhost:8090", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
-        private readonly ProCulturaBackEndContext _db = new ProCulturaBackEndContext();
+        private readonly IUserAppService _userAppService;
 
-        // POST api/Login2
-        [ResponseType(typeof(AuthModel))]
-        public IHttpActionResult PostUserModel(LoginModel usermodel)
+        public LoginController(IUserAppService userAppService)
         {
-            var user = _db.UserModels.FirstOrDefault(x => x.Email == usermodel.Email);
-            if (user == null)
-                return new HttpActionResult(HttpStatusCode.NotFound, LocalizedResponseService.LocalizedResponseFactory.UserNotFoundMessage());
-            if (!PasswordEncryptionService.CheckPassword(user, usermodel.Password))
-                return new HttpActionResult(HttpStatusCode.Forbidden, LocalizedResponseService.LocalizedResponseFactory.InvalidPasswordMessage());
-            var authModel = new AuthModel
-            {
-                Id = user.Id,
-                AccessToken = AuthRequestFactory.BuildEncryptedRequest(user.Email),
-                Mensaje = LocalizedResponseService.LocalizedResponseFactory.LoginSuccessMessage()
-            };
-            return Ok(authModel);
+            this._userAppService = userAppService;
         }
 
-        protected override void Dispose(bool disposing)
+     
+        public AuthModel PostUserModel(LoginModel request)
         {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
+            var authModel = _userAppService.GetAuth(request);
+            return authModel;
         }
     }
 }
