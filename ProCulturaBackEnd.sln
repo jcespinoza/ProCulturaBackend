@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Web.Api", "ProCultura.Web.Api\ProCultura.Web.Api.csproj", "{19D57329-A20E-4D70-B5C9-2A581166F649}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CADDC959-76BB-43B6-AD05-41D1D739C0F3} = {CADDC959-76BB-43B6-AD05-41D1D739C0F3}
+		{920454D5-D611-414E-A74C-E3281D5A3F25} = {920454D5-D611-414E-A74C-E3281D5A3F25}
+		{5E7859D6-E687-44AC-B0F9-1A0EA818B06F} = {5E7859D6-E687-44AC-B0F9-1A0EA818B06F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCultura.Domain", "ProCultura.Domain\ProCultura.Domain.csproj", "{0AF303BB-9666-49CA-81D6-BEC96F94060E}"
 EndProject

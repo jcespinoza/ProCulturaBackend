@@ -11,7 +11,7 @@
     using ProCultura.CrossCutting.L10N;
     using ProCultura.CrossCutting.Settings;
 
-    public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute, IExceptionFilter
+    public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private static IDictionary<Type, HttpStatusCode> _exceptionDictionary;
 
@@ -32,16 +32,30 @@
 
         private static IDictionary<Type, HttpStatusCode> CreateAndInitializeExceptionDictionary()
         {
-            var dictionary = new Dictionary<Type, HttpStatusCode>();
+            _exceptionDictionary =
+                new Dictionary<Type, HttpStatusCode>
+                {
+                    {
+                        typeof(UserNotFoundException), HttpStatusCode.NotFound
+                    },
+                    {
+                        typeof(EmailInUseException), HttpStatusCode.Forbidden
+                    },
+                    {
+                        typeof(NotEnoughPrivilegesException), HttpStatusCode.Forbidden
+                    },
+                    {
+                        typeof(EmptyEmailException), HttpStatusCode.Forbidden
+                    },
+                    {
+                        typeof(InvalidPasswordException), HttpStatusCode.Forbidden
+                    },
+                    {
+                        typeof(ResourceNotFoundException), HttpStatusCode.NotFound
+                    }
+                };
 
-            dictionary.Add(typeof(UserNotFoundException), HttpStatusCode.NotFound);
-            dictionary.Add(typeof(EmailInUseException), HttpStatusCode.Forbidden);
-            dictionary.Add(typeof(NotEnoughPrivilegesException), HttpStatusCode.Forbidden);
-            dictionary.Add(typeof(EmptyEmailException), HttpStatusCode.Forbidden);
-            dictionary.Add(typeof(InvalidPasswordException), HttpStatusCode.Forbidden);
-            dictionary.Add(typeof(ResourceNotFoundException), HttpStatusCode.NotFound);
-            return dictionary;
-
+            return _exceptionDictionary;
         }
 
         private HttpStatusCode GetStatusCode(Exception exception)
