@@ -2,6 +2,8 @@
 
 namespace ProCultura.Web.Api.Controllers
 {
+    using System.Collections.Generic;
+
     using Procultura.Application.DTO.Events;
     using Procultura.Application.Services.Events;
 
@@ -12,6 +14,11 @@ namespace ProCultura.Web.Api.Controllers
         public EventController(IEventsAppService eventsAppService)
         {
             this._eventsAppService = eventsAppService;
+        }
+
+        public IEnumerable<EventModel> GetEvents()
+        {
+            return _eventsAppService.GetAllEvents();
         }
 
         public EventModel GetEvent(int eventId)

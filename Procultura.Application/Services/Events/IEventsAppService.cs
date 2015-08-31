@@ -1,5 +1,7 @@
 ﻿namespace Procultura.Application.Services.Events
 {
+    using System.Collections.Generic;
+
     using Procultura.Application.DTO.Events;
 
     /// <summary>
@@ -34,5 +36,11 @@
         /// <param name="eventId"></param>
         /// <returns></returns>
         EventModel DeleteEvent(int eventId);
+
+        /// <summary>
+        /// Gets all events
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<EventModel> GetAllEvents();
     }
 }

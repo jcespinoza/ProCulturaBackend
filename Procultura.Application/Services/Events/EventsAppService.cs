@@ -1,6 +1,7 @@
 namespace Procultura.Application.Services.Events
 {
     using System;
+    using System.Collections.Generic;
 
     using Procultura.Application.DTO.Events;
     using Procultura.Application.Exceptions.Events;
@@ -63,6 +64,11 @@ namespace Procultura.Application.Services.Events
             _eventRepository.UnitOfWork.SaveChanges();
 
             return eventFound.ProjectAs<EventModel>();
+        }
+
+        public IEnumerable<EventModel> GetAllEvents()
+        {
+            return _eventRepository.GetAllList().ProjectAs<EventModel>();
         }
 
         private Event GetEventById(int eventId)
