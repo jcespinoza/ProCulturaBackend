@@ -83,10 +83,14 @@
                                    EventId = 1,
                                    Name = "Polache's Wild Concert",
                                    BeginDate = new DateTime(2015, 09, 12),
+                                   EndDate = new DateTime(2015,09, 12),
                                    Summary = "Enjoy listening to Polaches master pieces this September 12th",
                                    ImageUrl =
                                        "http://www.hondudiario.com/sites/default/files/dt.common.streams.StreamServer_55.jpg",
-                                   Location = "Morazan Stadium, San Pedro Sula"
+                                   Location = "Morazan Stadium, San Pedro Sula",
+                                   Price = 500,
+                                   Description = "This concert will be the best CATRACHADA in the Honduran history of concerts. Bring your \"punta\" shoes and suit to dance at the \"Pan de Coco\" rhythm!",
+                                   Status = "SOLD"
                                };
             context.Events.Add(eventOne);
         }
