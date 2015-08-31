@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Context\ProCulturaBackEndContext.cs" />
     <Compile Include="Context\ProCulturaContextInitializer.cs" />
+    <Compile Include="Mappings\Events\EventEntityTypeConfiguration.cs" />
     <Compile Include="Mappings\Security\RoleEntityTypeConfiguration.cs" />
     <Compile Include="Mappings\Security\UserRoleEntityTypeConfiguration.cs" />
     <Compile Include="Mappings\User\UserDetailEntityTypeConfiguration.cs" />
