@@ -31,5 +31,10 @@
         /// The Location where the event will be hold
         /// </summary>
         public string Location { get; set; }
+
+        /// <summary>
+        /// The URL for this event's image
+        /// </summary>
+        public string ImageUrl { get; set; }
     }
 }
