@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Events\NewEventModel.cs" />
     <Compile Include="DTO\RequestInformation.cs" />
     <Compile Include="DTO\RequestBase.cs" />
     <Compile Include="DTO\ResponseBase.cs" />
@@ -65,16 +66,20 @@
     <Compile Include="DTO\User\RegisterModel.cs" />
     <Compile Include="DTO\User\UserModel.cs" />
     <Compile Include="DTO\User\UserTokenModel.cs" />
-    <Compile Include="Exceptions\EmailInUseException.cs" />
-    <Compile Include="Exceptions\EmptyEmailException.cs" />
-    <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Exceptions\Events\EventNotFoundException.cs" />
+    <Compile Include="Exceptions\Users\EmailInUseException.cs" />
+    <Compile Include="Exceptions\Users\EmptyEmailException.cs" />
+    <Compile Include="Exceptions\Users\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\NotEnoughPrivilegesException.cs" />
     <Compile Include="Exceptions\ResourceNotFoundException.cs" />
-    <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Exceptions\Users\UserNotFoundException.cs" />
     <Compile Include="Extensions\ProCulturaExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IUserAppService.cs" />
-    <Compile Include="Services\UserAppService.cs" />
+    <Compile Include="DTO\Events\EventModel.cs" />
+    <Compile Include="Services\Events\EventsAppService.cs" />
+    <Compile Include="Services\Events\IEventsAppService.cs" />
+    <Compile Include="Services\Users\IUserAppService.cs" />
+    <Compile Include="Services\Users\UserAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">
@@ -94,6 +99,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

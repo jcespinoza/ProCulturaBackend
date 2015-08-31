@@ -129,6 +129,10 @@
     <value>message_EmailIsRequired</value>
     <comment>For when a user tries to signup without an email</comment>
   </data>
+  <data name="message_EventNotFound" xml:space="preserve">
+    <value>message_EventNotFound</value>
+    <comment>For when the event requested does not exist</comment>
+  </data>
   <data name="message_InsufficientPrivileges" xml:space="preserve">
     <value>message_InsufficientPrivileges</value>
     <comment>For when the user has not enough privileges</comment>

@@ -1,4 +1,4 @@
-﻿namespace Procultura.Application.Exceptions
+﻿namespace Procultura.Application.Exceptions.Users
 {
     using System;
 

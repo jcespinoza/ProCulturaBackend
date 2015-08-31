@@ -1,10 +1,8 @@
 ﻿namespace ProCultura.Web.Api.Controllers
 {
-    using System.Web.Http.Description;
-
     using Procultura.Application.DTO;
     using Procultura.Application.DTO.User;
-    using Procultura.Application.Services;
+    using Procultura.Application.Services.Users;
 
     using ProCultura.CrossCutting.Settings;
 

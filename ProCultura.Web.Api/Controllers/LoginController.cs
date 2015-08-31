@@ -1,10 +1,9 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace ProCultura.Web.Api.Controllers
 {
     using Procultura.Application.DTO.User;
-    using Procultura.Application.Services;
+    using Procultura.Application.Services.Users;
 
     public class LoginController : ApiController
     {

@@ -1,4 +1,4 @@
-﻿namespace Procultura.Application.Services
+﻿namespace Procultura.Application.Services.Users
 {
     using Procultura.Application.DTO;
     using Procultura.Application.DTO.User;

@@ -88,6 +88,15 @@ namespace ProCultura.CrossCutting.L10N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to message_EventNotFound.
+        /// </summary>
+        public static string message_EventNotFound {
+            get {
+                return ResourceManager.GetString("message_EventNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to message_InsufficientPrivileges.
         /// </summary>
         public static string message_InsufficientPrivileges {

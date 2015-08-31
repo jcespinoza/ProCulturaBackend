@@ -7,6 +7,7 @@
     using System.Web.Http.Filters;
 
     using Procultura.Application.Exceptions;
+    using Procultura.Application.Exceptions.Users;
 
     using ProCultura.CrossCutting.L10N;
     using ProCultura.CrossCutting.Settings;

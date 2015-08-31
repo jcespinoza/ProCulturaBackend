@@ -8,7 +8,6 @@
     using Procultura.Application.DTO;
 
     using ProCultura.CrossCutting.Settings;
-    using ProCultura.Domain.Entities;
 
     public static class ProCulturaExtensions
     {
@@ -43,6 +42,17 @@
             if (source == null)
                 throw new ArgumentNullException("source");
             return Mapper.Map<TDestination>(source);
+        }
+
+        public static TDestination ReplaceValues<TSource, TDestination>(this TSource source, TDestination destination)
+            where TDestination: class
+            where TSource  : class
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("destination");
+            return Mapper.Map(source, destination);
         }
 
         public static IEnumerable<TDestination> ProjectAs<TDestination>(this IEnumerable<object> source)
