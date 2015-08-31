@@ -7,7 +7,7 @@
     using Autofac;
     using Autofac.Integration.WebApi;
 
-    using Procultura.Application.Services;
+    using Procultura.Application.Services.Users;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;

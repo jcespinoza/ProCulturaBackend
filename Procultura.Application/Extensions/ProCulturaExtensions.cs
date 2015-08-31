@@ -8,7 +8,6 @@
     using Procultura.Application.DTO;
 
     using ProCultura.CrossCutting.Settings;
-    using ProCultura.Domain.Entities;
 
     public static class ProCulturaExtensions
     {

@@ -1,11 +1,13 @@
-﻿namespace ProCultura.Domain.Entities.Events
+﻿namespace Procultura.Application.DTO.Events
 {
     using System;
 
+    using Procultura.Application.DTO;
+
     /// <summary>
-    /// An object representing the Event entity
+    /// A DTO for the Event entity
     /// </summary>
-    public class Event : IEntity
+    public class EventModel : ResponseBase
     {
         /// <summary>
         /// The unique Id for the Event
