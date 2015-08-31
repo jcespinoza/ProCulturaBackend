@@ -29,6 +29,9 @@ namespace Procultura.Application.Services.Events
         public EventModel CreateEvent(NewEventModel request)
         {
             if(request == null) throw new ArgumentNullException("request");
+            
+            var existentEvent = this.GetEventById(request.EventId);
+            if(existentEvent != null) throw new EventAlreadyExistsException();
 
             var eventEntity = request.ProjectAs<Event>();
             var createdEntity = _eventRepository.Insert(eventEntity);

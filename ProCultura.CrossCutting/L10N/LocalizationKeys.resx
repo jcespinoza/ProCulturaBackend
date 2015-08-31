@@ -121,6 +121,10 @@
     <value>message_AuthRequestNotRecognized</value>
     <comment>For when the auth request is not in the right format</comment>
   </data>
+  <data name="message_DuplicateResource" xml:space="preserve">
+    <value>message_DuplicateResource</value>
+    <comment>For duplicate keys exceptions</comment>
+  </data>
   <data name="message_EmailInUse" xml:space="preserve">
     <value>message_EmailInUse</value>
     <comment>For when a user tries to signup with an existing email</comment>
@@ -128,6 +132,10 @@
   <data name="message_EmailIsRequired" xml:space="preserve">
     <value>message_EmailIsRequired</value>
     <comment>For when a user tries to signup without an email</comment>
+  </data>
+  <data name="message_EventAlreadyExist" xml:space="preserve">
+    <value>message_EventAlreadyExist</value>
+    <comment>For when the user tries to add an existing event</comment>
   </data>
   <data name="message_EventNotFound" xml:space="preserve">
     <value>message_EventNotFound</value>
