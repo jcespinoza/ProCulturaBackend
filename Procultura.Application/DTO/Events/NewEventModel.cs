@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class NewEventModel : ResponseBase
+    public class NewEventModel : RequestBase
     {
         public int EventId { get; set; }
         public string Name { get; set; }
