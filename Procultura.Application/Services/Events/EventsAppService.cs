@@ -29,9 +29,13 @@ namespace Procultura.Application.Services.Events
         public EventModel CreateEvent(NewEventModel request)
         {
             if(request == null) throw new ArgumentNullException("request");
+            
+            var existentEvent = this.GetEventById(request.EventId);
+            if(existentEvent != null) throw new EventAlreadyExistsException();
 
             var eventEntity = request.ProjectAs<Event>();
             var createdEntity = _eventRepository.Insert(eventEntity);
+            _eventRepository.UnitOfWork.SaveChanges();
 
             return createdEntity.ProjectAs<EventModel>();
         }
@@ -45,6 +49,8 @@ namespace Procultura.Application.Services.Events
             request.ReplaceValues(eventFound);
 
             var updatedEntity =_eventRepository.Update(eventFound);
+            _eventRepository.UnitOfWork.SaveChanges();
+
             return updatedEntity.ProjectAs<EventModel>();
         }
 
@@ -54,6 +60,8 @@ namespace Procultura.Application.Services.Events
             if (eventFound == null) throw new EventNotFoundException();
 
             _eventRepository.Delete(eventFound);
+            _eventRepository.UnitOfWork.SaveChanges();
+
             return eventFound.ProjectAs<EventModel>();
         }
 

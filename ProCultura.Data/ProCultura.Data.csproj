@@ -55,6 +55,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\DictionaryEntriesSeedScript.sql" />
+    <Content Include="Scripts\EventMessages.sql" />
     <Content Include="Scripts\LanguageSeedScript.sql" />
     <Content Include="Scripts\LocalizationTablesCreateScript.sql" />
   </ItemGroup>

@@ -1,9 +1,11 @@
 ﻿namespace ProCultura.Data.Context
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
 
     using ProCultura.Domain.Entities.Account;
+    using ProCultura.Domain.Entities.Events;
     using ProCultura.Domain.Entities.Security;
     using ProCultura.Domain.Services;
 
@@ -69,7 +71,24 @@
                 context.Roles.Add(userRole);
             }
 
+            SeedEvents(context);
+
             context.SaveChanges();
+        }
+
+        private void SeedEvents(ProCulturaBackEndContext context)
+        {
+            var eventOne = new Event
+                               {
+                                   EventId = 1,
+                                   Name = "Polache's Wild Concert",
+                                   BeginDate = new DateTime(2015, 09, 12),
+                                   Summary = "Enjoy listening to Polaches master pieces this September 12th",
+                                   ImageUrl =
+                                       "http://www.hondudiario.com/sites/default/files/dt.common.streams.StreamServer_55.jpg",
+                                   Location = "Morazan Stadium, San Pedro Sula"
+                               };
+            context.Events.Add(eventOne);
         }
     }
 }

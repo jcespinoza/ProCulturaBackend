@@ -70,6 +70,15 @@ namespace ProCultura.CrossCutting.L10N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to message_DuplicateResource.
+        /// </summary>
+        public static string message_DuplicateResource {
+            get {
+                return ResourceManager.GetString("message_DuplicateResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to message_EmailInUse.
         /// </summary>
         public static string message_EmailInUse {
@@ -84,6 +93,15 @@ namespace ProCultura.CrossCutting.L10N {
         public static string message_EmailIsRequired {
             get {
                 return ResourceManager.GetString("message_EmailIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_EventAlreadyExist.
+        /// </summary>
+        public static string message_EventAlreadyExist {
+            get {
+                return ResourceManager.GetString("message_EventAlreadyExist", resourceCulture);
             }
         }
         

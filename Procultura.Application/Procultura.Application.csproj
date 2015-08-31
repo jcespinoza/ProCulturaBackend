@@ -66,6 +66,8 @@
     <Compile Include="DTO\User\RegisterModel.cs" />
     <Compile Include="DTO\User\UserModel.cs" />
     <Compile Include="DTO\User\UserTokenModel.cs" />
+    <Compile Include="Exceptions\DuplicateResourceException.cs" />
+    <Compile Include="Exceptions\Events\EventAlreadyExistsException.cs" />
     <Compile Include="Exceptions\Events\EventNotFoundException.cs" />
     <Compile Include="Exceptions\Users\EmailInUseException.cs" />
     <Compile Include="Exceptions\Users\EmptyEmailException.cs" />
