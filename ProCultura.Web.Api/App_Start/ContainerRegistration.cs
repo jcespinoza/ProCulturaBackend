@@ -7,6 +7,7 @@
     using Autofac;
     using Autofac.Integration.WebApi;
 
+    using Procultura.Application.Services.Events;
     using Procultura.Application.Services.Users;
 
     using ProCultura.CrossCutting.Encryption;
@@ -44,9 +45,10 @@
         /// <param name="builder"></param>
         private static void RegisterCustomTypes(ContainerBuilder builder)
         {
-            ConfigureCrossCuttingDependencies(builder);
-            ConfigureDomainDependencies(builder);
             ConfigureDataDependencies(builder);
+            ConfigureDomainDependencies(builder);
+            ConfigureCrossCuttingDependencies(builder);
+            ConfigureApplicationDependencies(builder);
         }
 
         /// <summary>
@@ -70,7 +72,6 @@
             builder.RegisterType<EntityFrameworkLocalizationService>().As<ILocalizationService>();
             builder.RegisterType<AuthRequestFactory>().As<IAuthRequestFactory>();
             builder.RegisterType<GeneralEncryptionService>().As<IEncryptionService>();
-            builder.RegisterType<UserAppService>().As<IUserAppService>();
         }
 
         /// <summary>
@@ -83,6 +84,16 @@
             builder.RegisterInstance(context).As<DbContext>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+        }
+
+        /// <summary>
+        /// Register dependencies registered in the Application layer
+        /// </summary>
+        /// <param name="builder"></param>
+        private static void ConfigureApplicationDependencies(ContainerBuilder builder)
+        {
+            builder.RegisterType<UserAppService>().As<IUserAppService>();
+            builder.RegisterType<EventsAppService>().As<IEventsAppService>();
         }
     }
 }
