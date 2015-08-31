@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace ProCultura.CrossCutting.L10N {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -81,6 +84,15 @@ namespace ProCultura.CrossCutting.L10N {
         public static string message_EmailIsRequired {
             get {
                 return ResourceManager.GetString("message_EmailIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message_EventNotFound.
+        /// </summary>
+        public static string message_EventNotFound {
+            get {
+                return ResourceManager.GetString("message_EventNotFound", resourceCulture);
             }
         }
         

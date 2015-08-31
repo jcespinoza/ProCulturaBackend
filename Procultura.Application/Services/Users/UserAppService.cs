@@ -5,6 +5,8 @@
     using Procultura.Application.DTO;
     using Procultura.Application.DTO.User;
     using Procultura.Application.Exceptions;
+    using Procultura.Application.Exceptions.Users;
+    using Procultura.Application.Extensions;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;

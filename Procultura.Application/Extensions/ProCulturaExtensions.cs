@@ -44,6 +44,17 @@
             return Mapper.Map<TDestination>(source);
         }
 
+        public static TDestination ReplaceValues<TSource, TDestination>(this TSource source, TDestination destination)
+            where TDestination: class
+            where TSource  : class
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("destination");
+            return Mapper.Map(source, destination);
+        }
+
         public static IEnumerable<TDestination> ProjectAs<TDestination>(this IEnumerable<object> source)
             where TDestination : class
         {
