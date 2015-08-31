@@ -14,22 +14,22 @@ namespace ProCultura.Web.Api.Controllers
             this._eventsAppService = eventsAppService;
         }
 
-        public EventModel Get(int eventId)
+        public EventModel GetEvent(int eventId)
         {
             return _eventsAppService.GetEventWithId(eventId);
         }
 
-        public EventModel Post(NewEventModel request)
+        public EventModel PostEvent(NewEventModel request)
         {
             return _eventsAppService.CreateEvent(request);
         }
 
-        public EventModel Put(NewEventModel request)
+        public EventModel PutEvent(NewEventModel request)
         {
             return _eventsAppService.UpdateEvent(request);
         }
 
-        public EventModel Delete(int eventId)
+        public EventModel DeleteEvent(int eventId)
         {
             return _eventsAppService.DeleteEvent(eventId);
         }
