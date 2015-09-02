@@ -17,10 +17,13 @@
             //Columns
             Property(e => e.EventId).HasColumnName("EventId").IsRequired();
             Property(e => e.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-            Property(e => e.Summary).HasColumnName("Summary").HasMaxLength(1024);
+            Property(e => e.ShortDescription).HasColumnName("ShortDescription").HasMaxLength(100).IsRequired();
             Property(e => e.ImageUrl).HasColumnName("ImageUrl");
             Property(e => e.BeginDate).HasColumnName("BeginDate").IsRequired();
+            Property(e => e.EndDate).HasColumnName("EndDate");
             Property(e => e.Location).HasColumnName("Location").IsRequired();
+            Property(e => e.Status).HasColumnName("Status").IsRequired();
+            Property(e => e.LongDescription).HasColumnName("LongDescription").HasMaxLength(1024);
         }
     }
 }
