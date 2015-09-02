@@ -20,7 +20,7 @@
         /// <summary>
         /// A summary of what this event is about
         /// </summary>
-        public string Summary { get; set; }
+        public string ShortDescription { get; set; }
 
         /// <summary>
         /// The Date on which this event will ocurr
@@ -38,14 +38,9 @@
         public string Location { get; set; }
 
         /// <summary>
-        /// Price of the event´s entrance
-        /// </summary>
-        public double Price { get; set; }
-
-        /// <summary>
         /// Full description of what`s the event about
         /// </summary>
-        public string Description { get; set; }
+        public string LongDescription { get; set; }
 
         /// <summary>
         /// The URL for this event's image

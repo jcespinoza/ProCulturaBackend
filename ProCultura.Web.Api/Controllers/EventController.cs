@@ -21,9 +21,9 @@ namespace ProCultura.Web.Api.Controllers
             return _eventsAppService.GetAllEvents();
         }
 
-        public EventModel GetEvent(int eventId)
+        public EventModel GetEvent(int id)
         {
-            return _eventsAppService.GetEventWithId(eventId);
+            return _eventsAppService.GetEventWithId(id);
         }
 
         public EventModel PostEvent(NewEventModel request)
@@ -36,9 +36,9 @@ namespace ProCultura.Web.Api.Controllers
             return _eventsAppService.UpdateEvent(request);
         }
 
-        public EventModel DeleteEvent(int eventId)
+        public EventModel DeleteEvent(int id)
         {
-            return _eventsAppService.DeleteEvent(eventId);
+            return _eventsAppService.DeleteEvent(id);
         }
     }
 }

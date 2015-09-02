@@ -40,11 +40,6 @@
         public string Location { get; set; }
 
         /// <summary>
-        /// Price of the event´s entrance
-        /// </summary>
-        public double Price { get; set; }
-
-        /// <summary>
         /// Full description of what`s the event about
         /// </summary>
         public string Description { get; set; }
