@@ -35,6 +35,7 @@ namespace Procultura.Application.Services.Events
             if(existentEvent != null) throw new EventAlreadyExistsException();
 
             var eventEntity = request.ProjectAs<Event>();
+            eventEntity.Status = "NEW";
             var createdEntity = _eventRepository.Insert(eventEntity);
             _eventRepository.UnitOfWork.SaveChanges();
 
