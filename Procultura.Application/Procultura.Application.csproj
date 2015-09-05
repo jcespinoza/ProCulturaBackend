@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ErrorResponse.cs" />
     <Compile Include="DTO\Events\NewEventModel.cs" />
     <Compile Include="DTO\RequestInformation.cs" />
     <Compile Include="DTO\RequestBase.cs" />
