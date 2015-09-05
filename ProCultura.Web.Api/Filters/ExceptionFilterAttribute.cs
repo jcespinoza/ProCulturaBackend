@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Formatting;
     using System.Web.Http.Filters;
 
+    using Procultura.Application.DTO;
     using Procultura.Application.Exceptions;
     using Procultura.Application.Exceptions.Users;
 
@@ -29,6 +31,40 @@
         public ProCulturaExceptionFilterAttribute(ILocalizationService localizationService)
         {
             this._localizationService = localizationService;
+        }
+
+        private HttpStatusCode GetStatusCode(Exception exception)
+        {
+            if (ExceptionDictionary.ContainsKey(exception.GetType()))
+            {
+                return ExceptionDictionary[exception.GetType()];
+            }
+            return HttpStatusCode.InternalServerError;
+        }
+
+        public override void OnException(HttpActionExecutedContext actionExecutedContext)
+        {
+            base.OnException(actionExecutedContext);
+            var exception = actionExecutedContext.Exception;
+            actionExecutedContext.Response = new HttpResponseMessage(this.GetStatusCode(exception))
+                                                 {
+                                                     Content = CreateErrorObjectContent(exception)
+                                                 };
+        }
+
+        private ObjectContent CreateErrorObjectContent(Exception exception)
+        {
+            var errorResponse = CreateErrorResponse(exception);
+            return new ObjectContent(typeof(ErrorResponse), errorResponse, new JsonMediaTypeFormatter());
+        }
+
+        private ErrorResponse CreateErrorResponse(Exception exception)
+        {
+            var message = _localizationService.GetLocalizedString(exception.Message, AppStrings.EnglishCode);
+            return new ErrorResponse()
+                       {
+                           Message = message
+                       };
         }
 
         private static IDictionary<Type, HttpStatusCode> CreateAndInitializeExceptionDictionary()
@@ -57,26 +93,6 @@
                 };
 
             return _exceptionDictionary;
-        }
-
-        private HttpStatusCode GetStatusCode(Exception exception)
-        {
-            if (ExceptionDictionary.ContainsKey(exception.GetType()))
-            {
-                return ExceptionDictionary[exception.GetType()];
-            }
-            return HttpStatusCode.InternalServerError;
-        }
-
-        public override void OnException(HttpActionExecutedContext actionExecutedContext)
-        {
-            base.OnException(actionExecutedContext);
-            var exception = actionExecutedContext.Exception;
-            var message = _localizationService.GetLocalizedString(exception.Message, AppStrings.EnglishCode);
-            actionExecutedContext.Response = new HttpResponseMessage(this.GetStatusCode(exception))
-                                                 {
-                                                     Content = new StringContent(message)
-                                                 };
         }
     }
 }
