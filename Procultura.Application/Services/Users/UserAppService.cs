@@ -44,7 +44,7 @@
                 throw new InvalidPasswordException();
             }
 
-            return this.BuildSuccessAuthModel(user, request);
+            return this.BuildSuccessAuthModel(user);
         }
 
         public ResponseBase DeleteUser(string token, DeleteUserModel request)
@@ -71,7 +71,7 @@
             this._userRepository.Delete(user);
             this._userRepository.UnitOfWork.SaveChanges();
 
-            return this.BuildGenericResponse(LocalizationKeys.message_UserDeleted, request.GetRequestLanguage());
+            return BuildGenericResponse(LocalizationKeys.message_UserDeleted);
         }
 
         public UserModel GetUser(string token)
@@ -127,7 +127,7 @@
             this._userRepository.Insert(newUser);
             this._userRepository.UnitOfWork.SaveChanges();
 
-            return this.BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess, request.GetRequestLanguage());
+            return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess);
         }
 
         public ResponseBase UpdateUser(string token, UserModel request)
@@ -156,7 +156,7 @@
             this._userRepository.Update(userToModify);
             this._userRepository.UnitOfWork.SaveChanges();
 
-            return this.BuildGenericResponse(LocalizationKeys.message_UpdateUserSuccess, AppStrings.EnglishCode);
+            return BuildGenericResponse(LocalizationKeys.message_UpdateUserSuccess);
         }
 
         private UserEntity GetUserByEmail(string email)
@@ -165,26 +165,23 @@
             return user;
         }
 
-        private AuthModel BuildSuccessAuthModel(UserEntity user, LoginModel request)
+        private AuthModel BuildSuccessAuthModel(UserEntity user)
         {
             var tokenModel = new UserTokenModel { Email = user.Email };
             var authModel = new AuthModel
             {
                 Id = user.Id,
-                AccessToken = this._authRequestFactory.BuildEncryptedRequest(tokenModel),
-                Message =
-                    this._l10nService.GetLocalizedString(
-                        LocalizationKeys.message_LoginSuccess,
-                        request.GetRequestLanguage())
+                AccessToken = _authRequestFactory.BuildEncryptedRequest(tokenModel),
+                Message = LocalizationKeys.message_LoginSuccess
             };
             return authModel;
         }
 
-        private ResponseBase BuildGenericResponse(string messageKey, string languageId)
+        private ResponseBase BuildGenericResponse(string messageKey)
         {
             return new ResponseBase()
             {
-                Message = this._l10nService.GetLocalizedString(messageKey, languageId)
+                Message = messageKey
             };
         }
     }
