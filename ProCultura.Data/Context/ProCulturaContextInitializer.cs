@@ -9,7 +9,7 @@
     using ProCultura.Domain.Entities.Security;
     using ProCultura.Domain.Services;
 
-    public class ProCulturaContextInitializer : DropCreateDatabaseIfModelChanges<ProCulturaBackEndContext>
+    public class ProCulturaContextInitializer : CreateDatabaseIfNotExists<ProCulturaBackEndContext>
     {
         protected override void Seed(ProCulturaBackEndContext context)
         {
@@ -19,10 +19,10 @@
 
             var userToSeed = new UserEntity
             {
-                Email = "admin@proculturabackend.com",
+                Email = "admin@procultura.com",
                 Name = "Admin",
                 Id = 1,
-                Password = "adminpassword"
+                Password = "admin"
             };
 
             PasswordEncryptionService.Encrypt(userToSeed);
