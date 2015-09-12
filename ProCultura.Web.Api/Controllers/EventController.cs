@@ -26,7 +26,7 @@ namespace ProCultura.Web.Api.Controllers
             return _eventsAppService.GetEventWithId(id);
         }
 
-        public EventModel PostEvent(NewEventModel request)
+        public EventModel PostEvent([FromUri] int id, [FromBody] NewEventModel request)
         {
             return _eventsAppService.CreateEvent(request);
         }
