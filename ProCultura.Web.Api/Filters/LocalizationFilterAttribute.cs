@@ -20,7 +20,10 @@
         {
             base.OnActionExecuted(actionExecutedContext);
             var requestLanguage = GetLanguageFromRequest(actionExecutedContext.Request);
-            ReplaceMessageKeys(actionExecutedContext.Response.Content, requestLanguage);
+            if (actionExecutedContext.Response != null)
+            {
+                ReplaceMessageKeys(actionExecutedContext.Response.Content, requestLanguage);
+            }
         }
 
         private string GetLanguageFromRequest(HttpRequestMessage request)
@@ -48,7 +51,6 @@
                     responseValue.Message = replacement;
                 }
             }
-            
         }
     }
 }
