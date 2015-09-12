@@ -13,8 +13,10 @@
 
         public string GetLocalizedString(string resourceKey, string languageId = "en")
         {
+            if (resourceKey == null) return null;
+
             var result = _context.LocalizedEntries
-                .FirstOrDefault(le => le.EntryKey == resourceKey && le.LanguageId == languageId);
+                .FirstOrDefault(le => le.EntryKey == resourceKey && languageId.Contains(le.LanguageId));
 
             if (result != null)
             {

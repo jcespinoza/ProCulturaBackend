@@ -20,6 +20,7 @@ namespace ProCultura.Web.Api
         {
             var localizationService = container.Resolve<ILocalizationService>();
             filters.Add(new ProCulturaExceptionFilterAttribute(localizationService));
+            filters.Add(new LocalizationFilterAttribute(localizationService));
         }
     }
 }

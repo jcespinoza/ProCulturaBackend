@@ -15,7 +15,7 @@
             using (var connection = new SqlConnection(connectionString))
             {
                 var sqlCommand = @"SELECT EntryKey, LanguageId, Value FROM Localization.Dictionary "
-                                + @"WHERE EntryKey = '" + resourceKey + "' AND LanguageId = '" + languageId + "'";
+                                + @"WHERE EntryKey = '" + resourceKey + "' AND '" + languageId + "' LIKE LanguageId";
                 connection.Open();
                 var command = new SqlCommand(sqlCommand, connection);
                 command.CommandType = CommandType.Text;

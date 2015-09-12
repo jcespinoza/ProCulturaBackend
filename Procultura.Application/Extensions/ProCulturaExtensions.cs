@@ -47,5 +47,10 @@
                 throw new ArgumentNullException("source");
             return Mapper.Map<IEnumerable<TDestination>>(source);
         }
+
+        public static bool IsDerivedFrom(this object source, Type type)
+        {
+            return type.IsInstanceOfType(source);
+        }
     }
 }
