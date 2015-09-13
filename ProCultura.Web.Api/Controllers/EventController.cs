@@ -36,6 +36,11 @@ namespace ProCultura.Web.Api.Controllers
             return _eventsAppService.UpdateEvent(request);
         }
 
+        public EventModel PutEvent([FromUri] int id, [FromBody] NewEventModel request)
+        {
+            return _eventsAppService.UpdateEvent(id, request);
+        }
+
         public EventModel DeleteEvent(int id)
         {
             return _eventsAppService.DeleteEvent(id);

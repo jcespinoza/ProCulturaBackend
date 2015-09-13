@@ -130,28 +130,25 @@
             return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess);
         }
 
-        public ResponseBase UpdateUser(string token, UserModel request)
-        {
-            var userEntity = request.ProjectAs<UserEntity>();
-            
+        public ResponseBase UpdateUser(string token, UpdateUserModel request)
+        {   
             //TODO: add method to check whether the entity is valid and call that method here
 
             var tokenModel = this._authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
             var requestSendingUser = this.GetUserByEmail(tokenModel.Email);
-            var userToModify = this._userRepository.Single(x => x.Id == userEntity.Id);
+            var userToModify = this._userRepository.Single(x => x.Id == request.Id);
 
             if (requestSendingUser == null || userToModify == null)
             {
                 throw new UserNotFoundException();
             }
 
-            if (requestSendingUser.Id != userEntity.Id && !requestSendingUser.IsAdmin())
+            if (requestSendingUser.Id != request.Id && !requestSendingUser.IsAdmin())
             {
                 throw new NotEnoughPrivilegesException();
             }
 
-            userEntity.Password = userToModify.Password;
-            userEntity.Salt = userToModify.Salt;
+            request.ReplaceValues(userToModify);
 
             this._userRepository.Update(userToModify);
             this._userRepository.UnitOfWork.SaveChanges();

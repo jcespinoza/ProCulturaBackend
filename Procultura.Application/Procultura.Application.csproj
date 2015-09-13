@@ -65,6 +65,7 @@
     <Compile Include="DTO\User\DeleteUserModel.cs" />
     <Compile Include="DTO\User\LoginModel.cs" />
     <Compile Include="DTO\User\RegisterModel.cs" />
+    <Compile Include="DTO\User\RoleModel.cs" />
     <Compile Include="DTO\User\UserModel.cs" />
     <Compile Include="DTO\User\UserTokenModel.cs" />
     <Compile Include="Exceptions\DuplicateResourceException.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Services\Events\EventsAppService.cs" />
     <Compile Include="Services\Events\IEventsAppService.cs" />
     <Compile Include="Services\Users\IUserAppService.cs" />
+    <Compile Include="DTO\User\UpdateUserModel.cs" />
     <Compile Include="Services\Users\UserAppService.cs" />
   </ItemGroup>
   <ItemGroup>

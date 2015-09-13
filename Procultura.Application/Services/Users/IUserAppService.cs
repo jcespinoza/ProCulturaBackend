@@ -15,6 +15,6 @@
 
         ResponseBase CreateUser(RegisterModel request);
 
-        ResponseBase UpdateUser(string token, UserModel request);
+        ResponseBase UpdateUser(string token, UpdateUserModel request);
     }
 }
