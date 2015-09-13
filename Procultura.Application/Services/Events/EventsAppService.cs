@@ -72,6 +72,12 @@ namespace Procultura.Application.Services.Events
             return _eventRepository.GetAllList().ProjectAs<EventModel>();
         }
 
+        public EventModel UpdateEvent(int id, NewEventModel request)
+        {
+            request.EventId = id;
+            return UpdateEvent(request);
+        }
+
         private Event GetEventById(int eventId)
         {
             var eventEntity = this._eventRepository.FirstOrDefault(e => e.EventId == eventId);

@@ -42,5 +42,13 @@
         /// </summary>
         /// <returns></returns>
         IEnumerable<EventModel> GetAllEvents();
+
+        /// <summary>
+        /// Updates the given event
+        /// </summary>
+        /// <param name="id">The unique identifier of the event to update</param>
+        /// <param name="request">The data to be assigned to the event</param>
+        /// <returns></returns>
+        EventModel UpdateEvent(int id, NewEventModel request);
     }
 }
