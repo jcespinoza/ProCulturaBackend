@@ -12,11 +12,6 @@
         
         public string Email { get; set; }
         
-        public ICollection<RoleModel> Role { get; set; }
-    }
-
-    public class RoleModel
-    {
-        public string RoleId { get; set; }
+        public ICollection<RoleModel> UserRoles { get; set; }
     }
 }

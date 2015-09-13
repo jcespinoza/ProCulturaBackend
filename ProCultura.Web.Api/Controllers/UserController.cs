@@ -18,7 +18,7 @@
         }
 
     
-        public ResponseBase PutUser(string token, UserModel request)
+        public ResponseBase PutUser(string token, UpdateUserModel request)
         {
             var response = _userAppService.UpdateUser(token, request);
 
