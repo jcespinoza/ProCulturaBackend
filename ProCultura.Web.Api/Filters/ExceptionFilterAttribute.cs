@@ -80,6 +80,11 @@
             var acceptLanguageHeaderValues = request.Headers.AcceptLanguage;
             var preferredLanguage = acceptLanguageHeaderValues.FirstOrDefault();
 
+            if (preferredLanguage != null)
+            {
+                return preferredLanguage.Value;
+            }
+
             return AppStrings.EnglishCode;
         }
 
