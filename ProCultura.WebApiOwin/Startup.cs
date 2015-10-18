@@ -9,11 +9,16 @@ namespace ProCultura.WebApiOwin
 
     using Autofac;
     using Autofac.Integration.WebApi;
+    using Microsoft.Owin.Cors;
+    using System.Threading.Tasks;
+    using System.Web.Cors;
 
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureCors(app);
+
             var builder = new ContainerBuilder();
 
             ConfigureAuth(app);
@@ -37,6 +42,35 @@ namespace ProCultura.WebApiOwin
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
+        }
+
+        private void ConfigureCors(IAppBuilder app)
+        {
+
+            var corsOptions = CreateCorsOptions(app);
+            app.UseCors(corsOptions);
+        }
+
+        private CorsOptions CreateCorsOptions(IAppBuilder app)
+        {
+            var corsPolicy = new CorsPolicy
+            {
+                AllowAnyMethod = true,
+                AllowAnyHeader = true
+            };
+
+            //Add Test Origins and production ones
+            corsPolicy.Origins.Add("http://localhost:8090");
+            corsPolicy.Origins.Add("http://procultura.herokuapp.com");
+
+            var corsOptions = new CorsOptions
+            {
+                PolicyProvider = new CorsPolicyProvider
+                {
+                    PolicyResolver = context => Task.FromResult(corsPolicy)
+                }
+            };
+            return corsOptions;
         }
     }
 }
