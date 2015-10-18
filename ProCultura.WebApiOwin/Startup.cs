@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(ProCultura.WebApiOwin.Startup))]
 
 namespace ProCultura.WebApiOwin
 {
-    using System.Reflection;
     using System.Web.Http;
 
     using Autofac;
@@ -22,17 +18,19 @@ namespace ProCultura.WebApiOwin
 
             ConfigureAuth(app);
 
-            // Register your Web API controllers.
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-
             // Get your HttpConfiguration. In OWIN, you'll create one
             // rather than using GlobalConfiguration.
             var config = new HttpConfiguration();
+
+            ContainerRegistration.Configure(config, builder);
 
             // Run other optional steps, like registering filters,
             // per-controller-type services, etc., then set the dependency resolver
             // to be Autofac.
             var container = builder.Build();
+
+            FilterConfig.RegisterHttpFilters(GlobalConfiguration.Configuration.Filters, container);
+
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             // Register the Autofac middleware FIRST.
