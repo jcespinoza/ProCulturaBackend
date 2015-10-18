@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
 
 namespace ProCultura.WebApiOwin.Models
 {
@@ -21,13 +22,31 @@ namespace ProCultura.WebApiOwin.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ProCulturaContext", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new UsersInitializer());
         }
         
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+    }
+
+    public class UsersInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            context.Roles.Add(new IdentityRole
+            {
+                Id = "Administrator",
+                Name = "Administrator",
+            });
+            context.Roles.Add(new IdentityRole
+            {
+                Id = "User",
+                Name = "User",
+            });
         }
     }
 }

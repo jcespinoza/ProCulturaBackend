@@ -17,12 +17,8 @@ namespace ProCultura.WebApiOwin
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureCors(app);
-
             var builder = new ContainerBuilder();
-
-            ConfigureAuth(app);
-
+            
             // Get your HttpConfiguration. In OWIN, you'll create one
             // rather than using GlobalConfiguration.
             var config = new HttpConfiguration();
@@ -35,8 +31,11 @@ namespace ProCultura.WebApiOwin
             var container = builder.Build();
 
             FilterConfig.RegisterHttpFilters(GlobalConfiguration.Configuration.Filters, container);
-
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            ConfigureCors(app);
+            ConfigureAuth(app);
 
             // Register the Autofac middleware FIRST.
             app.UseAutofacMiddleware(container);

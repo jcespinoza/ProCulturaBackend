@@ -11,11 +11,12 @@ namespace ProCultura.WebApiOwin
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new Filters.RequireHttpsAttribute());
         }
 
         public static void RegisterHttpFilters(HttpFilterCollection filters, IContainer container)
         {
+            filters.Add(new Filters.RequireHttpsAttribute());
+
             var localizationService = container.Resolve<ILocalizationService>();
             filters.Add(new ProCulturaExceptionFilterAttribute(localizationService));
             filters.Add(new LocalizationFilterAttribute(localizationService));

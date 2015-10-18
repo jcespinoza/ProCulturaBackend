@@ -8,7 +8,7 @@
         public IDbSet<LocalizedEntry> LocalizedEntries { get; set; }
 
         public LocalizationContext()
-            : base("name=ProCulturaBackEndContext")
+            : base("name=ProCulturaContext")
         {
             
         }

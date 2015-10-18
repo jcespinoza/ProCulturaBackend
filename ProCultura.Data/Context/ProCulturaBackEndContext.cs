@@ -19,7 +19,7 @@
         public IDbSet<Event> Events { get; set; }
 
         public ProCulturaBackEndContext()
-            : base("name=ProCulturaBackEndContext")
+            : base("name=ProCulturaContext")
         {
             Database.SetInitializer(new ProCulturaContextInitializer());
         }
