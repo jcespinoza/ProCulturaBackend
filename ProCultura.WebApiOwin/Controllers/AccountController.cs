@@ -13,9 +13,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using ProCultura.WebApiOwin.Models;
-using ProCultura.WebApiOwin.Providers;
-using ProCultura.WebApiOwin.Results;
 
 namespace ProCultura.WebApiOwin.Controllers
 {
