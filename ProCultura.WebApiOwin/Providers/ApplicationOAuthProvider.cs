@@ -9,10 +9,12 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using LocalAccountsApp.Models;
+using ProCultura.WebApiOwin.Models;
 
-namespace LocalAccountsApp.Providers
+namespace ProCultura.WebApiOwin.Providers
 {
+    using ProCultura.WebApiOwin.Models;
+
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;

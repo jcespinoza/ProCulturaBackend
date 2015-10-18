@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace LocalAccountsApp.Models
+namespace ProCultura.WebApiOwin.Models
 {
     // Models used as parameters to AccountController actions.
 

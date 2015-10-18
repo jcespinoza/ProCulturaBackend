@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace LocalAccountsApp.Filters
+namespace ProCultura.WebApiOwin.Filters
 {
     public class RequireHttpsAttribute : AuthorizationFilterAttribute
     {

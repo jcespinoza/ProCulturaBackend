@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LocalAccountsApp.Controllers
+namespace ProCultura.WebApiOwin.Controllers
 {
     public class HomeController : Controller
     {

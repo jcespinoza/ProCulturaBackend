@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LocalAccountsApp.Models
+namespace ProCultura.WebApiOwin.Models
 {
     // Models returned by AccountController actions.
 

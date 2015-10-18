@@ -6,8 +6,10 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
-namespace LocalAccountsApp
+namespace ProCultura.WebApiOwin
 {
+    using ProCultura.WebApiOwin.Filters;
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -27,7 +29,7 @@ namespace LocalAccountsApp
             );
 
             // Enforce HTTPS
-            config.Filters.Add(new LocalAccountsApp.Filters.RequireHttpsAttribute());
+            config.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }

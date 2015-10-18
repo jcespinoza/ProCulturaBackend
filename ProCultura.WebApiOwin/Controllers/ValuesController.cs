@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace LocalAccountsApp.Controllers
+namespace ProCultura.WebApiOwin.Controllers
 {
     [Authorize]
     public class ValuesController : ApiController

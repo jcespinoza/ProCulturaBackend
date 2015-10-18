@@ -13,12 +13,16 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using LocalAccountsApp.Models;
-using LocalAccountsApp.Providers;
-using LocalAccountsApp.Results;
+using ProCultura.WebApiOwin.Models;
+using ProCultura.WebApiOwin.Providers;
+using ProCultura.WebApiOwin.Results;
 
-namespace LocalAccountsApp.Controllers
+namespace ProCultura.WebApiOwin.Controllers
 {
+    using ProCultura.WebApiOwin.Models;
+    using ProCultura.WebApiOwin.Providers;
+    using ProCultura.WebApiOwin.Results;
+
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController

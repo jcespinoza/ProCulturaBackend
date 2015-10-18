@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(LocalAccountsApp.Startup))]
+[assembly: OwinStartup(typeof(ProCultura.WebApiOwin.Startup))]
 
-namespace LocalAccountsApp
+namespace ProCultura.WebApiOwin
 {
     public partial class Startup
     {

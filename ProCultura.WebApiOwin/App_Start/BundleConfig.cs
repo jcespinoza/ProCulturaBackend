@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace LocalAccountsApp
+namespace ProCultura.WebApiOwin
 {
     public class BundleConfig
     {
