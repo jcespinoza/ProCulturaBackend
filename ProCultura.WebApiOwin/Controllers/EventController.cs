@@ -6,6 +6,7 @@ namespace ProCultura.WebApiOwin.Controllers
 
     using Procultura.Application.DTO.Events;
     using Procultura.Application.Services.Events;
+    using Microsoft.AspNet.Identity;
 
     public class EventController : ApiController
     {
@@ -26,6 +27,8 @@ namespace ProCultura.WebApiOwin.Controllers
             return _eventsAppService.GetEventWithId(id);
         }
 
+        [Authorize]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public EventModel PostEvent(NewEventModel request)
         {
             return _eventsAppService.CreateEvent(request);

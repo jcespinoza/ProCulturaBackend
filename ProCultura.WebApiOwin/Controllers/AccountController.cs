@@ -19,6 +19,8 @@ namespace ProCultura.WebApiOwin.Controllers
     using ProCultura.WebApiOwin.Models;
     using ProCultura.WebApiOwin.Providers;
     using ProCultura.WebApiOwin.Results;
+    using Procultura.Application.Exceptions;
+    using Procultura.Application.Exceptions.Users;
 
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -330,13 +332,14 @@ namespace ProCultura.WebApiOwin.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var foundUser = await UserManager.FindByEmailAsync(user.Email);
+
+            if (foundUser != null)
+            {
+                throw new EmailInUseException();
+            }
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
 
             return Ok();
         }
