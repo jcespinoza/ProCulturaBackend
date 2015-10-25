@@ -1,13 +1,11 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Procultura.Application.DTO.Events;
+using Procultura.Application.Services.Events;
 
 namespace ProCultura.WebApiOwin.Controllers
 {
-    using System.Collections.Generic;
-
-    using Procultura.Application.DTO.Events;
-    using Procultura.Application.Services.Events;
-    using Microsoft.AspNet.Identity;
-
     public class EventController : ApiController
     {
         private readonly IEventsAppService _eventsAppService;

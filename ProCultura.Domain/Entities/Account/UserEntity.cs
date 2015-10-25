@@ -1,10 +1,9 @@
-﻿namespace ProCultura.Domain.Entities.Account
+﻿using System.Collections.Generic;
+using System.Linq;
+using ProCultura.Domain.Entities.Security;
+
+namespace ProCultura.Domain.Entities.Account
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Security;
-
     public class UserEntity : IEntity
     {
         public int Id { get; set; }

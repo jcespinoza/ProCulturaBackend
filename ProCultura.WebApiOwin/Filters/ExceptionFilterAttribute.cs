@@ -1,21 +1,19 @@
-﻿namespace ProCultura.WebApiOwin.Filters
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Web.Http.Filters;
+using Procultura.Application.DTO;
+using Procultura.Application.Exceptions;
+using Procultura.Application.Exceptions.Users;
+using Procultura.Application.Extensions;
+using ProCultura.CrossCutting.L10N;
+using ProCultura.CrossCutting.Settings;
+
+namespace ProCultura.WebApiOwin.Filters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Formatting;
-    using System.Web.Http.Filters;
-
-    using Procultura.Application.DTO;
-    using Procultura.Application.Exceptions;
-    using Procultura.Application.Extensions;
-    using Procultura.Application.Exceptions.Users;
-
-    using CrossCutting.L10N;
-    using CrossCutting.Settings;
-
     public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private static IDictionary<Type, HttpStatusCode> _exceptionDictionary;

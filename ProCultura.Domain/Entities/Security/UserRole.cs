@@ -1,7 +1,7 @@
-﻿namespace ProCultura.Domain.Entities.Security
-{
-    using Account;
+﻿using ProCultura.Domain.Entities.Account;
 
+namespace ProCultura.Domain.Entities.Security
+{
     public class UserRole : IEntity
     {
         public int UserId { get; set; }

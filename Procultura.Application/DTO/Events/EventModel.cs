@@ -1,9 +1,7 @@
-﻿namespace Procultura.Application.DTO.Events
+﻿using System;
+
+namespace Procultura.Application.DTO.Events
 {
-    using System;
-
-    using DTO;
-
     /// <summary>
     /// A DTO for the Event entity
     /// </summary>

@@ -1,24 +1,21 @@
-﻿namespace ProCultura.WebApiOwin
+﻿using System.Data.Entity;
+using System.Reflection;
+using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
+using Procultura.Application.Services.Events;
+using Procultura.Application.Services.Users;
+using ProCultura.CrossCutting.Encryption;
+using ProCultura.CrossCutting.L10N;
+using ProCultura.CrossCutting.L10N.EF;
+using ProCultura.Data.Context;
+using ProCultura.Data.Repositories;
+using ProCultura.Data.UnitOfWork;
+using ProCultura.Domain.Repositories;
+using ProCultura.Domain.UnitOfWork;
+
+namespace ProCultura.WebApiOwin
 {
-    using System.Data.Entity;
-    using System.Reflection;
-    using System.Web.Http;
-
-    using Autofac;
-    using Autofac.Integration.WebApi;
-
-    using Procultura.Application.Services.Events;
-    using Procultura.Application.Services.Users;
-
-    using CrossCutting.Encryption;
-    using CrossCutting.L10N;
-    using CrossCutting.L10N.EF;
-    using Data.Context;
-    using Data.Repositories;
-    using Data.UnitOfWork;
-    using Domain.Repositories;
-    using Domain.UnitOfWork;
-
     /// <summary>
     /// Register implementations for project dependencies
     /// </summary>

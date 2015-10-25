@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using ProCultura.WebApiOwin.Providers;
 using ProCultura.WebApiOwin.Models;
+using ProCultura.WebApiOwin.Providers;
 
 namespace ProCultura.WebApiOwin
 {
-    using Models;
-    using Providers;
-
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }

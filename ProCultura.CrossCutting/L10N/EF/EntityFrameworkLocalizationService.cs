@@ -1,7 +1,7 @@
-﻿namespace ProCultura.CrossCutting.L10N.EF
-{
-    using System.Linq;
+﻿using System.Linq;
 
+namespace ProCultura.CrossCutting.L10N.EF
+{
     public class EntityFrameworkLocalizationService : ILocalizationService
     {
 

@@ -1,20 +1,17 @@
-﻿namespace Procultura.Application.Services.Users
+﻿using System;
+using Procultura.Application.DTO;
+using Procultura.Application.DTO.User;
+using Procultura.Application.Exceptions;
+using Procultura.Application.Exceptions.Users;
+using Procultura.Application.Extensions;
+using ProCultura.CrossCutting.Encryption;
+using ProCultura.CrossCutting.L10N;
+using ProCultura.Domain.Entities.Account;
+using ProCultura.Domain.Repositories;
+using ProCultura.Domain.Services;
+
+namespace Procultura.Application.Services.Users
 {
-    using System;
-
-    using DTO;
-    using DTO.User;
-    using Exceptions;
-    using Exceptions.Users;
-    using Extensions;
-
-    using ProCultura.CrossCutting.Encryption;
-    using ProCultura.CrossCutting.L10N;
-    using ProCultura.CrossCutting.Settings;
-    using ProCultura.Domain.Entities.Account;
-    using ProCultura.Domain.Repositories;
-    using ProCultura.Domain.Services;
-
     public class UserAppService: IUserAppService
     {
         private readonly IAuthRequestFactory _authRequestFactory;

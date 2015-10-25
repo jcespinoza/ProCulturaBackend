@@ -1,7 +1,7 @@
-﻿namespace Procultura.Application.DTO.Events
-{
-    using System;
+﻿using System;
 
+namespace Procultura.Application.DTO.Events
+{
     public class NewEventModel : RequestBase
     {
         public int EventId { get; set; }

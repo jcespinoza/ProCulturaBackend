@@ -1,11 +1,10 @@
-﻿namespace ProCultura.CrossCutting.L10N
+﻿using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using ProCultura.CrossCutting.Settings;
+
+namespace ProCultura.CrossCutting.L10N
 {
-    using System.Configuration;
-    using System.Data;
-    using System.Data.SqlClient;
-
-    using Settings;
-
     public class DatabaseLocalizationService: ILocalizationService
     {
         public string GetLocalizedString(string resourceKey, string languageId = "en")

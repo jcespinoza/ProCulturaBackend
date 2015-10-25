@@ -1,7 +1,7 @@
-﻿namespace Procultura.Application.Exceptions.Events
-{
-    using ProCultura.CrossCutting.L10N;
+﻿using ProCultura.CrossCutting.L10N;
 
+namespace Procultura.Application.Exceptions.Events
+{
     public class EventNotFoundException : ResourceNotFoundException
     {
         public EventNotFoundException(string message) : base(message) { }

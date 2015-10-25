@@ -1,7 +1,7 @@
-﻿namespace ProCultura.Domain.Entities.Events
-{
-    using System;
+﻿using System;
 
+namespace ProCultura.Domain.Entities.Events
+{
     /// <summary>
     /// An object representing the Event entity
     /// </summary>

@@ -6,22 +6,19 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Procultura.Application.Exceptions.Users;
+using ProCultura.WebApiOwin.Models;
+using ProCultura.WebApiOwin.Providers;
+using ProCultura.WebApiOwin.Results;
 
 namespace ProCultura.WebApiOwin.Controllers
 {
-    using Models;
-    using Providers;
-    using Results;
-    using Procultura.Application.Exceptions;
-    using Procultura.Application.Exceptions.Users;
-
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController

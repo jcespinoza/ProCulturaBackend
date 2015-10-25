@@ -1,7 +1,5 @@
 ﻿namespace Procultura.Application.DTO.User
 {
-    using DTO;
-
     public class RegisterModel : RequestBase
     {
         public string Name { get; set; }

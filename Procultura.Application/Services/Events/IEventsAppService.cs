@@ -1,9 +1,8 @@
-﻿namespace Procultura.Application.Services.Events
+﻿using System.Collections.Generic;
+using Procultura.Application.DTO.Events;
+
+namespace Procultura.Application.Services.Events
 {
-    using System.Collections.Generic;
-
-    using DTO.Events;
-
     /// <summary>
     /// Contract for Events application service implementations
     /// </summary>

@@ -1,9 +1,8 @@
-﻿namespace ProCultura.Data.Mappings.Events
+﻿using System.Data.Entity.ModelConfiguration;
+using ProCultura.Domain.Entities.Events;
+
+namespace ProCultura.Data.Mappings.Events
 {
-    using System.Data.Entity.ModelConfiguration;
-
-    using Domain.Entities.Events;
-
     public class EventEntityTypeConfiguration : EntityTypeConfiguration<Event>
     {
         public EventEntityTypeConfiguration()

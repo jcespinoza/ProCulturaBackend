@@ -1,13 +1,12 @@
-﻿namespace ProCultura.WebApiOwin.Filters
+﻿using System.Linq;
+using System.Net.Http;
+using System.Web.Http.Filters;
+using Procultura.Application.DTO;
+using ProCultura.CrossCutting.L10N;
+using ProCultura.CrossCutting.Settings;
+
+namespace ProCultura.WebApiOwin.Filters
 {
-    using System.Linq;
-    using System.Net.Http;
-    using System.Web.Http.Filters;
-
-    using Procultura.Application.DTO;
-    using CrossCutting.L10N;
-    using CrossCutting.Settings;
-
     public class LocalizationFilterAttribute : ActionFilterAttribute
     {
         private readonly ILocalizationService _localizationService;

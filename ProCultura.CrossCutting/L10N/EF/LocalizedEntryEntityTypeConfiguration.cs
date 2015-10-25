@@ -1,7 +1,7 @@
-﻿namespace ProCultura.CrossCutting.L10N.EF
-{
-    using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
+namespace ProCultura.CrossCutting.L10N.EF
+{
     public class LocalizedEntryEntityTypeConfiguration : EntityTypeConfiguration<LocalizedEntry>
     {
         public LocalizedEntryEntityTypeConfiguration()

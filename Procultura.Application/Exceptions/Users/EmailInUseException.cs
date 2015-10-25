@@ -1,9 +1,8 @@
-﻿namespace Procultura.Application.Exceptions.Users
+﻿using System;
+using ProCultura.CrossCutting.L10N;
+
+namespace Procultura.Application.Exceptions.Users
 {
-    using System;
-
-    using ProCultura.CrossCutting.L10N;
-
     public class EmailInUseException : ArgumentException
     {
         public EmailInUseException(string message) : base(message) { }

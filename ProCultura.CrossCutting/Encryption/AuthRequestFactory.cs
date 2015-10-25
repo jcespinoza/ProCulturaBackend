@@ -1,6 +1,7 @@
-﻿namespace ProCultura.CrossCutting.Encryption
+﻿using System.Web.Script.Serialization;
+
+namespace ProCultura.CrossCutting.Encryption
 {
-    using System.Web.Script.Serialization;
     public class AuthRequestFactory: IAuthRequestFactory
     {
         private readonly IEncryptionService encryptionService;

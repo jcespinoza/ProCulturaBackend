@@ -1,8 +1,9 @@
-﻿using Autofac;
+﻿using System.Web.Http.Filters;
+using System.Web.Mvc;
+using Autofac;
 using ProCultura.CrossCutting.L10N;
 using ProCultura.WebApiOwin.Filters;
-using System.Web.Http.Filters;
-using System.Web.Mvc;
+using RequireHttpsAttribute = ProCultura.WebApiOwin.Filters.RequireHttpsAttribute;
 
 namespace ProCultura.WebApiOwin
 {
@@ -15,7 +16,7 @@ namespace ProCultura.WebApiOwin
 
         public static void RegisterHttpFilters(HttpFilterCollection filters, IContainer container)
         {
-            filters.Add(new Filters.RequireHttpsAttribute());
+            filters.Add(new RequireHttpsAttribute());
 
             var localizationService = container.Resolve<ILocalizationService>();
             filters.Add(new ProCulturaExceptionFilterAttribute(localizationService));

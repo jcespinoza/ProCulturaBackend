@@ -1,14 +1,11 @@
-﻿namespace Procultura.Application.Extensions
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
+using Procultura.Application.DTO;
+using ProCultura.CrossCutting.Settings;
+
+namespace Procultura.Application.Extensions
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AutoMapper;
-
-    using DTO;
-
-    using ProCultura.CrossCutting.Settings;
-
     public static class ProCulturaExtensions
     {
         public static string GetRequestLanguage<T>(this T request) where T : RequestBase

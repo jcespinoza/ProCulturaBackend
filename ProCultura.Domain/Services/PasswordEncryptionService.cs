@@ -1,11 +1,10 @@
-﻿namespace ProCultura.Domain.Services
+﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using ProCultura.Domain.Entities.Account;
+
+namespace ProCultura.Domain.Services
 {
-    using System;
-    using System.Security.Cryptography;
-    using System.Text;
-
-    using Entities.Account;
-
     public static class PasswordEncryptionService
     {
         public static bool CheckPassword(UserEntity user, string password)

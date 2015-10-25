@@ -1,9 +1,8 @@
-﻿namespace ProCultura.Data.Mappings.User
+﻿using System.Data.Entity.ModelConfiguration;
+using ProCultura.Domain.Entities.Account;
+
+namespace ProCultura.Data.Mappings.User
 {
-    using System.Data.Entity.ModelConfiguration;
-
-    using Domain.Entities.Account;
-
     public class UserDetailEntityTypeConfiguration: EntityTypeConfiguration<UserEntity>
     {
         public UserDetailEntityTypeConfiguration()

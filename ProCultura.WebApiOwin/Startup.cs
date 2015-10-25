@@ -1,18 +1,17 @@
-﻿using Microsoft.Owin;
+﻿using System.Threading.Tasks;
+using System.Web.Cors;
+using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
+using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Owin;
+using ProCultura.WebApiOwin;
 
-[assembly: OwinStartup(typeof(ProCultura.WebApiOwin.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace ProCultura.WebApiOwin
 {
-    using System.Web.Http;
-
-    using Autofac;
-    using Autofac.Integration.WebApi;
-    using Microsoft.Owin.Cors;
-    using System.Threading.Tasks;
-    using System.Web.Cors;
-
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

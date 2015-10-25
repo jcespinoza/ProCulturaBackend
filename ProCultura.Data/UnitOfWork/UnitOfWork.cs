@@ -1,9 +1,8 @@
-﻿namespace ProCultura.Data.UnitOfWork
+﻿using System.Data.Entity;
+using ProCultura.Domain.UnitOfWork;
+
+namespace ProCultura.Data.UnitOfWork
 {
-    using System.Data.Entity;
-
-    using Domain.UnitOfWork;
-
     public class UnitOfWork : IUnitOfWork
     {
         protected DbContext Context { get; set; }

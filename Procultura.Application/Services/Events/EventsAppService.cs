@@ -1,15 +1,13 @@
+using System;
+using System.Collections.Generic;
+using Procultura.Application.DTO.Events;
+using Procultura.Application.Exceptions.Events;
+using Procultura.Application.Extensions;
+using ProCultura.Domain.Entities.Events;
+using ProCultura.Domain.Repositories;
+
 namespace Procultura.Application.Services.Events
 {
-    using System;
-    using System.Collections.Generic;
-
-    using DTO.Events;
-    using Exceptions.Events;
-    using Extensions;
-
-    using ProCultura.Domain.Entities.Events;
-    using ProCultura.Domain.Repositories;
-
     public class EventsAppService : IEventsAppService
     {
         private readonly IRepository<Event> _eventRepository;

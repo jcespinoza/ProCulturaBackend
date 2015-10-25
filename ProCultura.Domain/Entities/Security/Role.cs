@@ -1,7 +1,7 @@
-﻿namespace ProCultura.Domain.Entities.Security
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace ProCultura.Domain.Entities.Security
+{
     public class Role : IEntity
     {
         public string RoleId { get; set; }

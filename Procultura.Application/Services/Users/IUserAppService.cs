@@ -1,8 +1,8 @@
-﻿namespace Procultura.Application.Services.Users
-{
-    using DTO;
-    using DTO.User;
+﻿using Procultura.Application.DTO;
+using Procultura.Application.DTO.User;
 
+namespace Procultura.Application.Services.Users
+{
     public interface IUserAppService
     {
         AuthModel GetAuth(LoginModel request);

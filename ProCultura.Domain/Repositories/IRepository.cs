@@ -1,14 +1,13 @@
-﻿namespace ProCultura.Domain.Repositories
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using ProCultura.Domain.Entities;
+using ProCultura.Domain.UnitOfWork;
+
+namespace ProCultura.Domain.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-
-    using Entities;
-    using UnitOfWork;
-
     /// <summary>
     /// This interface is implemented by all repositories to ensure implementation of fixed methods.
     /// </summary>

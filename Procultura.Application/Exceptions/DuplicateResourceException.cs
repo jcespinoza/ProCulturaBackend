@@ -1,9 +1,8 @@
-﻿namespace Procultura.Application.Exceptions
+﻿using System;
+using ProCultura.CrossCutting.L10N;
+
+namespace Procultura.Application.Exceptions
 {
-    using System;
-
-    using ProCultura.CrossCutting.L10N;
-
     public class DuplicateResourceException : ArgumentException
     {
         public DuplicateResourceException(string message) : base(message) { }

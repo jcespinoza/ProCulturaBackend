@@ -1,9 +1,8 @@
-﻿namespace ProCultura.Data.Mappings.Security
+﻿using System.Data.Entity.ModelConfiguration;
+using ProCultura.Domain.Entities.Security;
+
+namespace ProCultura.Data.Mappings.Security
 {
-    using System.Data.Entity.ModelConfiguration;
-
-    using Domain.Entities.Security;
-
     public class UserRoleEntityTypeConfiguration: EntityTypeConfiguration<UserRole>
     {
         public UserRoleEntityTypeConfiguration()
