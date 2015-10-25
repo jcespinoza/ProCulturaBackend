@@ -4,7 +4,7 @@
     using System.Security.Cryptography;
     using System.Text;
 
-    using ProCultura.Domain.Entities.Account;
+    using Entities.Account;
 
     public static class PasswordEncryptionService
     {

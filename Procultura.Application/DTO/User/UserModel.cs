@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Procultura.Application.DTO;
+    using DTO;
 
     public class UserModel: ResponseBase
     {

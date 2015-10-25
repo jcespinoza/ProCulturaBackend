@@ -4,7 +4,7 @@
     using System.Data;
     using System.Data.SqlClient;
 
-    using ProCultura.CrossCutting.Settings;
+    using Settings;
 
     public class DatabaseLocalizationService: ILocalizationService
     {

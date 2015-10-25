@@ -2,7 +2,7 @@
 {
     using System;
 
-    using Procultura.Application.DTO;
+    using DTO;
 
     /// <summary>
     /// A DTO for the Event entity

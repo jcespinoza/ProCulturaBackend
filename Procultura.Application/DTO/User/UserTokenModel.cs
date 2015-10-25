@@ -1,6 +1,6 @@
 ﻿namespace Procultura.Application.DTO.User
 {
-    using Procultura.Application.DTO;
+    using DTO;
 
     public class UserTokenModel : ResponseBase
     {

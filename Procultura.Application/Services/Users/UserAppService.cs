@@ -2,11 +2,11 @@
 {
     using System;
 
-    using Procultura.Application.DTO;
-    using Procultura.Application.DTO.User;
-    using Procultura.Application.Exceptions;
-    using Procultura.Application.Exceptions.Users;
-    using Procultura.Application.Extensions;
+    using DTO;
+    using DTO.User;
+    using Exceptions;
+    using Exceptions.Users;
+    using Extensions;
 
     using ProCultura.CrossCutting.Encryption;
     using ProCultura.CrossCutting.L10N;
@@ -27,14 +27,14 @@
             if (l10NService == null) throw new ArgumentNullException("l10NService");
             if (userRepository == null) throw new ArgumentNullException("userRepository");
 
-            this._authRequestFactory = authRequestFactory;
-            this._l10nService = l10NService;
-            this._userRepository = userRepository;
+            _authRequestFactory = authRequestFactory;
+            _l10nService = l10NService;
+            _userRepository = userRepository;
         }
 
         public AuthModel GetAuth(LoginModel request)
         {
-            var user = this.GetUserByEmail(request.Email);
+            var user = GetUserByEmail(request.Email);
             if (user == null)
             {
                 throw new UserNotFoundException();
@@ -44,7 +44,7 @@
                 throw new InvalidPasswordException();
             }
 
-            return this.BuildSuccessAuthModel(user);
+            return BuildSuccessAuthModel(user);
         }
 
         public ResponseBase DeleteUser(string token, DeleteUserModel request)
@@ -54,9 +54,9 @@
                 throw new EmptyEmailException();
             }
 
-            var user = this.GetUserByEmail(request.Email);
-            var tokenModel = this._authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var requestSendingUser = this.GetUserByEmail(tokenModel.Email);
+            var user = GetUserByEmail(request.Email);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var requestSendingUser = GetUserByEmail(tokenModel.Email);
 
             if (user == null || requestSendingUser == null)
             {
@@ -68,16 +68,16 @@
                 throw new  NotEnoughPrivilegesException();
             }
 
-            this._userRepository.Delete(user);
-            this._userRepository.UnitOfWork.SaveChanges();
+            _userRepository.Delete(user);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_UserDeleted);
         }
 
         public UserModel GetUser(string token)
         {
-            var tokenModel = this._authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var foundUser = this.GetUserByEmail(tokenModel.Email);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var foundUser = GetUserByEmail(tokenModel.Email);
 
             if (foundUser != null)
             {
@@ -89,12 +89,12 @@
 
         public UserModel GetUser(string token, int id)
         {
-            var tokenModel = this._authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
 
-            var obtainedUserEntity = this._userRepository.Single(x => x.Id == id);
+            var obtainedUserEntity = _userRepository.Single(x => x.Id == id);
             var userModel = obtainedUserEntity.ProjectAs<UserModel>();
 
-            var requestingUser = this.GetUserByEmail(tokenModel.Email);
+            var requestingUser = GetUserByEmail(tokenModel.Email);
 
             if (obtainedUserEntity == null && requestingUser == null)
             {
@@ -116,7 +116,7 @@
                 throw new EmptyEmailException();
             }
 
-            if (this.GetUserByEmail(request.Email) != null)
+            if (GetUserByEmail(request.Email) != null)
             {
                 throw new EmailInUseException();
             }
@@ -124,8 +124,8 @@
             var newUser = request.ProjectAs<UserEntity>();
 
             PasswordEncryptionService.Encrypt(newUser);
-            this._userRepository.Insert(newUser);
-            this._userRepository.UnitOfWork.SaveChanges();
+            _userRepository.Insert(newUser);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_RegistrationSuccess);
         }
@@ -134,9 +134,9 @@
         {   
             //TODO: add method to check whether the entity is valid and call that method here
 
-            var tokenModel = this._authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
-            var requestSendingUser = this.GetUserByEmail(tokenModel.Email);
-            var userToModify = this._userRepository.Single(x => x.Id == request.Id);
+            var tokenModel = _authRequestFactory.BuildDecryptedRequest<UserTokenModel>(token);
+            var requestSendingUser = GetUserByEmail(tokenModel.Email);
+            var userToModify = _userRepository.Single(x => x.Id == request.Id);
 
             if (requestSendingUser == null || userToModify == null)
             {
@@ -150,15 +150,15 @@
 
             request.ReplaceValues(userToModify);
 
-            this._userRepository.Update(userToModify);
-            this._userRepository.UnitOfWork.SaveChanges();
+            _userRepository.Update(userToModify);
+            _userRepository.UnitOfWork.SaveChanges();
 
             return BuildGenericResponse(LocalizationKeys.message_UpdateUserSuccess);
         }
 
         private UserEntity GetUserByEmail(string email)
         {
-            var user = this._userRepository.Single(x => x.Email == email);
+            var user = _userRepository.Single(x => x.Email == email);
             return user;
         }
 

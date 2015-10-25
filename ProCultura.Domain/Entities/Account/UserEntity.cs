@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using ProCultura.Domain.Entities.Security;
+    using Security;
 
     public class UserEntity : IEntity
     {

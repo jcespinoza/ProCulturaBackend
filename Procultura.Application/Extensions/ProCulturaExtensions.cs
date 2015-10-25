@@ -5,7 +5,7 @@
 
     using AutoMapper;
 
-    using Procultura.Application.DTO;
+    using DTO;
 
     using ProCultura.CrossCutting.Settings;
 

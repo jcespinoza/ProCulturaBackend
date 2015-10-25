@@ -2,7 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
 
-    using ProCultura.Domain.Entities.Events;
+    using Domain.Entities.Events;
 
     public class EventEntityTypeConfiguration : EntityTypeConfiguration<Event>
     {

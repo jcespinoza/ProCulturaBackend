@@ -2,7 +2,7 @@
 {
     using System.Data.Entity;
 
-    using ProCultura.Domain.UnitOfWork;
+    using Domain.UnitOfWork;
 
     public class UnitOfWork : IUnitOfWork
     {

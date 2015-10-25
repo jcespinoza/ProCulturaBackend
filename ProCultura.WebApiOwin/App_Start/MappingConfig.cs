@@ -5,9 +5,9 @@
     using Procultura.Application.DTO.Events;
     using Procultura.Application.DTO.User;
 
-    using ProCultura.Domain.Entities.Account;
-    using ProCultura.Domain.Entities.Events;
-    using ProCultura.Domain.Entities.Security;
+    using Domain.Entities.Account;
+    using Domain.Entities.Events;
+    using Domain.Entities.Security;
 
     public class MappingConfig
     {

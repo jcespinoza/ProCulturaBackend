@@ -2,7 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
 
-    using ProCultura.Domain.Entities.Security;
+    using Domain.Entities.Security;
 
     public class UserRoleEntityTypeConfiguration: EntityTypeConfiguration<UserRole>
     {

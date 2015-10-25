@@ -4,10 +4,10 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using ProCultura.Domain.Entities.Account;
-    using ProCultura.Domain.Entities.Events;
-    using ProCultura.Domain.Entities.Security;
-    using ProCultura.Domain.Services;
+    using Domain.Entities.Account;
+    using Domain.Entities.Events;
+    using Domain.Entities.Security;
+    using Domain.Services;
 
     public class ProCulturaContextInitializer : CreateDatabaseIfNotExists<ProCulturaBackEndContext>
     {

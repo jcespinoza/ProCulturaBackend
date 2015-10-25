@@ -3,12 +3,12 @@
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
 
-    using ProCultura.Data.Mappings.Events;
-    using ProCultura.Data.Mappings.Security;
-    using ProCultura.Data.Mappings.User;
-    using ProCultura.Domain.Entities.Account;
-    using ProCultura.Domain.Entities.Events;
-    using ProCultura.Domain.Entities.Security;
+    using Mappings.Events;
+    using Mappings.Security;
+    using Mappings.User;
+    using Domain.Entities.Account;
+    using Domain.Entities.Events;
+    using Domain.Entities.Security;
 
     public class ProCulturaBackEndContext : DbContext
     {

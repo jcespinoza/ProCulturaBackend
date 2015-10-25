@@ -3,9 +3,9 @@ namespace Procultura.Application.Services.Events
     using System;
     using System.Collections.Generic;
 
-    using Procultura.Application.DTO.Events;
-    using Procultura.Application.Exceptions.Events;
-    using Procultura.Application.Extensions;
+    using DTO.Events;
+    using Exceptions.Events;
+    using Extensions;
 
     using ProCultura.Domain.Entities.Events;
     using ProCultura.Domain.Repositories;
@@ -16,12 +16,12 @@ namespace Procultura.Application.Services.Events
 
         public EventsAppService(IRepository<Event> eventRepository)
         {
-            this._eventRepository = eventRepository;
+            _eventRepository = eventRepository;
         }
 
         public EventModel GetEventWithId(int eventId)
         {
-            var eventEntity = this.GetEventById(eventId);
+            var eventEntity = GetEventById(eventId);
             if (eventEntity == null) throw new EventNotFoundException();
 
             return eventEntity.ProjectAs<EventModel>();
@@ -31,7 +31,7 @@ namespace Procultura.Application.Services.Events
         {
             if(request == null) throw new ArgumentNullException("request");
             
-            var existentEvent = this.GetEventById(request.EventId);
+            var existentEvent = GetEventById(request.EventId);
             if(existentEvent != null) throw new EventAlreadyExistsException();
 
             var eventEntity = request.ProjectAs<Event>();
@@ -45,7 +45,7 @@ namespace Procultura.Application.Services.Events
         public EventModel UpdateEvent(NewEventModel request)
         {
             if (request == null) throw new ArgumentNullException("request");
-            var eventFound = this.GetEventById(request.EventId);
+            var eventFound = GetEventById(request.EventId);
             if (eventFound == null) throw new EventNotFoundException();
 
             request.ReplaceValues(eventFound);
@@ -58,7 +58,7 @@ namespace Procultura.Application.Services.Events
 
         public EventModel DeleteEvent(int eventId)
         {
-            var eventFound = this.GetEventById(eventId);
+            var eventFound = GetEventById(eventId);
             if (eventFound == null) throw new EventNotFoundException();
 
             _eventRepository.Delete(eventFound);
@@ -80,7 +80,7 @@ namespace Procultura.Application.Services.Events
 
         private Event GetEventById(int eventId)
         {
-            var eventEntity = this._eventRepository.FirstOrDefault(e => e.EventId == eventId);
+            var eventEntity = _eventRepository.FirstOrDefault(e => e.EventId == eventId);
             return eventEntity;
         }
     }

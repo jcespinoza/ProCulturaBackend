@@ -14,7 +14,7 @@ namespace ProCultura.WebApiOwin.Controllers
 
         public EventController(IEventsAppService eventsAppService)
         {
-            this._eventsAppService = eventsAppService;
+            _eventsAppService = eventsAppService;
         }
 
         public IEnumerable<EventModel> GetEvents()

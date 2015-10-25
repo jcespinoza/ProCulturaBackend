@@ -1,6 +1,6 @@
 ﻿namespace ProCultura.Domain.Entities.Security
 {
-    using ProCultura.Domain.Entities.Account;
+    using Account;
 
     public class UserRole : IEntity
     {

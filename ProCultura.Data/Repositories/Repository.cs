@@ -7,9 +7,9 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    using ProCultura.Domain.Entities;
-    using ProCultura.Domain.Repositories;
-    using ProCultura.Domain.UnitOfWork;
+    using Domain.Entities;
+    using Domain.Repositories;
+    using Domain.UnitOfWork;
 
     /// <summary>
     /// Implements IRepository for Entity Framework.
@@ -184,7 +184,7 @@
         /// <inheritdoc/>
         public Task<long> LongCountAsync()
         {
-            return Task.FromResult(this.LongCount());
+            return Task.FromResult(LongCount());
         }
 
         /// <inheritdoc/>
@@ -196,7 +196,7 @@
         /// <inheritdoc/>
         public Task<long> LongCountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return Task.FromResult(this.LongCount(predicate));
+            return Task.FromResult(LongCount(predicate));
         }
 
         /// <inheritdoc/>

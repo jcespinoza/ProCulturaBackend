@@ -1,7 +1,7 @@
 ﻿namespace Procultura.Application.Services.Users
 {
-    using Procultura.Application.DTO;
-    using Procultura.Application.DTO.User;
+    using DTO;
+    using DTO.User;
 
     public interface IUserAppService
     {

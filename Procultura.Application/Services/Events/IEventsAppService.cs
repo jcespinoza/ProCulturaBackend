@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Procultura.Application.DTO.Events;
+    using DTO.Events;
 
     /// <summary>
     /// Contract for Events application service implementations

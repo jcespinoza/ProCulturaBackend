@@ -13,7 +13,7 @@ namespace ProCultura.WebApiOwin.Controllers
         // GET api/values
         public string Get()
         {
-            var userName = this.RequestContext.Principal.Identity.Name;
+            var userName = RequestContext.Principal.Identity.Name;
             return String.Format("Hello, {0}.", userName);
         }
     }

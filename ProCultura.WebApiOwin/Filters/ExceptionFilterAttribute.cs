@@ -13,8 +13,8 @@
     using Procultura.Application.Extensions;
     using Procultura.Application.Exceptions.Users;
 
-    using ProCultura.CrossCutting.L10N;
-    using ProCultura.CrossCutting.Settings;
+    using CrossCutting.L10N;
+    using CrossCutting.Settings;
 
     public class ProCulturaExceptionFilterAttribute : ExceptionFilterAttribute
     {
@@ -32,7 +32,7 @@
 
         public ProCulturaExceptionFilterAttribute(ILocalizationService localizationService)
         {
-            this._localizationService = localizationService;
+            _localizationService = localizationService;
         }
 
         private HttpStatusCode GetStatusCode(Exception exception)
@@ -52,7 +52,7 @@
         {
             base.OnException(actionExecutedContext);
             var exception = actionExecutedContext.Exception;
-            actionExecutedContext.Response = new HttpResponseMessage(this.GetStatusCode(exception))
+            actionExecutedContext.Response = new HttpResponseMessage(GetStatusCode(exception))
                                                  {
                                                      Content = CreateErrorObjectContent(actionExecutedContext)
                                                  };

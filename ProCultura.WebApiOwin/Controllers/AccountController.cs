@@ -16,9 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace ProCultura.WebApiOwin.Controllers
 {
-    using ProCultura.WebApiOwin.Models;
-    using ProCultura.WebApiOwin.Providers;
-    using ProCultura.WebApiOwin.Results;
+    using Models;
+    using Providers;
+    using Results;
     using Procultura.Application.Exceptions;
     using Procultura.Application.Exceptions.Users;
 

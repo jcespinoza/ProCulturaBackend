@@ -6,8 +6,8 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    using ProCultura.Domain.Entities;
-    using ProCultura.Domain.UnitOfWork;
+    using Entities;
+    using UnitOfWork;
 
     /// <summary>
     /// This interface is implemented by all repositories to ensure implementation of fixed methods.

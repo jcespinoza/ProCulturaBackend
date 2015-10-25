@@ -8,7 +8,7 @@
         private readonly LocalizationContext _context;
         public EntityFrameworkLocalizationService(LocalizationContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public string GetLocalizedString(string resourceKey, string languageId = "en")

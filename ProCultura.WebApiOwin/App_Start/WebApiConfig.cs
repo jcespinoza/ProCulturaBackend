@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace ProCultura.WebApiOwin
 {
-    using ProCultura.WebApiOwin.Filters;
+    using Filters;
 
     public static class WebApiConfig
     {

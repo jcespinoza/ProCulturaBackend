@@ -13,8 +13,8 @@ using ProCultura.WebApiOwin.Models;
 
 namespace ProCultura.WebApiOwin
 {
-    using ProCultura.WebApiOwin.Models;
-    using ProCultura.WebApiOwin.Providers;
+    using Models;
+    using Providers;
 
     public partial class Startup
     {

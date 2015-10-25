@@ -2,7 +2,7 @@
 {
     using System.Data.Entity.ModelConfiguration;
 
-    using ProCultura.Domain.Entities.Account;
+    using Domain.Entities.Account;
 
     public class UserDetailEntityTypeConfiguration: EntityTypeConfiguration<UserEntity>
     {

@@ -5,15 +5,15 @@
     using System.Web.Http.Filters;
 
     using Procultura.Application.DTO;
-    using ProCultura.CrossCutting.L10N;
-    using ProCultura.CrossCutting.Settings;
+    using CrossCutting.L10N;
+    using CrossCutting.Settings;
 
     public class LocalizationFilterAttribute : ActionFilterAttribute
     {
         private readonly ILocalizationService _localizationService;
         public LocalizationFilterAttribute(ILocalizationService localizationService)
         {
-            this._localizationService = localizationService;
+            _localizationService = localizationService;
         }
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)

@@ -13,7 +13,7 @@ using ProCultura.WebApiOwin.Models;
 
 namespace ProCultura.WebApiOwin.Providers
 {
-    using ProCultura.WebApiOwin.Models;
+    using Models;
 
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
