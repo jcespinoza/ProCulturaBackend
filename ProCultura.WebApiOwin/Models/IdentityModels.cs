@@ -20,6 +20,9 @@ namespace ProCultura.WebApiOwin.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public IDbSet<Privilege> Privileges { get; set; }
+        public IDbSet<RolePrivilege> RolePrivileges { get; set; }
+
         public ApplicationDbContext()
             : base("ProCulturaContext", throwIfV1Schema: false)
         {
