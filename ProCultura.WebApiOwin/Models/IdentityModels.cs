@@ -1,8 +1,12 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ProCultura.Data.Mappings.Events;
+using ProCultura.Data.Mappings.Security;
+using ProCultura.Data.Mappings.User;
 
 namespace ProCultura.WebApiOwin.Models
 {
@@ -32,6 +36,13 @@ namespace ProCultura.WebApiOwin.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 

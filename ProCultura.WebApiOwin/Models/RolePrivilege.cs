@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,12 @@ namespace ProCultura.WebApiOwin.Models
 {
     public class RolePrivilege
     {
-        public string PrivilegeId { get; set; }
-        public string RoleId { get; set; }
+        [Required]
+        [ForeignKey("Privilege")]
+        public Privilege Privilege { get; set; }
 
-        public virtual Privilege Privilege { get; set; }
-        public virtual IdentityRole Role { get; set; }
+        [Required]
+        [ForeignKey("IdentityRole")]
+        public IdentityRole Role { get; set; }
     }
 }
