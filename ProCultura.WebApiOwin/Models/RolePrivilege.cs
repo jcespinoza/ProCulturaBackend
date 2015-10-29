@@ -11,11 +11,17 @@ namespace ProCultura.WebApiOwin.Models
     public class RolePrivilege
     {
         [Required]
-        [ForeignKey("Privilege")]
+        [ForeignKey("PrivilegeId")]
         public Privilege Privilege { get; set; }
 
+        [KeyAttribute]
+        public string PrivilegeId { get; set; }
+
+        [KeyAttribute]
+        public string RoleId { get; set; }
+
         [Required]
-        [ForeignKey("IdentityRole")]
+        [ForeignKey("RoleId")]
         public IdentityRole Role { get; set; }
     }
 }

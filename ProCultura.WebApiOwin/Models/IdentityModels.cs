@@ -42,6 +42,11 @@ namespace ProCultura.WebApiOwin.Models
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<RolePrivilege>().HasKey(rp => new
+            {
+                rp.RoleId,
+                rp.PrivilegeId
+            });
 
         }
     }

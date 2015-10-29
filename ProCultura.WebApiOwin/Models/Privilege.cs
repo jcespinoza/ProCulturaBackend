@@ -14,8 +14,5 @@ namespace ProCultura.WebApiOwin.Models
         public string PrivilegeId { get; set; }
         public string Action { get; set; }
 
-        [Required]
-        [ForeignKey("IdentityRole")]
-        public IdentityRole Role { get; set; }
     }
 }
