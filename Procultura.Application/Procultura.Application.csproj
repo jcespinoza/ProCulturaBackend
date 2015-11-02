@@ -74,9 +74,7 @@
     <Compile Include="DTO\Events\EventModel.cs" />
     <Compile Include="Services\Events\EventsAppService.cs" />
     <Compile Include="Services\Events\IEventsAppService.cs" />
-    <Compile Include="Services\Users\IUserAppService.cs" />
     <Compile Include="DTO\User\UpdateUserModel.cs" />
-    <Compile Include="Services\Users\UserAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProCultura.CrossCutting\ProCultura.CrossCutting.csproj">

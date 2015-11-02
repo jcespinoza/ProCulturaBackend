@@ -4,7 +4,6 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Procultura.Application.Services.Events;
-using Procultura.Application.Services.Users;
 using ProCultura.CrossCutting.Encryption;
 using ProCultura.CrossCutting.L10N;
 using ProCultura.CrossCutting.L10N.EF;
@@ -86,7 +85,6 @@ namespace ProCultura.WebApiOwin
         /// <param name="builder"></param>
         private static void ConfigureApplicationDependencies(ContainerBuilder builder)
         {
-            builder.RegisterType<UserAppService>().As<IUserAppService>();
             builder.RegisterType<EventsAppService>().As<IEventsAppService>();
         }
     }
